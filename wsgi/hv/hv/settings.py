@@ -109,12 +109,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/multimedia/'
-STATIC_ROOT = os.path.join(WSGI_DIR, 'multimedia')
+STATIC_ROOT = os.path.join(WSGI_DIR, 'Multimedia/')
 
+MEDIA_URL = '/media-url/'
 MEDIA_ROOT = os.path.join(WSGI_DIR, 'images')  # '~/hv/Multimedia/images/'
 # xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
 
-MEDIA_URL = '/media-url/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
