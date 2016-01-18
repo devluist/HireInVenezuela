@@ -109,7 +109,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/multimedia/'
-STATIC_ROOT = os.path.join(WSGI_DIR, 'Multimedia/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'Multimedia/')
 # Additional locations of static files
 # STATICFILES_DIRS = (
 	## Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -119,7 +119,7 @@ STATIC_ROOT = os.path.join(WSGI_DIR, 'Multimedia/')
 # )
 
 MEDIA_URL = '/media-url/'
-MEDIA_ROOT = os.path.join(WSGI_DIR, 'images')  # '~/hv/Multimedia/images/'
+MEDIA_ROOT = os.path.join(DATA_DIR, 'Subidas')  # '~/hv/Multimedia/images/'
 # xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
 
 

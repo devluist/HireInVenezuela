@@ -41,7 +41,7 @@ for i, cat in enumerate(CATEGORIAS):
 	LISTA_SUBCATEGORIAS.append([i, Categoria.objects.filter(url__padre=cat.url)])
 
 # ANIO_INICIO_CH = 2015  # CH: cuadro de honor
-IDIOMAS_DISPONIBLES = ["es", "en", "pt", "pt-br"]
+IDIOMAS_DISPONIBLES = ["es", "en"]
 	# "es":
 	# "en-US":
 	# "pt-BR":
