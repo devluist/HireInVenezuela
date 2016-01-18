@@ -112,10 +112,10 @@ STATIC_URL = '/multimedia/'
 STATIC_ROOT = os.path.join(WSGI_DIR, 'Multimedia/')
 # Additional locations of static files
 # STATICFILES_DIRS = (
-# 	# Put strings here, like "/home/html/static" or "C:/www/django/static".
-# 	# Always use forward slashes, even on Windows.
-# 	# Don't forget to use absolute paths, not relative paths.
-# 	os.path.join(WSGI_DIR, 'Multimedia/'),  # '~/hv',
+	## Put strings here, like "/home/html/static" or "C:/www/django/static".
+	## Always use forward slashes, even on Windows.
+	## Don't forget to use absolute paths, not relative paths.
+	# os.path.join(WSGI_DIR, 'Multimedia/'),  # '~/hv',
 # )
 
 MEDIA_URL = '/media-url/'
