@@ -67,7 +67,7 @@
 							{% if perfil_propio %}
 								<li><a href="/lista-solicitudes-servicio/">Solicitudes de Servicio</a></li>
 								<li><a href="/facturas/">Servicios Terminados</a></li>
-							 	<li><a href="#" data-toggle="modal" data-target=".modal-crearservicio">Crear GeoServicios</a></li>
+							 	<li><a href="#" data-toggle="modal" data-target=".modal-crearservicio">Crear Servicio</a></li>
 							{% endif %}
 							{% if logueado and not perfil_logueado.es_venezolano and perfil_logueado != perfil and not perfil_propio %}
 								<li><a href="{% url 'postman:write' perfil %}" title="¿Tienes preguntas sobre el servicio?" >Chatear con usuario</a></li>
@@ -85,7 +85,7 @@
 							<li>Tiempo de entrega: <span class="pull-right">{{ tiempo_entrega }}</span></li>
 							<br>
 							<li>Ganancias: <span class="pull-right">{{ ganancias }}</span></li>
-							<li>N&deg; Visitas a GeoServicios: <span class="pull-right">{{ visitas }}</span></li>
+							{% comment %}<li>N&deg; Visitas a tus Servicios: <span class="pull-right">{{ visitas }}</span></li>{% endcomment %}
 							<li>N&deg; servicios ofertados: <span class="pull-right">{{ n_servicios }}</span></li>
 							<li>N&deg; compradores:<span class="pull-right"> {{ n_compradores }}</span></li>
 							{% comment %}<li>N&deg; servicios en progreso: <span class="pull-right">{{ n_servicios_progreso }}</span></li>
@@ -96,7 +96,7 @@
 				<div class="row fila-2">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 caja-perfil caja-titulo table-responsive">
 						<table class="table categoria table-condensed table-striped">
-							<div class="titulo-categoria"  style="background: #BE2A2D;margin-bottom:0">Mis GeoServicios</div>
+							<div class="titulo-categoria"  style="background: #BE2A2D;margin-bottom:0">Mis Servicios</div>
 							<thead>
 								<th class="col-md-6">Nombre de Servicio</th>
 								<th class="col-md-2">N&deg; Usuarios en cola</th>
