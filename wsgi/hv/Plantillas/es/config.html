@@ -1,0 +1,97 @@
+{% load i18n %}
+{% load static from staticfiles %}
+{% if mensaje %}
+	<div class="alert alert-warning fade in" style="text-align: center">
+		<i><b>HV informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	</div>
+{% endif %}
+<div class="cuerpo" style="margin-bottom: 50px;">
+	<div class="container">
+		<div class="row">
+			<div style="margin: 0 0 40px;border: 1px solid #DDD;padding: 0;background-color: #fff;">
+				<div class="titulo-categoria" style="background: #F7E296;color:#000">Modificar tus Datos</div>
+				<form action="/configuracion/" id="form-cfg" onsubmit="return enviar_cfg();" method="post" accept-charset="utf-8">
+					{% csrf_token %}
+					<ul class="row categoria">
+						{% comment %}<div class="col-md-4">
+							<li><img src="/multimedia/images/falta.png" width="150px" height="200px" class="imag-perfil media-object"></li>
+							<li class="form-group" style="margin: 0 auto;text-align: center;">
+								<label for="exampleInputFile">Cambiar Foto</label>
+								{% comment %}<input type="file" class="btn btn-default btn-sm btn-block" id="exampleInputFile">{% end comment %}
+								<!-- <p class="help-block">Example block-level help text here.</p> -->
+							</li>
+						</div>{% endcomment %}
+						<div class="col-md-5">
+							<li><b>Usuario:</b>  @{{ perfil }}</li>
+							<li class="row">
+								<b class="col-xs-12 col-md-5" style="padding: 0;">Nombre y Apellido:</b>
+								<span class="col-xs-12 col-md-7" style="padding: 0;">
+									<input class="form-control input-sm caja-txt-form caja-txt-cfg" name="nombre_completo" type="text" placeholder="Nombre Completo" value="{{ perfil.nombre_completo }}">
+								</span>
+							</li><br>
+							<li>
+								<span class="col-xs-12 col-md-3" style="padding:0">
+									<b>Edad:</b>
+									<input name="edad" class="form-control input-sm caja-txt-form caja-txt-cfg" type="text" placeholder="Edad" value="{{ perfil.edad }}" style="width: 35px !important;display: inline-block;margin-left: 10px;text-align: center;">
+								</span>
+								<span class="col-xs-12 col-md-9">
+									<b>¿Modo vacaciones?</b>
+									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="vacacionando" value="0" {% if perfil.vacacionando == 0 %}checked{% endif %}>No</label>
+									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="vacacionando" value="1" {% if perfil.vacacionando == 1 %}checked{% endif %}>Si</label>
+								</span>
+							</li>
+							<li style="clear: left;">
+								<b>G&eacute;nero:</b>
+								<span>
+									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="sexo" value="H" {% if perfil.sexo == "H" %}checked{% endif %}>Femenino</label>
+									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="sexo" value="M" {% if perfil.sexo == "M" %}checked{% endif %}>Mascul&iacute;no</label>
+									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="sexo" value="D" {% if perfil.sexo == "D" %}checked{% endif %}>Sexodiverso</label>
+								</span>
+							</li>
+							<li>
+								<b>Ubicaci&oacute;n:</b><br>
+								{% if not perfil.es_venezolano  %}
+									<select name="pais" class="form-control formu input-sm caja-txt-form caja-txt-cfg">
+										<option>Pa&iacute;s</option>
+										<option>2</option>
+									</select>
+								{% endif %}
+								<select name="estado" class="form-control formu input-sm caja-txt-form caja-txt-cfg">
+									<option>Estado</option>
+									<option>2</option>
+								</select>
+								<select name="ciudad" class="form-control formu input-sm caja-txt-form caja-txt-cfg">
+									<option>Ciudad</option>
+									<option>2</option>
+								</select>
+							</li>
+							<br>
+							<li><a href="#" data-toggle="modal" data-target=".modal-confirmar" >&times; Eliminar mi cuenta</a></li>
+							{% comment %}<li><input name="ci" class="form-control input-sm caja-txt-form caja-txt-cfg" type="text" placeholder="CI/Rif/Pasaporte"></li><li><textarea name="" class="form-control form-controlado" rows="3" placeholder="Autorespuesta ante un saludo en la mensajer&iacute;a"></textarea></li>
+							<li><textarea name="" class="form-control form-controlado" rows="3" placeholder="Horario en que puedo chatear..."></textarea></li>
+							<li>{% endcomment %}
+						</div>
+						<div class="col-md-3">
+							<li><b>Idiomas que dominas:</b><br>
+								<input type="hidden" id="lenguas" name="lenguas" value="">
+								<select id="lista_lenguas" multiple="multiple">
+									{% get_language_info_list for idiomas_disponibles as idiomas %}
+									{% for idioma in idiomas %}
+										<option value="{{ idioma.code }}" {% if idioma.code in idiomas_usr_habla %} selected="selected" {% endif %}>
+											<i class="glyphicon glyphicon-globe"></i> {{ idioma.name_local|capfirst }} ({{ idioma.code }})
+										</option>
+			                        {% endfor %}
+								</select>
+							</li>
+						</div>
+					</ul>
+					<ul class="row categoria">
+						<li class="separador"></li>
+						<li><button type="submit" class="btn btn-default btn-sm form-guardar pull-right">Guardar</button></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% comment %}<div class="footer"  style="position: fixed;bottom: 0;">{% endcomment %}

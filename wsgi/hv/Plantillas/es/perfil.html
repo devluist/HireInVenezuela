@@ -1,0 +1,265 @@
+{% load i18n %}
+{% load static from staticfiles %}
+{% if mensaje %}
+	<div class="alert alert-warning fade in" style="text-align: center">
+		<i><b>HV informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	</div>
+{% endif %}
+{% if perfil_propio and perfil.es_venezolano %}
+	<script type="text/javascript" charset="utf-8">
+		var lista = [[]]
+		{% for cat in lista_subcat %}
+	 		{% for subcat in cat.1 %}
+				lista[{{ forloop.parentloop.counter0 }}][{{ forloop.counter0 }}] = "<option value='{{ forloop.parentloop.counter0 }}'>{{ subcat }}</option>"
+			{% endfor %}
+			lista[{{ forloop.counter }}] = new Array()
+		{% endfor %}
+		function actualizarLista(a) {
+			var c = a.options[a.selectedIndex].value;
+			if(c!=-1){document.getElementById("id-subcateg").innerHTML = lista[c];}
+			else{document.getElementById("id-subcateg").innerHTML = '<option value="-1">Subcategor&iacute;as:</option>'}
+		}
+		function subcatEnviar(x){
+			document.getElementById("subc").value = x.selectedIndex;
+		}
+		function agregarInput(){
+			var n = document.getElementById("Nclausulas");
+			var i = document.createElement("input");
+			var s = document.createElement("span");
+			var f = document.getElementById("btn-inputs");
+			n = ++n.value;
+			if (s.innerText)
+				{s.innerText = n+".-"}
+			else
+				{s.textContent = n+".-"}
+			s.className = "col-md-1";
+			i.type = "text";
+			i.name = "clausula-"+(n-1);
+			i.className = "clausulas form-controlado col-md-11";
+			document.getElementById("formu-serv").insertBefore(s, f);
+			document.getElementById("formu-serv").insertBefore(i, f);
+		}
+	</script>
+{% endif %}
+<div class="cuerpo">
+	<div class="container">
+		<div class="row">
+			{% if perfil.es_venezolano %}
+				<div class="row fila-1">
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 caja-perfil caja-titulo">
+						<ul class="categoria">
+							<li class="titulo-categoria" style="background: #F7E296;color:#000">Datos</li>
+							{% comment %}<li><img src="{% static 'images/profile.jpg' %}" width="100px" height="90px" class="imag-perfil media-object"></li>{% endcomment %}
+							<li class="nombusr">{{ perfil.nombre_completo }}</li>
+							<li class="usuario-perfil">@{{ perfil }}</li>
+							<li class="separador"></li>
+							<li>Vacacionando: <span class="pull-right">{{ vacacionando }}</span></li>
+							<li>Clasificaci&oacute;n: <span class="pull-right">Nivel 
+								{% if nivel == 0 %}0 - Nuevo
+								{% elif nivel == 1 %}1 - Principiante
+								{% elif nivel == 2 %}2 - Conocedor
+								{% elif nivel == 3 %}3 - Experto
+								{% endif %}
+							</span></li>
+							<li>Promedio: <span class="pull-right">{{ prom }}</span></li>
+							<li>Experiencia: <span class="pull-right">{{ exp }}</span></li>
+							<br>
+							{% if perfil_propio %}
+								<li><a href="/lista-solicitudes-servicio/">Solicitudes de Servicio</a></li>
+								<li><a href="/facturas/">Servicios Terminados</a></li>
+							 	<li><a href="#" data-toggle="modal" data-target=".modal-crearservicio">Crear GeoServicios</a></li>
+							{% endif %}
+							{% if logueado and not perfil_logueado.es_venezolano and perfil_logueado != perfil and not perfil_propio %}
+								<li><a href="{% url 'postman:write' perfil %}" title="¿Tienes preguntas sobre el servicio?" >Chatear con usuario</a></li>
+							{% endif %}
+							{% comment %}<li><button>Reportar usuario</button></li>{% endcomment %}
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 caja-perfil caja-titulo" style="width: auto; max-width: 729px; margin-right: 0;  min-width: 235px;">
+						<ul class="categoria">
+							<li class="titulo-categoria">Estad&iacute;sticas</li>
+							<li><b>Promedio de Puntuaci&oacute;n:</b></li>
+							<li>Promedio General: <span class="pull-right">{{ prom }}</span></li>
+							<li>Atencion al Cliente: <span class="pull-right">{{ atencion }}</span></li>
+							<li>Calidad del resultado: <span class="pull-right">{{ calidad }}</span></li>
+							<li>Tiempo de entrega: <span class="pull-right">{{ tiempo_entrega }}</span></li>
+							<br>
+							<li>Ganancias: <span class="pull-right">{{ ganancias }}</span></li>
+							<li>N&deg; Visitas a GeoServicios: <span class="pull-right">{{ visitas }}</span></li>
+							<li>N&deg; servicios ofertados: <span class="pull-right">{{ n_servicios }}</span></li>
+							<li>N&deg; compradores:<span class="pull-right"> {{ n_compradores }}</span></li>
+							{% comment %}<li>N&deg; servicios en progreso: <span class="pull-right">{{ n_servicios_progreso }}</span></li>
+							<li>N&deg; servicios cancelados:<span class="pull-right"> {{ n_servicios_cancelados }}</span></li>{% endcomment %}
+						</ul>
+					</div>
+				</div>
+				<div class="row fila-2">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 caja-perfil caja-titulo table-responsive">
+						<table class="table categoria table-condensed table-striped">
+							<div class="titulo-categoria"  style="background: #BE2A2D;margin-bottom:0">Mis GeoServicios</div>
+							<thead>
+								<th class="col-md-6">Nombre de Servicio</th>
+								<th class="col-md-2">N&deg; Usuarios en cola</th>
+								<th class="col-md-2">N&deg; Ventas</th>
+								<th class="col-md-2">N&deg; Cancelados</th>
+							</thead>
+							<tbody>
+								{% for s in lista_servis %}
+									<tr>
+										<td class="col-md-6"><a href="/categoria/{{s.0.url.subcategoria.padre}}/{{s.0.url.subcategoria}}/{{ s.0.url }}/">{{ s.0 }}</a></td>
+										<td class="col-md-2 text-center">{{ s.1 }}</td>
+										<td class="col-md-2 text-center">{{ s.2 }}</td>
+										<td class="col-md-2 text-center">{{ s.3 }}</td>
+									</tr>
+								{% endfor %}
+								{% comment %}<li>servicios en cola (garantia restante: 1/2/3), fecha</li>{% endcomment %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			{% else %}
+				<div class="row fila-1">
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 caja-perfil caja-titulo">
+						<ul class="categoria">
+							<li class="titulo-categoria" style="background: #F7E296;color:#000">Datos</li>
+							{% comment %}<li><img src="{% static 'images/profile.jpg' %}" width="100px" height="90px" class="imag-perfil media-object"></li>{% endcomment %}
+							<li class="nombusr">{{ perfil.nombre_completo }}</li>
+							<li class="usuario-perfil">@{{ perfil }}</li>
+							<li class="separador"></li>
+							{% comment %}<br>
+							<li><button>Reportar usuario</button></li> <!-- xHACER: hacer q funcione -->{% endcomment %}
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 caja-perfil caja-titulo" style="min-height:420px;height:auto;">
+						<ul class="categoria">
+							<li class="titulo-categoria">Estad&iacute;sticas</li>
+							{% comment %}<li><b>Promedio de Puntuaci&oacute;n:</b></li>
+							<li>Promedio General: <span class="pull-right">{{ prom }}</span></li>
+							<br>{% endcomment %}
+							<li>Invertido: <span class="pull-right">{{ invertido }} $</span></li>
+							<li>Cantidad de compras: <span class="pull-right">{{ n_compras }}</span></li>
+						</ul>
+						<br><br><br>
+						{% if perfil_propio %}
+							{% if lista_aprobados %}
+								<div class="titulo-categoria" style="margin: 0;">Servicios Terminandose ({{ lista_aprobados|length }})</div>
+								{% for servi in lista_aprobados %}
+									<div action="/perfil/{{ perfil }}/" class="solicitud col-md-12" method="post" accept-charset="utf-8">
+										<p>
+											<a href="/discusion/{{ servi.conversacion }}/{{ servi.id }}/"><span style="font-size:1.2em"><b>{{ servi.servicio }}</b></span></a>
+											<small> Desde hace {{ servi.fecha|timesince }}</small>
+											<small class="pull-right">
+												<b>Vendedor:</b> <a href="/perfil/{{ servi.vendedor }}/">@{{ servi.vendedor }}</a><br>
+												<b>Idioma:</b> {{ servi.servicio.idioma }}
+											</small>
+										</p>
+										{% if servi.contrato_mod %}
+											<div style="margin: 0 20px">
+												<p>Solicitastes:</p>
+												{% for n in servi.contrato %}
+													<small class="clausula"><b>{{ forloop.counter }}.-</b> {{ n }}</small><br>
+												{% endfor %}
+											</div>
+										{% endif %}
+									</div>
+								{% endfor %}
+							{% else %}
+								<p class="text-center" ><br>No has solicitados Servicios. Puedes revisar nuestras categorias y <a href="/mejores-servicios/">elegir</a> algo que te guste  ;)</p>
+							{% endif %}
+						{% endif %}
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 caja-perfil caja-titulo" {% if lista %}style="height: auto;"{% endif %}>
+						{% comment %}
+							<!-- xHACER:
+							# que sean dos listas las de serv solicitados y la de servicios aprobados y por su puesto limitarlo si no soy el dueño de la cta
+							-->{% endcomment %}
+						{% if lista %}
+							<div class="titulo-categoria"  style="background: #BE2A2D;margin-bottom:0">Servicios Solicitados ({{ lista|length }})</div>
+							{% for sc in lista %}
+								<form action="/perfil/{{ perfil }}/" class="solicitud col-md-12" method="post" accept-charset="utf-8">
+									{% csrf_token %}
+									<p>
+										<a href="/categoria/{{ sc.servicio.url.subcategoria.padre }}/{{ sc.servicio.url.subcategoria }}/{{ sc.servicio.url }}/"><span style="font-size:1.2em"><b>{{ sc.servicio }}</b></span></a>
+										<small> Hace {{ sc.fecha|timesince }}</small>
+										<small class="pull-right">
+											<b>Vendedor:</b> <a href="/perfil/{{ sc.vendedor }}/">@{{ sc.vendedor }}</a><br>
+											<b>Idioma:</b> {{ sc.idioma }}
+										</small>
+									</p>
+									{% if sc.contrato_mod %}
+										<div style="margin: 0 20px">
+											<p>Solicitastes:</p>
+											{% for n in sc.contrato %}
+												<small class="clausula"><b>{{ forloop.counter }}.-</b> {{ n }}</small><br>
+											{% endfor %}
+										</div>
+									{% endif %}
+									{% comment %}{% if perfil_propio %}   EL COMPRADOR NO PUEDE CANCELAR SOLO, q lo reporte en AC y sino cancelan mutuamente
+										<input type="hidden" name="ident" value="{{ sc.id }}">
+										<br>
+										<button type="submit" name="rechazar" class="btn btn-danger pull-right">Cancelar Solicitud</button>
+									{% endif %}{% endcomment %}
+								</form>
+							{% endfor %}
+						{% else %}
+							<div class="titulo-categoria"  style="background: #BE2A2D;margin-bottom:0">Servicios Solicitados</div>
+							<p class="text-center" ><br>Sin solicitudes por ahora...</p>
+						{% endif %}
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+<br>
+{% if perfil_propio and perfil.es_venezolano %}
+	{% comment %}{% load bolivizar %}{% endcomment %}
+	<div class="modal fade modal-crearservicio" tabindex="-2" role="dialog" aria-labelledby="CrearServicio" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Nuevo Servicio</h4>
+				</div>
+				<form action="/crear-servicio/" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="modal-body row">
+						<select onchange="actualizarLista(this)" class="col-md-6">
+							<option value="-1">Categor&iacute;as:</option>
+							{% for cat in categorias %}
+							 	<option value="{{ forloop.counter0 }}">{{ cat }}</option>
+							{% endfor %}
+						</select>
+						<select onchange="subcatEnviar(this)"  class="col-md-6" size="1" id="id-subcateg" name="subcategoria">
+							<option value="-1">Subcategor&iacute;as:</option>
+						</select>
+						<br><br>
+						<input type="text" class="form-control form-controlado" placeholder="Nombre del servicio" name="nomb">
+						<input type="hidden" id="subc" name="subc" value="0">
+						{% comment %}
+							<!-- xHACER:
+							# editar la forma de presentar el precio, hacerlo variable con un maximo fijo y validarlo en js
+						-->{% endcomment %}
+						<label>Precio:</label>
+						{% comment %}<p class="form-control-static" style="display: inline-block; margin-right: 10px;">{{ precio_max }} $</p>{% endcomment %}
+						<input type="number" step="1" name="precio" required min="5" pattern="/d+/" max="500" placeholder="5-500$">
+						<label>Imagen del Servicio:</label><input style="display: inline-block;" type="file" name="img_serv">
+						<textarea class="form-control form-controlado" rows="3" name="descrip" placeholder="Descripci&oacute;n..."></textarea>
+						<br>
+						<p id="formu-serv">
+							<b>Clausulas del Contrato:</b><br>
+							<span class="col-md-1">1.-</span>
+							<input type="text" name="clausula-0" class="clausulas form-controlado col-md-11">
+							<a href="#" id="btn-inputs" onclick="agregarInput()" class="btn btn-default">+</a>
+						</p>
+						<input type="hidden" id="Nclausulas" name="Nclausulas" value="1">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-primary">Enviar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endif %}

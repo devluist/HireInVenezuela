@@ -1,0 +1,88 @@
+
+.list-group-item {
+    border-radius: 0 !important;
+    border-right: none;
+}
+
+#postman-menu {
+	padding-right: 0;
+	margin: 0;
+}
+
+#postman {
+    border: 1px solid #DDD;
+    min-height: 206px;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+#postman h1, #postman h3 {
+    padding: 8px 20px;
+    border-bottom: 1px solid #DDD;
+    margin: 0;
+    background-color: #FFF;
+}
+
+#postman p {
+    padding: 15px 20px 0;
+    margin: 0;
+}
+
+#postman form {
+    padding: 15px 20px;
+}
+
+.pm_message {
+    padding: 10px 20px;
+}
+
+.pm_message .pm_body {
+    padding: 5px 20px;
+}
+
+#form-contabla {
+	padding: 0 !important;
+}
+
+#form-contabla #pm_messages{
+	width: 100%;
+	margin-top: 20px;
+}
+
+
+/*-----------------------------------------------*/
+
+#id_body {
+    padding: 10px 0px !important;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    outline: none;
+    height: 200px !important;
+    max-height: 200px;
+    max-width: 100%;
+    min-height: 200px;
+    min-width: 100%;
+    margin-bottom: 20px;
+}
+
+/*-----------------------------------------------*/
+
+.pm_message.pm_deleted {
+ text-decoration: line-through;
+}
+.pm_message.pm_deleted .pm_body{
+ display: none;
+}
+.pm_message.pm_archived {
+ font-style: italic;
+ color: grey;
+}
+.pm_message.pm_unread .pm_subject {
+ font-weight: bolder;
+}
+.pm_message.pm_pending .pm_header {
+ background-color: #FFC;
+}
+.pm_message.pm_rejected .pm_header {
+ background-color: #FDD;
+}

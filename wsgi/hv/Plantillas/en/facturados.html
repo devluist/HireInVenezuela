@@ -1,0 +1,37 @@
+{% load i18n %}
+{% load static from staticfiles %}
+<div class="cuerpo">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 caja-contacto caja-contacto-mod" style="float:none;margin:30px auto;{% if not lista %}background-color: #FFF;border: 1px solid #C8C7C7;{% endif %}">
+				<div class="titulo-categoria" style="margin: 0;">Servicios Entregados ({{ facts|length }})</div>
+				{% if facts %}
+					{% for f in facts %}
+						<div class="solicitud col-md-12">
+							<p>
+								<span style="font-size:1.2em">{{ f.url_servicio }}</span>
+								<small> Hace {{ f.fecha|timesince }}</small>
+								<small class="pull-right">
+									<b>Solicitante:</b> <a href="/perfil/{{ f.comprador }}/">@{{ f.comprador }}</a><br>
+									{% comment %} xHACER: <b>Idioma:</b> {{ f.url_servicio.obj_servicio.idioma }}{% endcomment %}
+									<b>Ganancias:</b> {{ f.vendedor_recibe }} 
+								</small>
+							</p>
+							{% if "" not in serv.contrato %}
+								<div style="margin: 0 20px">
+									<p>El usuario quer&iacute;a:</p>
+									{% for n in serv.contrato %}
+										<small class="clausula"><b>{{ forloop.counter }}.-</b> {{ n }}</small><br>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+					{% endfor %}
+				{% else %}
+					<p class="text-center" ><br>Sin servicios entregados por ahora...</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+<br><br>

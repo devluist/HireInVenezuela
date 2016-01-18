@@ -1,0 +1,287 @@
+{% load i18n %}
+{% load static from staticfiles %}
+<script type="text/javascript" charset="utf-8">
+	function agregarInput(cadena, modal){
+		var clau = "Nclausulas-"+modal;
+		var n = document.getElementById(clau);
+		var i = document.createElement("input");
+		var s = document.createElement("span");
+		var btn = "btn-inputs-"+modal;
+		var f = document.getElementById(btn);
+		n = ++n.value;
+		if (s.innerText)
+			{s.innerText = n+".-"}
+		else
+			{s.textContent = n+".-"}
+		s.className = "col-md-1";
+		i.type = "text";
+		i.name = "clausula-"+(n-1);
+		i.className = "clausulas form-controlado col-md-11";
+		document.getElementById(cadena).insertBefore(s, f);
+		document.getElementById(cadena).insertBefore(i, f);
+		/*n+".-"+document.getElementById("Nclausulas").previousElementSibling.outerHTML;*/
+	}
+	window.onload = function (){
+		var select = document.getElementsByName("traduccion_servicio")[0];
+		select.onchange = function() {
+			var formu = select.form;
+			formu.setAttribute("action","/categoria/{{ categoria }}/{{ categoria.urlsubcategoria }}/{{ servicio.url }}/");
+			formu.submit();
+		}
+	};
+</script>
+{% if mensaje %}
+	<div class="alert alert-warning fade in" style="text-align: center">
+		<i><b>HV informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	</div>
+{% endif %}
+<div class="cuerpo">
+	<div class="container">
+		<h4><a href="/categoria/{{ categoria }}/">{{ categoria.nombre }}</a>  >  <a href="/categoria/{{ categoria }}/{{ categoria.urlsubcategoria }}/">{{ categoria.subcategoria }}</a></h4>
+		<h2>{{ servicio }}</h2>
+		<div class="row">
+			<div class="col-md-3 foto-serv">
+				<p class="caja">
+					<a href="/perfil/{{ servicio.url.vendedor }}/">
+						<i class="glyphicon glyphicon-user"></i>  @{{ servicio.url.vendedor }}
+					</a>
+					<a href="{% url 'postman:write' servicio.url.vendedor %}" title="¿Tienes preguntas sobre el servicio?" >
+						{% if logueado and not perfil_logueado.es_venezolano and perfil_logueado != servicio.url.vendedor and not perfil_propio %}Chat
+							<i class="glyphicon glyphicon-comment"></i>
+						{% endif %}
+					</a>
+				</p>
+				<img src="{{ servicio.imagen.url }}" width="100%" height="200px" alt="1.000 Me Gusta para tu post, foto o video en Facebook">
+				<!-- <img data-src="holder.js/300x200" alt="..."> -->
+			</div>
+			<div class="col-md-8 col-md-offset-1 descrip-serv">
+				<form action="/enlistar-usuario/{{ perfil }}/" method="post" accept-charset="utf-8">
+					{% csrf_token %}
+					<p style="font-size: 17px;font-family: 'Palatino Linotype';padding: 10px;"><i><b>Descripci&oacute;n: </b></i>{{ servicio.descripcion }}</p>
+					<div class="row" style="border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+						<div class="col-md-12 contrato">
+							<p class="subtitulo">Contrato</p>
+							<div class="clausulas-contrato">
+								{% if contrato %}
+									{% for n in contrato %}
+										<p class="clausula"><b>{{ forloop.counter }}.-</b> {{ n }}</p>
+									{% endfor %}
+								{% endif %}
+							</div>
+							{% if logueado and perfil_logueado != servicio.url.vendedor and not perfil_logueado.es_venezolano %}
+									<a href="#" data-toggle="modal" data-target=".modal-crearcontrato" class="btn activar-chat pull-right">¿Negociar t&eacute;rminos?</a>
+							{% endif %}
+						</div>
+						{% comment %}<div class="col-md-6 extras">
+							<p class="subtitulo">Extras</p>
+							<div class="clausulas-contrato">
+								{% for n in servs_satelite %}
+									<p><input type="checkbox" name="{{ n.id }}"> {{ n.descripcion }} <span class="pull-right">{{ n.url.precio }}</span></p>
+								{% endfor %}
+							</div>
+						</div>{% endcomment %}
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<span>Atenci&oacute;n en:</span>
+							<select class="form-control form-controlado" name="traduccion_servicio" style="height: 28px;">
+								<option value="">Seleccione un idioma:</option>
+								{% get_language_info_list for idiomas_servicio as idiomas_servicio %}
+								{% for idioma in idiomas_servicio %}
+									<option value="{{ idioma.code }}">
+										<i class="glyphicon glyphicon-globe"></i> {{ idioma.name_local|capfirst }}
+									</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-md-4">
+							<p>¿Aceptas los t&eacute;rminos del contrato?</p>
+						</div>
+						<div class="col-md-2">
+							{% comment %}{% if perfil.es_venezolano %}
+								{% load bolivizar %}
+								<p id="precio-contrato"><b>Precio:</b><br>{{ servicio.url.precio|floatformat:"-2" }} $</p>
+							{% else %}{% endcomment %}
+								<p id="precio-contrato"><b>Precio:</b><br>$ {{ servicio.url.precio|floatformat:"-2" }} $</p>
+						</div>
+						<div class="col-md-3" id="div_boton_contratar">
+							{% if servicio.url.vendedor == perfil_logueado %}
+								<button type="button" id="traduce_luego_envia" data-toggle="modal" data-target=".modal-traducirserv" class="btn-contratar">Traducir</button>
+							{% elif not perfil_logueado %}
+								<a href="/" class="btn btn-contratar" style="margin-left: -2px;font-size: 13px;" title="Crear cuenta en HV">Registrate para<br>comprar!</a>
+							{% elif perfil_logueado.es_venezolano %}
+							{% else %}
+								<button type="submit" class="btn-contratar">Contratar</button>
+							{% endif %}
+						</div>
+					</div>
+					<input type="hidden" name="serv" value="{{ servicio.url }}">
+					<input type="hidden" name="idioma_serv" value="{{ servicio.idioma }}">
+				</form>
+			</div>
+		</div>
+		<br>
+		<h2>Barra Estad&iacute;stica (Promedios)</h2>
+		<div class="row">
+			<div class="col-md-3 caja-estadistica-serv">
+				<p class="titulo-caja-estadistica">Experiencia</p><br>
+				<p>{% if exp %}{{ exp }}{% else %}0{% endif %}</p>
+			</div>
+			<div class="col-md-3 caja-estadistica-serv">
+				<p class="titulo-caja-estadistica">Tiempo de Entrega</p><br>
+				<p>{% if te %}{{ te }}{% else %}0{% endif %} / 10 ptos.</p>
+			</div>
+			<div class="col-md-3 caja-estadistica-serv">
+				<p class="titulo-caja-estadistica">Calidad del Servicio</p><br>
+				<p>{% if calidad %}{{ calidad }}{% else %}0{% endif %} / 10 ptos.</p>
+			</div>
+			<div class="col-md-3 caja-estadistica-serv">
+				<p class="titulo-caja-estadistica">Atenci&oacute;n con los Usuario</p><br>
+				<p>{% if atencion %}{{ atencion }}{% else %}0{% endif %} / 10 ptos.</p>
+			</div>
+		</div>
+	</div>
+	<br><br>
+</div>
+{% if logueado %}
+	<div class="modal fade modal-crearcontrato" role="dialog" aria-labelledby="CrearContrato" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Sugerir nuevo contrato</h4>
+				</div>
+				<form action="/enlistar-usuario/{{ perfil }}/" method="post" accept-charset="utf-8">
+					{% csrf_token %}
+					<div class="modal-body row">
+						<p id="formu-serv">
+							<b>Clausulas del Contrato:</b><br>
+							<span class="col-md-1">1.-</span>
+							<input type="text" name="clausula-0" class="clausulas form-controlado col-md-11">
+							<a href="#" id="btn-inputs-negociar" onclick="agregarInput('formu-serv','negociar')" class="btn btn-default">+</a>
+						</p>
+						<input type="hidden" id="Nclausulas-negociar" name="Nclausulas" value="1">
+						<input type="hidden" name="serv" value="{{ servicio.url }}">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-primary">Enviar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade modal-traducirserv" role="dialog" aria-labelledby="TraducirServicio" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Traducci&oacute;n del Servicio</h4>
+				</div>
+				<form action="/traducir-servicio/" method="post" accept-charset="utf-8">
+					{% csrf_token %}
+					<div class="modal-body row">
+						<p>
+							<b>Idioma</b>
+							<select name="serv_traducido">
+								{% get_language_info_list for idiomas_disponibles as idiomas_disponibles %}
+								{% for idioma in idiomas_disponibles %}
+									<option value="{{ idioma.code }}">
+										<i class="glyphicon glyphicon-globe"></i> {{ idioma.name_local|capfirst }}
+									</option>
+								{% endfor %}
+							</select><br>
+							<div class="row">
+								<b>Nombre</b><br>
+								<input type="text" name="nomb" class="form-controlado col-md-12">
+							</div>
+							<div class="row">
+								<b>Descripci&oacute;n</b><br>
+								<textarea name="descrip" class="form-controlado col-md-12"></textarea>
+							</div>
+							<div class="row">
+								<b>Contrato</b><br>
+								{% if contrato %}
+									{% for n in contrato %}
+										<span class="col-md-1">{{ forloop.counter }}.-</span>
+										<input type="text" name="clausula-{{ forloop.counter0 }}" class="clausulas form-controlado col-md-11" placeholder="{{ n }}">
+									{% endfor %}
+								{% endif %}
+							</div>
+							{% comment %} xHACER: <a href="#" id="btn-inputs-traducir" onclick="agregarInput()" class="btn btn-default">+</a>{% endcomment %}
+						</p>
+						<input type="hidden" id="Nclausulas" name="Nclausulas" value="{% if contrato %}{{ contrato|length }}{% else %}1{% endif %}">
+						<input type="hidden" name="serv" value="{{ servicio.url }}">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-primary">Enviar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% if servicio.url.vendedor == perfil_logueado %}
+		<div class="modal fade modal-editarserv" role="dialog" aria-labelledby="EditarServicio" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Modo Edici&oacute;n de Servicio</h4>
+					</div>
+					<form action="/categoria/{{ categoria }}/{{ categoria.urlsubcategoria }}/{{ servicio.url }}/" method="post" accept-charset="utf-8">
+						{% csrf_token %}
+						<div class="modal-body row">
+							<b>Nombre</b><br>
+							<input type="text" name="nomb" class="form-controlado col-md-12" value="{{ servicio }}">
+							<b>Descripci&oacute;n</b><br>
+							<textarea name="descrip" class="form-controlado col-md-12">{{ servicio.descripcion }}</textarea>
+							<p id="form-edit-serv">
+								<b>Contrato</b><br>
+								{% if contrato %}
+									{% for n in contrato %}
+										<span class="col-md-1">{{ forloop.counter }}.-</span>
+										<input type="text" name="clausula-{{ forloop.counter0 }}" class="clausulas form-controlado col-md-11" value="{{ n }}">
+									{% endfor %}
+								{% endif %}
+								<a href="#" id="btn-inputs-editar" onclick="agregarInput('form-edit-serv','editar')" class="btn btn-default">+</a>
+							</p>
+							<input type="hidden" id="Nclausulas-editar" name="Nclausulas" value="{% if contrato %}{{ contrato|length }}{% else %}1{% endif %}">
+							<input type="hidden" name="idioma_serv" value="{{ servicio.idioma }}">
+							<input type="hidden" name="editar" value="1">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-primary">Editar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade modal-eliminarserv" role="dialog" aria-labelledby="EliminarServicio" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Eliminar Servicio</h4>
+					</div>
+					<form action="/categoria/{{ categoria }}/{{ categoria.urlsubcategoria }}/{{ servicio.url }}/" method="post" accept-charset="utf-8">
+						{% csrf_token %}
+						<div class="modal-body row">
+							{% get_language_info for servicio.idioma as idiom %}
+							<p>¿Est&aacute;s segur@ de eliminar este servicio en su versi&oacute;n para el idioma <b>{{ idiom.name_local|capfirst }}</b>?</p>
+							<input type="hidden" name="eliminar" value="1">
+							<input type="hidden" name="idioma_serv" value="{{ servicio.idioma }}">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-primary">Eliminar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endif %}
+
+{% comment %}<div class="footer"  style="position: relative; margin-top: 50px;">{% endcomment %}

@@ -1,0 +1,64 @@
+{% load i18n %}
+{% load static from staticfiles %}
+<div class="cuerpo">
+	<div class="container">
+		<h2>Servicios {% if vista == "nuevos" %}recientes{% else %}mejor valorados{% endif %}</h2>
+		<hr class="linea-hr">
+		<div class="row">
+			{% for serv in lista_servicios %}
+				<div class="col-md-3 caja-serv">
+					<div class="cara-secundaria">
+						<p class="usuario"><a href="/perfil/{{ serv.url.vendedor }}/"><i class="glyphicon glyphicon-user"></i>  @{{ serv.url.vendedor }}</a></p>
+						<a class="enlace-serv" href="/categoria/{{ serv.url.subcategoria.padre }}/{{ serv.url.subcategoria }}/{{ serv.url }}/">
+							<p class="datos-extra">
+								<span class="titulo-extras">Nivel:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> {{ serv.nivel }}</span>
+								{% if serv.valoraciones %}
+									<span class="titulo-extras">Promedio:</span><span><i class="glyphicon glyphicon-star color-oro"></i> {{ serv.valoraciones.promedio }} / 10</span>
+									<span class="titulo-extras">Experiencia:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> {{ serv.valoraciones.experiencia }}</span>
+									<span class="vermas"><i class="glyphicon glyphicon-chevron-right" style=""></i></span>
+								{% else %}
+									<span class="titulo-extras">Promedio:</span><span><i class="glyphicon glyphicon-star color-oro"></i> Sin calificar</span>
+									<span class="titulo-extras">Experiencia:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> 0</span>
+									<span class="vermas"><i class="glyphicon glyphicon-chevron-right" style=""></i></span>
+								{% endif %}
+							</p>
+						</a>
+					</div>
+				 	<div class="cara-principal">
+						<img src="{{ serv.imagen.url }}" width="215" height="130" alt="">
+				 		<!-- <img data-src="holder.js/300x200" alt="..."> -->
+					 	<div class="dir-serv">
+							<div class="row">
+								<h2 class="col-xs-9 nomb-serv">{{ serv }}</h2>
+								{% comment %}{% if perfil.es_venezolano %}
+									{% load bolivizar %}
+									<div class="col-xs-3 text-center precio"><div>$</div>{{ serv.url.precio }}</div>
+								{% else %}{% endcomment %}
+								{% load es_entero %}
+								{% if serv.url.precio|es_entero %}
+									<div class="col-xs-3 text-center precio" style="padding: 30px 0px">$ {{ serv.url.precio|floatformat:"-2" }}</div>
+								{% else %}
+									<div class="col-xs-3 text-center precio">$ {{ serv.url.precio|floatformat:"-2" }}</div>
+								{% endif %}
+							</div>
+				      	</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="container" style="text-align: center;">
+		<ul class="pagination">
+			<li><a href="?consulta={{ consulta }}&pagina=1">&laquo;</a></li>
+			{% for ind in rango %}
+				{% if ind != lista_servicios.number %}
+					<li><a href="?consulta={{ consulta }}&pagina={{ind}}">{{ind}} <span class="sr-only">(current)</span></a></li>
+				{% else %}
+					<li class="active"><a href="?consulta={{ consulta }}&pagina={{ind}}">{{ind}} <span class="sr-only">(current)</span></a></li>
+				{% endif %}
+			{% endfor %}
+			<li><a href="?consulta={{ consulta }}&pagina={{rango|length}}">&raquo;</a></li>
+		</ul>
+	</div>
+</div>
+{% comment %}<div class="footer"  style="position: fixed; bottom:0; margin-top: 50px;">{% endcomment %}

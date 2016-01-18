@@ -4,17 +4,17 @@ from setuptools import setup
 
 setup(
     # GETTING-STARTED: set your app name:
-    name='YourAppName',
+    name='buy',
     # GETTING-STARTED: set your app version:
-    version='1.0',
+    version='0.5',
     # GETTING-STARTED: set your app description:
-    description='OpenShift App',
+    description='App de inicio de HV',
     # GETTING-STARTED: set author name (your name):
-    author='Your Name',
+    author='Luis Tena',
     # GETTING-STARTED: set author email (your email):
     author_email='example@example.com',
     # GETTING-STARTED: set author url (your url):
-    url='http://www.python.org/sigs/distutils-sig/',
+    url='',
     # GETTING-STARTED: define required django version:
     install_requires=[
         'Django==1.8.4'

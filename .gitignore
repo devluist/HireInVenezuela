@@ -1,5 +1,8 @@
 *.py[co]
 *.sw[po]
+*.sublime-project
+*.sublime-workspace
+*.bat
 *.bak
 *.orig
 *~
