@@ -110,6 +110,13 @@ USE_TZ = True
 
 STATIC_URL = '/multimedia/'
 STATIC_ROOT = os.path.join(WSGI_DIR, 'Multimedia/')
+# Additional locations of static files
+# STATICFILES_DIRS = (
+# 	# Put strings here, like "/home/html/static" or "C:/www/django/static".
+# 	# Always use forward slashes, even on Windows.
+# 	# Don't forget to use absolute paths, not relative paths.
+# 	os.path.join(WSGI_DIR, 'Multimedia/'),  # '~/hv',
+# )
 
 MEDIA_URL = '/media-url/'
 MEDIA_ROOT = os.path.join(WSGI_DIR, 'images')  # '~/hv/Multimedia/images/'
@@ -120,14 +127,6 @@ MEDIA_ROOT = os.path.join(WSGI_DIR, 'images')  # '~/hv/Multimedia/images/'
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
-
-# Additional locations of static files
-STATICFILES_DIRS = (
-	# Put strings here, like "/home/html/static" or "C:/www/django/static".
-	# Always use forward slashes, even on Windows.
-	# Don't forget to use absolute paths, not relative paths.
-	os.path.join(WSGI_DIR, 'Multimedia/'),  # '~/hv',
-)
 
 # TEMPLATE_DIRS = (
 	# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
