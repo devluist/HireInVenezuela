@@ -126,7 +126,7 @@ STATICFILES_DIRS = (
 	# Put strings here, like "/home/html/static" or "C:/www/django/static".
 	# Always use forward slashes, even on Windows.
 	# Don't forget to use absolute paths, not relative paths.
-	os.path.join(WSGI_DIR, 'Multimedia/')  # '~/hv',
+	os.path.join(WSGI_DIR, 'Multimedia/'),  # '~/hv',
 )
 
 # TEMPLATE_DIRS = (
