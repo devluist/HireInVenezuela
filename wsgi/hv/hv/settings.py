@@ -119,7 +119,7 @@ MEDIA_URL = '/media-url/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-#ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
+ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -136,7 +136,7 @@ STATICFILES_DIRS = (
 	#"C:/Users/iLaptop/xampp/htdocs/Django/hv/Plantillas/",
 # )
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST = ""  # xHACER: que host me brinda OpenShift pa los correos?
 # EMAIL_PORT = 25
 
@@ -147,4 +147,4 @@ STATICFILES_DIRS = (
 
 
 # super usr=jefe , pw= jefe@a.a
-#POSTMAN_AUTO_MODERATE_AS = True
+POSTMAN_AUTO_MODERATE_AS = True
