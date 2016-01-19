@@ -17,7 +17,7 @@
 
 # xHACER: las siguientes dos lineas son temporales, solo dunrante desarrollo
 # from django.conf import settings
-from django.conf.urls.static import static
+# from django.conf.urls.static import static
 from postman.views import ConversationView
 
 from django.conf.urls import patterns, url, include
