@@ -17,6 +17,7 @@ sys.path.append(os.path.join(REPO_DIR, 'libs'))
 import secrets
 SECRETS = secrets.getter(os.path.join(DATA_DIR, 'secrets.json'))
 
+from decimal import Decimal
 MI_CORREO_PAYPAL = "v11-presidente@hotmail.com"  # "luistena.developer@hotmail.com"
 IDIOMAS_DISPONIBLES = ["es", "en"]
 	# "es":
