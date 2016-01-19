@@ -109,8 +109,8 @@ USE_TZ = True
 
 # ATENCION: por haber cambiado el nombre a un nombre mio creo q hay q ejecutar el comando en el directorio cada vez q se modifique el lugar de esta carpeta
 	# django-admin collectstatic
-STATIC_URL = '/multimedia/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'Multimedia/')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 ##################################
 ##################################
