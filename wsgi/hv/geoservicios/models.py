@@ -116,7 +116,7 @@ class UrlCategoria(models.Model):
 	padre = models.ForeignKey('self', blank=True, null=True, related_name="hijos")
 
 	class Meta:
-		unique_together = (('url', 'padre'))
+		unique_together = ('url', 'padre', 'id')
 
 	def __unicode__(self):
 		return "%s" % self.url
