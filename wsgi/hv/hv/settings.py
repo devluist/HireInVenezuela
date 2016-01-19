@@ -115,14 +115,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 ##################################
 ##################################
 
-# STATICFILES_FINDERS = (
-#  	"django.contrib.staticfiles.finders.FileSystemFinder",
-# 	"django.contrib.staticfiles.finders.AppDirectoriesFinder",
-# )
-
-
-
-
 MEDIA_URL = '/media-url/'
 MEDIA_ROOT = os.path.join(DATA_DIR, 'Subidas/')  # '~/hv/Multimedia/images/'
 # xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
