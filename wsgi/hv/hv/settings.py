@@ -17,6 +17,23 @@ sys.path.append(os.path.join(REPO_DIR, 'libs'))
 import secrets
 SECRETS = secrets.getter(os.path.join(DATA_DIR, 'secrets.json'))
 
+MI_CORREO_PAYPAL = "v11-presidente@hotmail.com"  # "luistena.developer@hotmail.com"
+IDIOMAS_DISPONIBLES = ["es", "en"]
+	# "es":
+	# "en-US":
+	# "pt-BR":
+	# "ru-RU":
+	# "hi":  # india?
+	# "en-ZA":  # sudafrica  or "af" or "zu":
+	# "zh-CN":
+	# "fr-FR":
+	# "da-DE":  # or "de-DE":
+#PRECIO_POR_DOLAR = 1000
+COMISION_PAYPAL = {"ganancia": Decimal("5.4"), "neto": Decimal("0.3")}
+COMISION_HV = 30
+# ANIO_INICIO_CH = 2015  # CH: cuadro de honor
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 

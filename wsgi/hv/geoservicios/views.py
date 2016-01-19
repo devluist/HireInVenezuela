@@ -21,7 +21,7 @@ from os import mkdir, access, F_OK
 from datetime import datetime  # , date
 from hashlib import sha1
 import re, urllib2, json
-
+from django.conf.settings import MI_CORREO_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL  # , PRECIO_POR_DOLAR, ANIO_INICIO_CH
 
 #----------------------------------------------------------
 #---------------------  Inicializando  --------------------
@@ -39,22 +39,6 @@ LISTA_SUBCATEGORIAS = []
 CATEGORIAS = Categoria.objects.filter(url__padre=None)
 for i, cat in enumerate(CATEGORIAS):
 	LISTA_SUBCATEGORIAS.append([i, Categoria.objects.filter(url__padre=cat.url)])
-
-# ANIO_INICIO_CH = 2015  # CH: cuadro de honor
-IDIOMAS_DISPONIBLES = ["es", "en"]
-	# "es":
-	# "en-US":
-	# "pt-BR":
-	# "ru-RU":
-	# "hi":  # india?
-	# "en-ZA":  # sudafrica  or "af" or "zu":
-	# "zh-CN":
-	# "fr-FR":
-	# "da-DE":  # or "de-DE":
-#PRECIO_POR_DOLAR = 1000
-COMISION_PAYPAL = {"ganancia": Decimal("5.4"), "neto": Decimal("0.3")}
-COMISION_HV = 30
-MI_CORREO_PAYPAL = "v11-presidente@hotmail.com"  # "luistena.developer@hotmail.com"
 
 
 ##############################
