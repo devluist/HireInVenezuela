@@ -12,5 +12,5 @@ fi
 echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/hv/manage.py migrate --noinput'"
 python "$OPENSHIFT_REPO_DIR"wsgi/hv/manage.py migrate --noinput
 
-echo "Executing 'python $OPENSHIFT_HOMEDIR/wsgi/hv/manage.py collectstatic --noinput'"
-python "$OPENSHIFT_HOMEDIR"wsgi/hv/manage.py collectstatic --noinput
+echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/hv/manage.py collectstatic --noinput'"
+python "$OPENSHIFT_REPO_DIR"wsgi/hv/manage.py collectstatic --noinput
