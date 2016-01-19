@@ -21,7 +21,7 @@ from os import mkdir, access, F_OK
 from datetime import datetime  # , date
 from hashlib import sha1
 import re, urllib2, json
-from django.conf.settings import MI_CORREO_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL  # , PRECIO_POR_DOLAR, ANIO_INICIO_CH
+from django.conf.settings import MI_CORREO_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL, HEADERS_PAYPAL  # , PRECIO_POR_DOLAR, ANIO_INICIO_CH
 
 #----------------------------------------------------------
 #---------------------  Inicializando  --------------------
@@ -409,14 +409,6 @@ def datos_perfil_venezolano(perfil, idioma):
 
 def reembolsar(obj_encola):
 	inter = Intermediario.objects.get(obj_cola=obj_encola)
-	headers = {
-		"X-PAYPAL-SECURITY-USERID": "v11-presidente_api1.hotmail.com",
-		"X-PAYPAL-SECURITY-PASSWORD": "YDJ4JY78B4PJ49NM",
-		"X-PAYPAL-SECURITY-SIGNATURE": "AFcWxV21C7fd0v3bYYYRCpSSRl31A19Xg5YCxz26FXh2mHNU6iUanMTY",
-		"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
-		"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
-		"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-	}
 	datos_paypal = {
 		"currencyCode": "USD",
 		"payKey": inter.clave_paypal,
@@ -444,14 +436,7 @@ def reembolsar(obj_encola):
 
 def pagar_vendedores(obj_encola):
 	inter = Intermediario.objects.get(obj_cola=obj_encola)
-	headers = {
-		"X-PAYPAL-SECURITY-USERID": "v11-presidente_api1.hotmail.com",
-		"X-PAYPAL-SECURITY-PASSWORD": "YDJ4JY78B4PJ49NM",
-		"X-PAYPAL-SECURITY-SIGNATURE": "AFcWxV21C7fd0v3bYYYRCpSSRl31A19Xg5YCxz26FXh2mHNU6iUanMTY",
-		"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
-		"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
-		"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-	}
+	headers = HEADERS_PAYPAL
 	datos_paypal = {
 		"payKey": inter.clave_paypal,
 		"requestEnvelope": {
@@ -1323,14 +1308,7 @@ def enlistar_usuario(request, usr):
 			# editar los headers app-id, usrs, url de la peticion al sandbox
 		precio_serv = encola.servicio.url.precio
 		comisiones = precio_serv - (precio_serv * COMISION_PAYPAL["ganancia"] / 100) - COMISION_PAYPAL["neto"] - (precio_serv * COMISION_HV / 100)
-		headers = {
-			"X-PAYPAL-SECURITY-USERID": "v11-presidente_api1.hotmail.com",
-			"X-PAYPAL-SECURITY-PASSWORD": "YDJ4JY78B4PJ49NM",
-			"X-PAYPAL-SECURITY-SIGNATURE": "AFcWxV21C7fd0v3bYYYRCpSSRl31A19Xg5YCxz26FXh2mHNU6iUanMTY",
-			"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
-			"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
-			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-		}
+		headers = HEADERS_PAYPAL
 		datos_paypal = {
 			# xHACER: falta enviar el precio de la comision para q se vea directo cuanto debe pagar
 			"actionType": "PAY_PRIMARY",
@@ -1350,8 +1328,8 @@ def enlistar_usuario(request, usr):
 				}]
 			},
 			# xHACER: cambiar URLS
-			"returnUrl": "http://localhost:8000/perfil/" + unicode(p) + "/?mensaje=bien&c=" + unicode(encola.id),
-			"cancelUrl": "http://localhost:8000/perfil/" + unicode(p) + "/?mensaje=cancelado&c=" + unicode(encola.id),
+			"returnUrl": "http://buy-2venezuela.rhcloud.com/perfil/" + unicode(p) + "/?mensaje=bien&c=" + unicode(encola.id),
+			"cancelUrl": "http://buy-2venezuela.rhcloud.com/perfil/" + unicode(p) + "/?mensaje=cancelado&c=" + unicode(encola.id),
 			"requestEnvelope": {
 				"errorLanguage": "en_US",
 				"detailLevel": "ReturnAll"

@@ -33,7 +33,14 @@ IDIOMAS_DISPONIBLES = ["es", "en"]
 COMISION_PAYPAL = {"ganancia": Decimal("5.4"), "neto": Decimal("0.3")}
 COMISION_HV = 30
 # ANIO_INICIO_CH = 2015  # CH: cuadro de honor
-
+HEADERS_PAYPAL = {
+	"X-PAYPAL-SECURITY-USERID": "v11-presidente_api1.hotmail.com",
+	"X-PAYPAL-SECURITY-PASSWORD": "YDJ4JY78B4PJ49NM",
+	"X-PAYPAL-SECURITY-SIGNATURE": "AFcWxV21C7fd0v3bYYYRCpSSRl31A19Xg5YCxz26FXh2mHNU6iUanMTY",
+	"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
+	"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
+	"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
