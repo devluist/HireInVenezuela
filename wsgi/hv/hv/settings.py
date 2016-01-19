@@ -111,10 +111,9 @@ USE_TZ = True
 	# django-admin collectstatic
 STATIC_URL = '/multimedia/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'Multimedia/')
-STATICFILES_DIRS = (
-	("multimedia", os.path.join(BASE_DIR, 'Multimedia/')),
-	os.path.join(WSGI_DIR, 'Multimedia/'),
-)
+# STATICFILES_DIRS = (
+# 	("multimedia", os.path.join(WSGI_DIR, 'Multimedia/')),
+# )
 
 ##################################
 ##################################
