@@ -71,7 +71,11 @@ TEMPLATES = [
 			'context_processors': [
 				'django.template.context_processors.debug',
 				'django.template.context_processors.request',
+
+				# xHACER: anote esto
 				'django.template.context_processors.media',
+
+
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
 			],
@@ -117,6 +121,18 @@ STATICFILES_DIRS = (
 	# Don't forget to use absolute paths, not relative paths.
 	os.path.join(WSGI_DIR, 'Multimedia/'),
 )
+
+
+##################################
+##################################
+
+STATICFILES_FINDERS = (
+ 	"django.contrib.staticfiles.finders.FileSystemFinder",
+	"django.contrib.staticfiles.finders.AppDirectoriesFinder",
+)
+
+
+
 
 MEDIA_URL = '/media-url/'
 MEDIA_ROOT = os.path.join(DATA_DIR, 'Subidas/')  # '~/hv/Multimedia/images/'
