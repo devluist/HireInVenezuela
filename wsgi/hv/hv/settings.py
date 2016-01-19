@@ -71,11 +71,6 @@ TEMPLATES = [
 			'context_processors': [
 				'django.template.context_processors.debug',
 				'django.template.context_processors.request',
-
-				# xHACER: anote esto
-				'django.template.context_processors.media',
-
-
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
 			],
@@ -112,16 +107,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-# Additional locations of static files
-# STATICFILES_DIRS = (
-# 	# Put strings here, like "/home/html/static" or "C:/www/django/static".
-# 	# Always use forward slashes, even on Windows.
-# 	# Don't forget to use absolute paths, not relative paths.
-# 	os.path.join(WSGI_DIR, 'Multimedia/'),
-# )
-
+# ATENCION: por haber cambiado el nombre a un nombre mio creo q hay q ejecutar el comando en el directorio cada vez q se modifique el lugar de esta carpeta
+	# django-admin collectstatic
+STATIC_URL = '/multimedia/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'Multimedia/')
 
 ##################################
 ##################################
@@ -143,13 +132,6 @@ MEDIA_ROOT = os.path.join(DATA_DIR, 'Subidas/')  # '~/hv/Multimedia/images/'
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
-
-# TEMPLATE_DIRS = (
-	# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-	# Always use forward slashes, even on Windows.
-	# Don't forget to use absolute paths, not relative paths.
-	#"C:/Users/iLaptop/xampp/htdocs/Django/hv/Plantillas/",
-# )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST = ""  # xHACER: que host me brinda OpenShift pa los correos?
