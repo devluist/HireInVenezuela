@@ -21,8 +21,7 @@ from os import mkdir, access, F_OK
 from datetime import datetime  # , date
 from hashlib import sha1
 import re, urllib2, json
-from django.conf import settings
-from settings import MI_CORREO_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL, HEADERS_PAYPAL  # PRECIO_POR_DOLAR, ANIO_INICIO_CH
+from hv.settings import MI_CORREO_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL, HEADERS_PAYPAL  # ,PRECIO_POR_DOLAR, ANIO_INICIO_CH
 
 #----------------------------------------------------------
 #---------------------  Inicializando  --------------------
