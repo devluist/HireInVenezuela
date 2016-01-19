@@ -102,7 +102,7 @@
 								{% load bolivizar %}
 								<p id="precio-contrato"><b>Precio:</b><br>{{ servicio.url.precio|floatformat:"-2" }} $</p>
 							{% else %}{% endcomment %}
-								<p id="precio-contrato"><b>Precio:</b><br>$ {{ servicio.url.precio|floatformat:"-2" }} $</p>
+								<p id="precio-contrato"><b>Precio:</b><br>{{ servicio.url.precio|floatformat:"-2" }} $</p>
 						</div>
 						<div class="col-md-3" id="div_boton_contratar">
 							{% if servicio.url.vendedor == perfil_logueado %}

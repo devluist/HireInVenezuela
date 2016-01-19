@@ -118,7 +118,7 @@ STATIC_ROOT = os.path.join(WSGI_DIR, 'static/')
 ##################################
 ##################################
 
-MEDIA_URL = '/media-url/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(DATA_DIR, 'Subidas/')  # '~/hv/Multimedia/images/'
 # xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
 
@@ -126,7 +126,7 @@ MEDIA_ROOT = os.path.join(DATA_DIR, 'Subidas/')  # '~/hv/Multimedia/images/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST = ""  # xHACER: que host me brinda OpenShift pa los correos?
