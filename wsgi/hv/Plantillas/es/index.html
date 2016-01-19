@@ -123,11 +123,11 @@
 				</div>
 			{% endfor %}
 		</div>
-		<div class="titulo">
+		{% comment %}<div class="titulo">
 			<h2><a href="/mejores-servicios/" title="Ver m&aacute;s">Servicios Destacados <i class="glyphicon glyphicon-chevron-right mas"></i></a></h2>
-		</div>
-		<div class="row">
-			{% comment %}{% for sv in servicios_valorados %}
+		 </div>
+		 <div class="row">
+			{% for sv in servicios_valorados %}
 				<div class="col-md-3 caja-serv">
 					<div class="cara-secundaria">
 						<p class="usuario"><a href="/perfil/{{ sv.servicio.vendedor }}"><i class="glyphicon glyphicon-user"></i>  @{{ sv.servicio.vendedor }}</a></p>
@@ -162,8 +162,8 @@
 				      		</div>
 					</div>
 				</div>
-			{% endfor %}{% endcomment %}
-		</div>
+			{% endfor %}
+		</div>{% endcomment %}
 		<div class="titulo">
 			<h2>Categor&iacute;as</h2>
 		</div>

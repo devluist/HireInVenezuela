@@ -725,7 +725,7 @@ def inicio(request):
 	servis = ServicioVirtual.objects.filter(activo=True, idioma=idioma, url__vendedor__eliminado=False).order_by("-fecha_publicacion")[:8]
 	for s in servis:
 		try:
-			s.valoraciones = Contador.objects.get(servicio=s)
+			# s.valoraciones = Contador.objects.get(servicio=s)
 			s.nivel = NivelUsuario.objects.get(usuario=s.url.vendedor)
 		except:
 			pass
