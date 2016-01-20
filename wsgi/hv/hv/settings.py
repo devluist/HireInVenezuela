@@ -49,7 +49,7 @@ HEADERS_PAYPAL = {
 SECRET_KEY = SECRETS['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == 'True'
+DEBUG = True
 # TEMPLATE_DEBUG = True   #xPENSAR: esto estaba en la mia lo dejo?
 
 from socket import gethostname
@@ -128,30 +128,27 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-# ATENCION: por haber cambiado el nombre a un nombre mio creo q hay q ejecutar el comando en el directorio cada vez q se modifique el lugar de esta carpeta
-	# django-admin collectstatic
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(WSGI_DIR, 'static/')
+STATIC_URL = '/multimedia/'
+STATIC_ROOT = os.path.join(WSGI_DIR, 'multimedia/')
 # STATICFILES_DIRS = (
-# 	("multimedia", os.path.join(WSGI_DIR, 'Multimedia/')),
+	# os.path.join(BASE_DIR, 'Multimedia/'),
 # )
 
 ##################################
 ##################################
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(DATA_DIR, 'Subidas/')  # '~/hv/Multimedia/images/'
+MEDIA_URL = '/archivos-subidos/'
+MEDIA_ROOT = os.path.join(DATA_DIR, 'subidos/')  # '~/hv/Multimedia/images/'
 # xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
 
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST = ""  # xHACER: que host me brinda OpenShift pa los correos?
@@ -161,7 +158,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #####################
 # xDEPURAR: solo para jugar con ipython
 # DJANGO_SETTINGS_MODULE = 'hv.settings'
-
 
 # super usr=jefe , pw= jefe@a.a
 POSTMAN_AUTO_MODERATE_AS = True

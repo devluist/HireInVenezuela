@@ -18,8 +18,9 @@
 # xHACER: las siguientes dos lineas son temporales, solo dunrante desarrollo
 # from django.conf import settings
 # from django.conf.urls.static import static
-from postman.views import ConversationView
 
+
+from postman.views import ConversationView
 from django.conf.urls import patterns, url, include
 from django.contrib import admin
 
@@ -66,7 +67,7 @@ urlpatterns = patterns('geoservicios.views',
 	url('^admin/', include(admin.site.urls)),
 
 	# xHACER:  url('^borrar/(?P<id_tlmsj>\\d+)/$', 'borrar'),
-) # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # xHACER: temporal, solo dunrante desarrollo
+) # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # xHACER: temporal, solo dunrante desarrollo
 
 # xHACER: se pueden eliminar lo q no es una vista y pasar a funciones/form que simplementen procesen, x ejm:
 	# enlistar-usuario

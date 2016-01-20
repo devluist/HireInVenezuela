@@ -55,7 +55,7 @@ def uerelizar(cad):  # que tiene forma de URL
 # xHACER: cargar en el index las categorias desde la BD y no estaticamente?
 # ver archivo vista_traduccionCategoria.txt
 def inicializar_categorias():
-	if not Categoria.objects.filter(id=0).exists():
+	if not Categoria.objects.filter(id=1).exists():
 		c = UrlCategoria.objects.create(url="graficos-diseno-fotografia", padre=None)
 		Categoria.objects.create(url=c, nombre=u"Gráficos, Diseño y Fotografía", descripcion="")
 		u = UrlCategoria.objects.create(padre=c, url="historietas-caricaturas-personajes")
@@ -342,7 +342,8 @@ def inicializar_categorias():
 
 
 def inicializar_idiomas():
-	if not Idioma.objects.filter(id=0).exists():
+	# xHACER: falta validar los q ya existen de una mejor manera, xq luego yo puedo querer meter mas niveles
+	if not Idioma.objects.filter(id=1).exists():
 		for idioma in IDIOMAS_DISPONIBLES:
 			Idioma.objects.create(codigo=idioma)
 	else:
@@ -351,7 +352,8 @@ def inicializar_idiomas():
 
 def inicializar_niveles():
 	""" El precio sera en dolares hasta la version 1 de la plataforma """
-	if not Nivel.objects.filter(id=0).exists():
+	# xHACER: falta validar los q ya existen de una mejor manera, xq luego yo puedo querer meter mas niveles
+	if not Nivel.objects.all().exists():
 		Nivel.objects.create(numero=0, promedio=0, experiencia=0, meses_laborando=0, precio_max=4.00, max_satelites=0, precio_max_sat=0)
 		Nivel.objects.create(numero=1, promedio=0, experiencia=10, meses_laborando=1, precio_max=10.00, max_satelites=1, precio_max_sat=10.00)
 		Nivel.objects.create(numero=2, promedio=5, experiencia=25, meses_laborando=3, precio_max=20.00, max_satelites=3, precio_max_sat=50.00)

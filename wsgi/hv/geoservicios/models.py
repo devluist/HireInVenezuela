@@ -116,7 +116,7 @@ class UrlCategoria(models.Model):
 	padre = models.ForeignKey('self', blank=True, null=True, related_name="hijos")
 
 	class Meta:
-		unique_together = ('url', 'padre', 'id')
+		unique_together = ('url', 'padre')
 
 	def __unicode__(self):
 		return "%s" % self.url
@@ -173,7 +173,7 @@ class Categoria(models.Model):
 
 class UrlServicio(models.Model):
 	""" Precio es en dolares dentro del sistema, al usr le pido que ingrese por su cuenta cual debe ser el precio por dicho servicio en dolares igual, y yo lo multiplico en la vista al cambio en bolivares """
-	url = models.CharField(max_length=100, primary_key=True)
+	url = models.CharField(max_length=100, primary_key=True, unique=True)
 	subcategoria = models.ForeignKey(UrlCategoria)
 	vendedor = models.ForeignKey(Perfil)
 	precio = models.DecimalField(max_digits=5, decimal_places=2, default=5.00)
