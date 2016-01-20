@@ -2,8 +2,9 @@
 {% load i18n %}
 {% load postman_tags %}
 {% block extrahead %}
+	{% load static from staticfiles %}
 	{{ block.super }}
-	<link type="text/css" media="all" rel="stylesheet" href="{% load static from staticfiles %}{% static 'postman/css/postman.css' %}" />
+	<link type="text/css" media="all" rel="stylesheet" href="{% static 'postman/css/postman.css' %}" />
 {% endblock %}
 {% block postman_menu %}
 	<div class="list-group col-md-3" id="postman-menu">
