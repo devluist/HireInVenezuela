@@ -5,23 +5,24 @@
 		<i><b>HV informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 	</div>
 {% endif %}
-{% if perfil_propio and perfil.es_venezolano %}
-	<script type="text/javascript" charset="utf-8">
-		var lista = [[]]
-		{% for cat in lista_subcat %}
-	 		{% for subcat in cat.1 %}
-				lista[{{ forloop.parentloop.counter0 }}][{{ forloop.counter0 }}] = "<option value='{{ forloop.parentloop.counter0 }}'>{{ subcat }}</option>"
-			{% endfor %}
-			lista[{{ forloop.counter }}] = new Array()
+<script type="text/javascript" charset="utf-8">
+	var lista = [[]]
+	{% for cat in lista_subcat %}
+ 		{% for subcat in cat.1 %}
+			lista[{{ forloop.parentloop.counter0 }}][{{ forloop.counter0 }}] = "<option value='{{ forloop.parentloop.counter0 }}'>{{ subcat }}</option>"
 		{% endfor %}
-		function actualizarLista(a) {
-			var c = a.options[a.selectedIndex].value;
-			if(c!=-1){document.getElementById("id-subcateg").innerHTML = lista[c];}
-			else{document.getElementById("id-subcateg").innerHTML = '<option value="-1">Subcategor&iacute;as:</option>'}
-		}
-		function subcatEnviar(x){
-			document.getElementById("subc").value = x.selectedIndex;
-		}
+		lista[{{ forloop.counter }}] = new Array()
+	{% endfor %}
+	function actualizarLista(a) {
+		var c = a.options[a.selectedIndex].value;
+		if(c!=-1){document.getElementById("id-subcateg").innerHTML = lista[c];}
+		else{document.getElementById("id-subcateg").innerHTML = '<option value="-1">Subcategor&iacute;as:</option>'}
+	}
+	function subcatEnviar(x){
+		document.getElementById("subc").value = x.selectedIndex;
+	}
+
+	{% if perfil_propio and perfil.es_venezolano %}
 		function agregarInput(){
 			var n = document.getElementById("Nclausulas");
 			var i = document.createElement("input");
@@ -39,8 +40,8 @@
 			document.getElementById("formu-serv").insertBefore(s, f);
 			document.getElementById("formu-serv").insertBefore(i, f);
 		}
-	</script>
-{% endif %}
+	{% endif %}
+</script>
 <div class="cuerpo">
 	<div class="container">
 		<div class="row">
