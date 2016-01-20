@@ -48,7 +48,7 @@
 									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="sexo" value="D" {% if perfil.sexo == "D" %}checked{% endif %}>Sexodiverso</label>
 								</span>
 							</li>
-							<li>
+							{% comment %}<li>
 								<b>Ubicaci&oacute;n:</b><br>
 								{% if not perfil.es_venezolano  %}
 									<select name="pais" class="form-control formu input-sm caja-txt-form caja-txt-cfg">
@@ -64,7 +64,7 @@
 									<option>Ciudad</option>
 									<option>2</option>
 								</select>
-							</li>
+							</li>{% endcomment %}
 							<br>
 							<li><a href="#" data-toggle="modal" data-target=".modal-confirmar" >&times; Eliminar mi cuenta</a></li>
 							{% comment %}<li><input name="ci" class="form-control input-sm caja-txt-form caja-txt-cfg" type="text" placeholder="CI/Rif/Pasaporte"></li><li><textarea name="" class="form-control form-controlado" rows="3" placeholder="Autorespuesta ante un saludo en la mensajer&iacute;a"></textarea></li>
