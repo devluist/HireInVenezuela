@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block extrahead %}
 	{{ block.super }}
-	{% if autocompleter_app.is_active %}
+	{% comment %}{% if autocompleter_app.is_active %}
 		{% load static %}
 		{% if autocompleter_app.name == "ajax_select" %}
 			{% if autocompleter_app.version == "1.1.4" or autocompleter_app.version == "1.1.5" %}
@@ -10,7 +10,7 @@
 				<link type="text/css" media="all" rel="stylesheet" href="{% static 'css/jquery.autocomplete.css' %}" />{# else: for version 1.2.x use AJAX_SELECT_BOOTSTRAP + AJAX_SELECT_INLINES or arrange to include jqueryUI/js/css #}
 			{% endif %}
 		{% endif %}
-	{% endif %}
+	{% endif %}{% endcomment %}
 	{{ form.media }}{# for ajax_selects (v1.3.6 at least) #}
 {% endblock %}
 
