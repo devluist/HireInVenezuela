@@ -343,7 +343,7 @@ def inicializar_categorias():
 
 def inicializar_idiomas():
 	# xHACER: falta validar los q ya existen de una mejor manera, xq luego yo puedo querer meter mas niveles
-	if not Idioma.objects.filter(id=1).exists():
+	if not Idioma.objects.all().exists():
 		for idioma in IDIOMAS_DISPONIBLES:
 			Idioma.objects.create(codigo=idioma)
 	else:

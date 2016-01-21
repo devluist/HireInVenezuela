@@ -9,7 +9,7 @@ from django.db import models
 
 class Idioma(models.Model):
 	"""Description: Almacena los idiomas que habla cada usuario"""
-	codigo = models.CharField(max_length=5)
+	codigo = models.CharField(max_length=5, primary_key=True, unique=True)
 
 	def __unicode__(self):
 		return "%s" % self.codigo

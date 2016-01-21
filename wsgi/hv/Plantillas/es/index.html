@@ -9,8 +9,8 @@
 	<div class="col-md-6">
 		<span class="intro">Buy-2Venezuela</span><br>
 		<hr class="separa-intro">
-		<div class="eslogan">El &uacute;nico lugar donde podr&aacute;s vender y comprar los servicios que necesites, en tu zona. Ingresa y forma parte tu tambi&eacute;n de la Econom&iacute;a de Servicios! F&aacute;cil, r&aacute;pido y seguro</div>
-		<a class="btn btn-intro pull-right" type="button" href="#">Dime m&aacute;s!</a>
+		<div class="eslogan">El &uacute;nico lugar donde podr&aacute;s vender servicios directamente a extranjeros, recuperando tu poder adquisitivo mientras ayudas a Venezuela. Si eres extranjero podras acceder a servicios de calidad  Ingresa y forma parte tu tambi&eacute;n de la Econom&iacute;a de Servicios! F&aacute;cil, r&aacute;pido y seguro</div>
+		{% comment %}<a class="btn btn-intro pull-right" type="button" href="#">Dime m&aacute;s!</a>{% endcomment %}
 	</div>
 	<div class="col-md-6 frase row">
 		<ul class="nav nav-tabs nav-justified">
@@ -87,7 +87,7 @@
 					<div class="cara-secundaria">
 						<p class="usuario"><a href="/perfil/{{ gs.url.vendedor }}"><i class="glyphicon glyphicon-user"></i>  @{{ gs.url.vendedor }}</a></p>
 						<a class="enlace-serv" href="/categoria/{{ gs.url.subcategoria.padre }}/{{ gs.url.subcategoria }}/{{ gs.url }}/">
-							{% comment %}<p class="datos-extra">
+							<p class="datos-extra">{% comment %}
 								<span class="titulo-extras">Nivel:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> {{ gs.nivel }}</span>
 								{% if gs.valoraciones %}
 									<span class="titulo-extras">Promedio:</span><span><i class="glyphicon glyphicon-star color-oro"></i> {{ gs.valoraciones.promedio }} / 10</span>
@@ -95,10 +95,10 @@
 									<span class="vermas"><i class="glyphicon glyphicon-chevron-right" style=""></i></span>
 								{% else %}
 									<span class="titulo-extras">Promedio:</span><span><i class="glyphicon glyphicon-star color-oro"></i> Sin calificar</span>
-									<span class="titulo-extras">Experiencia:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> 0</span>
+									<span class="titulo-extras">Experiencia:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> 0</span>{% endcomment %}
 									<span class="vermas"><i class="glyphicon glyphicon-chevron-right" style=""></i></span>
-								{% endif %}
-							</p>{% endcomment %}
+								{% comment %}{% endif %}{% endcomment %}
+							</p>
 						</a>
 					</div>
 				 	<div class="cara-principal">

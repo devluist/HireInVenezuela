@@ -11,16 +11,16 @@
 						<p class="usuario"><a href="/perfil/{{ serv.url.vendedor }}/"><i class="glyphicon glyphicon-user"></i>  @{{ serv.url.vendedor }}</a></p>
 						<a class="enlace-serv" href="/categoria/{{ serv.url.subcategoria.padre }}/{{ serv.url.subcategoria }}/{{ serv.url }}/">
 							<p class="datos-extra">
-								<span class="titulo-extras">Nivel:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> {{ serv.nivel }}</span>
+								{% comment %}<span class="titulo-extras">Nivel:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> {{ serv.nivel }}</span>
 								{% if serv.valoraciones %}
 									<span class="titulo-extras">Promedio:</span><span><i class="glyphicon glyphicon-star color-oro"></i> {{ serv.valoraciones.promedio }} / 10</span>
 									<span class="titulo-extras">Experiencia:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> {{ serv.valoraciones.experiencia }}</span>
 									<span class="vermas"><i class="glyphicon glyphicon-chevron-right" style=""></i></span>
 								{% else %}
 									<span class="titulo-extras">Promedio:</span><span><i class="glyphicon glyphicon-star color-oro"></i> Sin calificar</span>
-									<span class="titulo-extras">Experiencia:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> 0</span>
+									<span class="titulo-extras">Experiencia:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> 0</span>{% endcomment %}
 									<span class="vermas"><i class="glyphicon glyphicon-chevron-right" style=""></i></span>
-								{% endif %}
+								{% comment %}{% endif %}{% endcomment %}
 							</p>
 						</a>
 					</div>
