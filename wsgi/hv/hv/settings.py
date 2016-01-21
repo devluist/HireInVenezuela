@@ -140,7 +140,7 @@ STATIC_ROOT = os.path.join(WSGI_DIR, 'multimedia/')
 ##################################
 ##################################
 
-MEDIA_URL = '/archivos-subidos/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(DATA_DIR, 'subidos/')  # '~/hv/Multimedia/images/'
 # xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
 
