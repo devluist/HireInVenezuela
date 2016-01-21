@@ -194,7 +194,7 @@ class ServicioVirtual(models.Model):
 	activo = models.BooleanField(default=True)
 	contrato = models.TextField()
 	eliminado = models.BooleanField(default=False)
-	imagen = models.ImageField(upload_to="alla")  # imagen/video
+	imagen = models.ImageField(upload_to="alla", blank=True, null=True)  # imagen/video
 	fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
 	class Meta:

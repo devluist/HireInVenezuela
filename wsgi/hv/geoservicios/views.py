@@ -1238,7 +1238,7 @@ def crear_servicio(request):
 					# img = request.FILES["img_serv"]
 					# s = ServicioVirtual.objects.create(url=u, nombre=nomb, descripcion=descrip, contrato=cont, imagen=img)  # idioma no va xq el q crea los servicios es un venezolano
 				# else:
-				s = ServicioVirtual.objects.create(url=u, nombre=nomb, descripcion=descrip, contrato=cont, imagen="alla/falta.png")  # idioma no va xq el q crea los servicios es un venezolano
+				# s = ServicioVirtual.objects.create(url=u, nombre=nomb, descripcion=descrip, contrato=cont, imagen="alla/falta.png")  # idioma no va xq el q crea los servicios es un venezolano
 				Contador.objects.create(servicio=s, experiencia=0, atencion=0, calidad=0, promedio=0, tiempo_entrega=0)
 			except BaseException, e:
 				# xHACER:
