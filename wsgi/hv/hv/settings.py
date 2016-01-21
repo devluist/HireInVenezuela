@@ -134,7 +134,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(WSGI_DIR, 'multimedia/')
 STATICFILES_DIRS = (
-	os.path.join(BASE_DIR, 'postman/static/postman/'),
+	os.path.join(BASE_DIR, 'postman/static/'),
 )
 
 ##################################
