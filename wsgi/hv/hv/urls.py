@@ -67,7 +67,7 @@ urlpatterns = patterns('geoservicios.views',
 	url('^admin/', include(admin.site.urls)),
 
 	# xHACER:  url('^borrar/(?P<id_tlmsj>\\d+)/$', 'borrar'),
-) # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # xHACER: temporal, solo dunrante desarrollo
+)  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # xHACER: temporal, solo dunrante desarrollo
 
 # xHACER: se pueden eliminar lo q no es una vista y pasar a funciones/form que simplementen procesen, x ejm:
 	# enlistar-usuario
