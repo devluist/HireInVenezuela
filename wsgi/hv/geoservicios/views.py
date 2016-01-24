@@ -176,7 +176,7 @@ def inicializar_categorias():
 		# termino
 
 
-		c = UrlCategoria.objects.create(url="marketing-digital", padre=None)
+		c = UrlCategoria.objects.create(url="marketing-digital", padre=None)  # mercadeo/mercadotecnia
 		Categoria.objects.create(url=c, nombre=u"Marketing Digital", descripcion="")
 		u = UrlCategoria.objects.create(padre=c, url="analisis-web")
 		Categoria.objects.create(nombre=u"Análisis Web", descripcion="", url=u)
@@ -200,7 +200,7 @@ def inicializar_categorias():
 		c = UrlCategoria.objects.create(url="publicidad-propaganda", padre=None)
 		Categoria.objects.create(url=c, nombre=u"Publicidad y Propaganda", descripcion="")
 		u = UrlCategoria.objects.create(padre=c, url="tu-mensaje-en-con")
-		Categoria.objects.create(nombre=u"Tu mensaje en/con...", descripcion="", url=u)
+		Categoria.objects.create(nombre=u"Tu mensaje en/con...", descripcion="", url=u)   # en mi cadera, con piedras/ tu mensaje sobre: arena,mi cadera, ¿sobre PIEDRAS? Sostener tu Letrero-->
 		u = UrlCategoria.objects.create(padre=c, url="encabezados-anuncios")
 		Categoria.objects.create(nombre=u"Encabezados y Anuncios", descripcion="", url=u)
 		u = UrlCategoria.objects.create(padre=c, url="volantes-folletos-regalos-publicitarios")

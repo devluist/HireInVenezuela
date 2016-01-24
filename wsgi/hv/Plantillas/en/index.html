@@ -1,5 +1,5 @@
 {% load i18n %}
-{% include "menu-superior.html" %}
+{% include "en/menu-superior.html" %}
 {% load static from staticfiles %}
 {% if mensaje %}
 	<div class="alert alert-warning fade in" style="text-align: center">
@@ -58,7 +58,6 @@
 								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 								<input class="caja-txt-form" type="text" name="usuario" placeholder="Username">
 							</div>
-							<!-- <input class="caja-txt-form" type="text" name="nombre" placeholder="Nombres Apellidos"> -->
 							<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 								<input class="caja-txt-form" type="text" name="correo" placeholder="Email">
@@ -103,7 +102,7 @@
 					</div>
 				 	<div class="cara-principal">
 						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="">
-				 		<!-- <img {{ gs.imagen.url }} data-src="holder.js/300x200" alt="..."> -->
+				 		{% comment %}<!-- <img {{ gs.imagen.url }} data-src="holder.js/300x200" alt="..."> -->{% endcomment %}
 					 	<div class="dir-serv">
 							<div class="row">
 								<h2 class="col-xs-9 nomb-serv">{{ gs }}</h2>
@@ -181,7 +180,7 @@
 						<li><a href="/categoria/diseno-graficos-fotografia/portada-libros-paquetes/">Book Cover & Packages</a></li>
 						<li><a href="/categoria/diseno-graficos-fotografia/fotografia-edicion-fotografica/">Photography & Photographic Edition</a></li>
 						<li><a href="/categoria/diseno-graficos-fotografia/presentaciones-infografias/">Presentations & Infographics</a></li>
-						<li><a href="/categoria/diseno-graficos-fotografia/arquitectura-inmobiliario/">Architecture y Housing Design</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/arquitectura-inmobiliario/">Architecture & Housing Design</a></li>
 						<li><a href="/categoria/diseno-graficos-fotografia/mobiliario-interiores/">Furniture & Interior Design</a></li>
 						<li><a href="/categoria/diseno-graficos-fotografia/modelado-2d-3d/">2D & 3D Models</a></li>
 						<li><a href="/categoria/diseno-graficos-fotografia/otros/">Others</a></li>
@@ -189,7 +188,7 @@
 				</div>
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
-						<li class="titulo-categoria" id="redaccion" >Transcription, Translation y Drafting</li>
+						<li class="titulo-categoria" id="redaccion" >Transcription, Translation & Drafting</li>
 						<li><a href="/categoria/transcripcion-traduccion-redaccion/redaccion-escritura-creativa/">Drafting & Creative Writing</a></li>
 						<li><a href="/categoria/transcripcion-traduccion-redaccion/traduccion/">Translation</a></li>
 						<li><a href="/categoria/transcripcion-traduccion-redaccion/transcripcion/">Transcription</a></li>
@@ -203,7 +202,7 @@
 				</div>
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
-						<li class="titulo-categoria" id="audio" >Audio y Music</li>
+						<li class="titulo-categoria" id="audio" >Audio & Music</li>
 						<li><a href="/categoria/audio-musica/edicion-audio/">Audio Edition</a></li>
 						<li><a href="/categoria/audio-musica/produccion-musical/">Musical Production</a></li>
 						<li><a href="/categoria/audio-musica/composicion-canciones/">Songwriter</a></li>
@@ -218,10 +217,10 @@
 				</div>
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
-						<li class="titulo-categoria" id="programacion" >Programaci&oacute;n y Tecnolog&iacute;a</li>
+						<li class="titulo-categoria" id="programacion" >Programaci&oacute;n & Tecnolog&iacute;a</li>
 						<li><a href="/categoria/programacion-tecnologia/python/">Python. Frameworks & Libraries</a></li>
 						<li><a href="/categoria/programacion-tecnologia/base-datos/">Relationals & No-Relationals Data Bases</a></li>
-						<li><a href="/categoria/programacion-tecnologia/ruby/">Ruby. Frameworks y Libraries</a></li>
+						<li><a href="/categoria/programacion-tecnologia/ruby/">Ruby. Frameworks & Libraries</a></li>
 						<li><a href="/categoria/programacion-tecnologia/wordpress/">WordPress</a></li>
 						<li><a href="/categoria/programacion-tecnologia/php/">PHP. Frameworks & Libraries</a></li>
 						<li><a href="/categoria/programacion-tecnologia/videojuegos/">Videogames</a></li>
@@ -243,7 +242,7 @@
 			<div class="row fila-2">
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
-						<li class="titulo-categoria" id="mercadeo">Marketing Digital</li> <!-- mercadeo/mercadotecnia -->
+						<li class="titulo-categoria" id="mercadeo" >Marketing Digital</li>
 						<li><a href="/categoria/marketing-digital/analisis-web/">Web Analytics</a></li>
 						<li><a href="/categoria/marketing-digital/menciones-blogs/">Blog Mentions</a></li>
 						<li><a href="/categoria/marketing-digital/paginas-fans/">FanPage</a></li>
@@ -257,7 +256,7 @@
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
 						<li class="titulo-categoria" id="publicidad" >Publicity & Propaganda</li>
-						<li><a href="/categoria/publicidad-propaganda/tu-mensaje-en-con/">Your message in/with...</a></li> <!-- en mi cadera, con piedras/ tu mensaje sobre: arena,mi cadera, ¿sobre PIEDRAS? Sostener tu Letrero-->
+						<li><a href="/categoria/publicidad-propaganda/tu-mensaje-en-con/">Your message in/with...</a></li>
 						<li><a href="/categoria/publicidad-propaganda/encabezados-anuncios/">Ads & Headlines</a></li>
 						<li><a href="/categoria/publicidad-propaganda/volantes-folletos-regalos-publicitarios/">Flyers, Handouts & Publicitary Gift Ideas</a></li>
 						<li><a href="/categoria/publicidad-propaganda/anuncios-humanos/">Human Billboards</a></li>

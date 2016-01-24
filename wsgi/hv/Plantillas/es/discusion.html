@@ -5,7 +5,7 @@
 	{{ block.super }}
 	<link type="text/css" media="all" rel="stylesheet" href="{% load static %}{% static 'postman/css/postman.css' %}" />
 {% endblock %}
-{% include "menu-superior.html" %}
+{% include "es/menu-superior.html" %}
 {% block mensaje %}
 	{% if mensaje %}
 		<div class="alert alert-warning fade in" style="text-align: center">

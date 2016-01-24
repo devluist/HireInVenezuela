@@ -1,5 +1,5 @@
 {% load i18n %}
-{% include "menu-superior.html" %}
+{% include "es/menu-superior.html" %}
 {% load static from staticfiles %}
 {% if mensaje %}
 	<div class="alert alert-warning fade in" style="text-align: center">
@@ -58,7 +58,6 @@
 								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 								<input class="caja-txt-form" type="text" name="usuario" placeholder="Usuario">
 							</div>
-							<!-- <input class="caja-txt-form" type="text" name="nombre" placeholder="Nombres Apellidos"> -->
 							<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 								<input class="caja-txt-form" type="text" name="correo" placeholder="Correo">
@@ -103,7 +102,7 @@
 					</div>
 				 	<div class="cara-principal">
 						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="">
-				 		<!-- <img {{ gs.imagen.url }} data-src="holder.js/300x200" alt="..."> -->
+				 		{% comment %}<!-- <img {{ gs.imagen.url }} data-src="holder.js/300x200" alt="..."> -->{% endcomment %}
 					 	<div class="dir-serv">
 							<div class="row">
 								<h2 class="col-xs-9 nomb-serv">{{ gs }}</h2>
@@ -243,7 +242,7 @@
 			<div class="row fila-2">
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
-						<li class="titulo-categoria" id="mercadeo">Marketing Digital</li> <!-- mercadeo/mercadotecnia -->
+						<li class="titulo-categoria" id="mercadeo">Marketing Digital</li>
 						<li><a href="/categoria/marketing-digital/analisis-web/">An&aacute;lisis Web</a></li>
 						<li><a href="/categoria/marketing-digital/menciones-blogs/">Menciones en Blogs</a></li>
 						<li><a href="/categoria/marketing-digital/paginas-fans/">P&aacute;ginas de Fans</a></li>
@@ -257,7 +256,7 @@
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
 						<li class="titulo-categoria" id="publicidad" >Publicidad y Propaganda</li>
-						<li><a href="/categoria/publicidad-propaganda/tu-mensaje-en-con/">Tu mensaje en/con...</a></li> <!-- en mi cadera, con piedras/ tu mensaje sobre: arena,mi cadera, ¿sobre PIEDRAS? Sostener tu Letrero-->
+						<li><a href="/categoria/publicidad-propaganda/tu-mensaje-en-con/">Tu mensaje en/con...</a></li>
 						<li><a href="/categoria/publicidad-propaganda/encabezados-anuncios/">Encabezados y Anuncios</a></li>
 						<li><a href="/categoria/publicidad-propaganda/volantes-folletos-regalos-publicitarios/">Volantes, Folletos y Regalos Publicitarios</a></li>
 						<li><a href="/categoria/publicidad-propaganda/anuncios-humanos/">Anuncios Humanos</a></li>
