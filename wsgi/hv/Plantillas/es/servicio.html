@@ -53,7 +53,7 @@
 					</a>
 				</p>
 				<img src="{% static 'images/falta.png' %}" width="100%" height="200px" alt="En estos momentos el servidor no puede subir imagenes">
-				<!-- <img src="{{servicio.imagen.url}}" data-src="holder.js/300x200" alt="..."> -->
+				{% comment %}<!-- <img src="{{servicio.imagen.url}}" data-src="holder.js/300x200" alt="..."> -->{% endcomment %}
 			</div>
 			<div class="col-md-8 col-md-offset-1 descrip-serv">
 				<form action="/enlistar-usuario/{{ perfil }}/" method="post" accept-charset="utf-8">
