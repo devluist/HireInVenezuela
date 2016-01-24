@@ -1,0 +1,100 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-mio" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle menu-opc" data-toggle="collapse" data-target="#m-principal">
+				<i class="glyphicon glyphicon-plus"></i>
+			</button>
+			<a class="navbar-brand navbar-brand-mio" title="Inicio" href="/"><i class="glyphicon glyphicon-home"></i><!-- <img src="images/logo.png" alt="logo" style="height: 30px;"> --></a>
+		</div>
+		<div class="collapse navbar-collapse" id="m-principal">
+			<form class="navbar-form navbar-left" role="search" action="/buscar/" method="get">
+				<div class="form-group">
+					<input type="text" class="form-control form-controlado" id="search-query" placeholder="Buscar" name="consulta">
+				</div>
+				<button class="btn btn-default btn-mio glyphicon glyphicon-search" type="submit"></button>
+			</form>
+			<ul class="nav nav-mio navbar-nav navbar-nav-mio navbar-right">
+				{% if logueado %}
+					{% if perfil_propio %}
+						<li class="active">
+							<a href="/perfil/{{ perfil.usuario }}/" title="Perf&iacute;l"><i class="glyphicon glyphicon-user"></i> <span class="menu-gr">Perf&iacute;l</span></a>
+						</li>
+					{% else %}
+						{% if servicio.descripcion and perfil == servicio.url.vendedor %}
+							<li class="menu-servicio">
+								<a href="#" data-toggle="modal" data-target=".modal-editarserv" title="Editar Servicio"><i class="glyphicon glyphicon-pencil"></i> <span class="menu-gr">Editar</span></a>
+							</li>
+							<li class="menu-servicio">
+								<a href="#" data-toggle="modal" data-target=".modal-eliminarserv" title="Eliminar Servicio"><i class="glyphicon glyphicon-trash"></i> <span class="menu-gr">Eliminar</span></a>
+							</li>
+						{% endif %}
+						<li>
+							<a href="/perfil/{{ perfil_logueado.usuario }}/" title="Perf&iacute;l"><i class="glyphicon glyphicon-user"></i> <span class="menu-gr">Perf&iacute;l</span></a>
+						</li>
+					{% endif %}
+					{% if current_url %}{# variable solo disponible en la pagina de mensajeria #}
+						<li class="active">
+							<a href="/mensajeria/" title="Mensajer&iacute;a"><i class="glyphicon glyphicon-comment"></i> <span class="menu-gr">Mensajer&iacute;a</span></a>
+						</li>
+					{% else %}
+						<li>
+							<a href="/mensajeria/" title="Mensajer&iacute;a"><i class="glyphicon glyphicon-comment"></i> <span class="menu-gr">Mensajer&iacute;a</span></a>
+						</li>
+					{% endif %}
+				{% endif %}
+				{% comment %}
+				<li><a href="#" title="Noticias GS"><i class="glyphicon glyphicon-bell"></i> <span class="menu-gr">Noticias GS</span></a>
+				</li>{% endcomment %}
+				<li class="dropdown">
+					<a href="#" data-toggle="dropdown" title="m&aacute;s..."><!-- <i class="glyphicon glyphicon-plus"></i>  --><i class="glyphicon glyphicon-chevron-down"></i> <span class="menu-gr">m&aacute;s...</span></a>
+					<ul class="dropdown-menu">
+						{% comment %}
+						<li><a href="/cuadroHonor/"><i class="glyphicon glyphicon-th"></i>Cuadro de Honor</a>
+						</li>{% endcomment %}
+						{% comment %}<li><a href="/blog/"><i class="glyphicon glyphicon-paperclip"></i>Blog / Gu&iacute;a</a>
+						</li>{% endcomment %}
+						<li><a href="/contacto/"><i class="glyphicon glyphicon-bullhorn"></i>Nosotros / Contactanos</a>
+						</li>
+						{% if logueado %}
+							<li><a href="/configuracion/"><i class="glyphicon glyphicon-cog"></i>Configuraci&oacute;n</a>
+							</li>
+							<li><a href="#" data-toggle="modal" data-target=".modal-sugerencia"><i class="glyphicon glyphicon-pushpin"></i>Sugerencias</a>
+							</li>
+							<li role="presentation" class="divider"></li>
+							<li><a href="/cierre-sesion/"><i class="glyphicon glyphicon-remove"></i>Cerrar Sesi&oacute;n</a>
+							</li>
+						{% endif %}
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" data-toggle="dropdown"><i class="glyphicon glyphicon-th-list"></i> Categor&iacute;as</a>
+					<ul class="dropdown-menu">
+						<li class=""><a href="/categoria/graficos-diseno-fotografia/">Gr&aacute;ficos, Dise&ntilde;o y Fotograf&iacute;a</a>
+						</li>
+						<li class=""><a href="/categoria/transcripcion-traduccion-redaccion/">Transcripci&oacute;n, Traducci&oacute;n y Redacci&oacute;n</a>
+						</li>
+						<li class=""><a href="/categoria/audio-musica/">Audio y M&uacute;sica</a>
+						</li>
+						<li class=""><a href="/categoria/programacion-tecnologia/">Programaci&oacute;n y Tecnolog&iacute;a</a>
+						</li>
+						<li class=""><a href="/categoria/marketing-digital/">Marketing Digital</a>
+						</li>
+						<!-- mercadeo/mercadotecnia -->
+						<li class=""><a href="/categoria/publicidad-propaganda/">Publicidad y Propaganda</a>
+						</li>
+						<li class=""><a href="/categoria/negocios/">Negocios</a>
+						</li>
+						<li class=""><a href="/categoria/video-animacion/">Video y Animaci&oacute;n</a>
+						</li>
+						<li class=""><a href="/categoria/diversion-entretenimiento/">Diversi&oacute;n y Entretenimiento</a>
+						</li>
+						<li class=""><a href="/categoria/estilo-vida/">Estilo de vida</a>
+						</li>
+						<li class=""><a href="/categoria/regalos/">Regalos</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

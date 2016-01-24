@@ -1,4 +1,5 @@
 {% load i18n %}
+{% include "menu-superior.html" %}
 {% load static from staticfiles %}
 <div class="cuerpo">
 	<div class="container">
@@ -60,13 +61,13 @@
 			<li><a href="?consulta={{ consulta }}&pagina=1">&laquo;</a></li>
 			{% for ind in rango %}
 				{% if ind != lista_servicios.number %}
-					<li><a href="?consulta={{ consulta }}&pagina={{ind}}">{{ind}} <span class="sr-only">(current)</span></a></li>
+					<li><a href="?consulta={{ consulta }}&pagina={{ind}}">{{ind}} <span class="sr-only">(p&aacute;gina actual)</span></a></li>
 				{% else %}
-					<li class="active"><a href="?consulta={{ consulta }}&pagina={{ind}}">{{ind}} <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="?consulta={{ consulta }}&pagina={{ind}}">{{ind}} <span class="sr-only">(p&aacute;gina actual)</span></a></li>
 				{% endif %}
 			{% endfor %}
 			<li><a href="?consulta={{ consulta }}&pagina={{rango|length}}">&raquo;</a></li>
 		</ul>
 	</div>
 </div>
-{% comment %}<div class="footer"  style="position: fixed; bottom:0; margin-top: 50px;">{% endcomment %}
+{% comment %}<div class="footer"  style="position: fixed; bottom:0; margin-top: 50px;">{% endcomment %

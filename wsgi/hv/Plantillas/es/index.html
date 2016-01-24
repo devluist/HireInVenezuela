@@ -1,29 +1,29 @@
 {% load i18n %}
+{% include "menu-superior.html" %}
 {% load static from staticfiles %}
 {% if mensaje %}
 	<div class="alert alert-warning fade in" style="text-align: center">
-		<i><b>HV informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		<i><b>HI informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 	</div>
 {% endif %}
 <div class="row presentacion">
 	<div class="col-md-6">
 		<span class="intro">Buy-2venezuela<small id="beta"> beta</small></span><br>
 		<hr class="separa-intro">
-		<div class="eslogan">El &uacute;nico lugar donde podr&aacute;s vender servicios directamente a extranjeros, recuperando tu poder adquisitivo mientras ayudas a Venezuela. Si eres extranjero podr&aacute;s acceder a servicios de calidad a buen precio. Ingresa ya! es gratis, f&aacute;cil, r&aacute;pido y seguro</div>
+		<div class="eslogan">El &uacute;nico lugar donde podr&aacute;s vender servicios directamente a extranjeros, recuperando tu poder adquisitivo mientras ayudas a Venezuela. Si eres extranjero podr&aacute;s acceder a servicios de calidad a buen precio. Ingresa ya! es gratis, f&aacute;cil y seguro</div>
 		{% comment %}<a class="btn btn-intro pull-right" type="button" href="#">Dime m&aacute;s!</a>{% endcomment %}
 	</div>
 	<div class="col-md-6 frase row">
 		<ul class="nav nav-tabs nav-justified">
 			<li class="active"><a href="#comnt" data-toggle="tab">Testimonios</a></li>
-			{% if logueado %}
-			{% else %}
+			{% if not logueado %}
 				<li><a href="#inicia-sesion" data-toggle="tab">Sesionarse</a></li>
 				<li><a href="#registrarse" data-toggle="tab">Registrarse</a></li>
 			{% endif %}
 		</ul>
 		<div class="tab-content">
 			<div id="comnt" class="tab-pane active media">
-				<img src="{% static 'images/logo.png' %}" width="100px" height="80px" class="imag img-responsive media-object pull-left">
+				<img src="{% static 'images/logo.jpg' %}" width="100px" height="80px" class="imag img-responsive media-object pull-left">
 				<div class=" media-body">
 					<span class="comilla">"</span> Desde el momento que nace este proyecto, se crearon MILLONES de vacantes de empleo en todo el pa&iacute;s. Solo faltas T&Uacute;!<span class="comilla">"</span>
 					<span class="nombre">Luis Tena</span>
@@ -103,7 +103,7 @@
 					</div>
 				 	<div class="cara-principal">
 						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="">
-				 		<!-- <img{{ gs.imagen.url }} data-src="holder.js/300x200" alt="..."> -->
+				 		<!-- <img {{ gs.imagen.url }} data-src="holder.js/300x200" alt="..."> -->
 					 	<div class="dir-serv">
 							<div class="row">
 								<h2 class="col-xs-9 nomb-serv">{{ gs }}</h2>
@@ -147,7 +147,7 @@
 						</a>
 					</div>
 				 	<div class="cara-principal">
-						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="1.000 Me Gusta para tu post, foto o video en Facebook">
+						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="">
 				 		<!-- <img{{ sv.imagen.url }} data-src="holder.js/300x200" alt="..."> -->
 					 	<div class="dir-serv">
 							<div class="row">
@@ -159,7 +159,7 @@
 									<div class="col-xs-3 text-center precio">$ {{ sv.url.precio|floatformat:"-2" }}</div>
 								{% endif %}
 							</div>
-				      		</div>
+				      	</div>
 					</div>
 				</div>
 			{% endfor %}
@@ -171,21 +171,20 @@
 			<div class="row fila-1">
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
-						<li class="titulo-categoria" id="graficos" >Gr&aacute;ficos, Dise&ntilde;o y Fotograf&iacute;a</li>
-						<li><a href="/categoria/graficos-diseno-fotografia/historietas-caricaturas-personajes/">Historietas, Caricaturas y Personajes</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/diseno-logos/">Dise&ntilde;o de Logos</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/ilustracion/">Ilustraci&oacute;n</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/portada-libros-paquetes/">Portada de Libros y Paquetes</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/diseno-web-iu/">Dise&ntilde;o Web e <abbr title="Interfaz de Usuario">IU</abbr></a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/fotografia-edicion-fotografica/">Fotograf&iacute;a y Edici&oacute;n Fotogr&aacute;fica</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/diseno-presentaciones/">Dise&ntilde;o de Presentaciones</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/tarjetas-negocios/">Tarjetas de Negocios</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/encabezados-anuncios/">Encabezados y Anuncios</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/arquitectura/">Arquitectura</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/pagina-web-estatica/">P&aacute;gina Web Est&aacute;tica</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/mobiliario/">Mobiliario</a></li>
-						<li><a href="/categoria/graficos-diseno-fotografia/videojuegos/">Videojuegos</a></li>  <!-- x HACER: deberia tener su propia categoria?? -->
-						<li><a href="/categoria/graficos-diseno-fotografia/otros/">Otros</a></li>
+						<li class="titulo-categoria" id="graficos" >Dise&ntilde;o, Gr&aacute;ficos y Fotograf&iacute;a</li>
+						<li><a href="/categoria/diseno-graficos-fotografia/historietas-caricaturas-personajes/">Historietas, Caricaturas y Personajes</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/logos/">Logos</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/vectorizar/">Vectorizar</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/estampados/">Estampados para prendas</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/ilustracion/">Ilustraci&oacute;n</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/tarjetas/">Tarjetas de Presentación/Negocio/Invitación</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/portada-libros-paquetes/">Portada de Libros y Paquetes</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/fotografia-edicion-fotografica/">Fotograf&iacute;a y Edici&oacute;n Fotogr&aacute;fica</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/presentaciones-infografias/">Presentaciones e Infograf&iacute;as</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/arquitectura-inmobiliario/">Arquitectura y Dise&ntilde;o Inmobiliario</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/mobiliario-interiores/">Mobiliario y Dise&ntilde;o de Interiores</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/modelado-2d-3d/">Modelado 2D 3D</a></li>
+						<li><a href="/categoria/diseno-graficos-fotografia/otros/">Otros</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 caja-serv caja-titulo">
@@ -195,49 +194,48 @@
 						<li><a href="/categoria/transcripcion-traduccion-redaccion/traduccion/">Traducci&oacute;n</a></li>
 						<li><a href="/categoria/transcripcion-traduccion-redaccion/transcripcion/">Transcripci&oacute;n</a></li>
 						<li><a href="/categoria/transcripcion-traduccion-redaccion/contenido-sitios-web/">Contenido para Sitios Web</a></li>
-						<li><a href="/categoria/transcripcion-traduccion-redaccion/resena-critica/">Rese&ntilde;a/Cr&iacute;tica</a></li>
-						<li><a href="/categoria/transcripcion-traduccion-redaccion/curriculum-cartas-presentacion/">Curriculum, Cartas de Presentación</a></li>
+						<li><a href="/categoria/transcripcion-traduccion-redaccion/resenas-criticas/">Rese&ntilde;as/Cr&iacute;ticas</a></li>
 						<li><a href="/categoria/transcripcion-traduccion-redaccion/redaccion-discursos/">Redacci&oacute;n de Discursos</a></li>
 						<li><a href="/categoria/transcripcion-traduccion-redaccion/edicion-revision-escritos/">Edici&oacute;n y Revisi&oacute;n de Escritos</a></li>
 						<li><a href="/categoria/transcripcion-traduccion-redaccion/comunicado-prensa/">Comunicado de Prensa</a></li>
-						<!-- Periodismo -->
 						<li><a href="/categoria/transcripcion-traduccion-redaccion/otros/">Otros</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
 						<li class="titulo-categoria" id="audio" >Audio y M&uacute;sica</li>
-						<li><a href="/categoria/audio-musica/edicion-masterizado-audio/">Edici&oacute;n y Masterizado de Audio</a></li>
-						<li><a href="/categoria/audio-musica/canciones/">Canciones</a></li>
+						<li><a href="/categoria/audio-musica/edicion-audio/">Edici&oacute;n de Audio</a></li>
+						<li><a href="/categoria/audio-musica/produccion-musical/">Producci&oacute;n Musical</a></li>
 						<li><a href="/categoria/audio-musica/composicion-canciones/">Composici&oacute;n de canciones</a></li>
 						<li><a href="/categoria/audio-musica/lecciones-musica/">Lecciones de M&uacute;sica</a></li>
 						<li><a href="/categoria/audio-musica/musica-rap/">M&uacute;sica Rap</a></li>
-						<!-- <li><a href="#">Música Hip-Hop</a></li> -->
-						<li><a href="/categoria/audio-musica/narracion-edicion-doblaje/">Narraci&oacute;n y Edici&oacute;n Doblaje</a></li>
+						<li><a href="/categoria/audio-musica/narracion-doblaje/">Narraci&oacute;n y Doblaje</a></li>
 						<li><a href="/categoria/audio-musica/efectos-sonido/">Efectos de sonido</a></li>
 						<li><a href="/categoria/audio-musica/tonos-llamada-personalizados/">Tonos de Llamada Personalizados</a></li>
-						<li><a href="/categoria/audio-musica/felicitaciones-correo-voz/">Felicitaciones por Correo de Voz</a></li>
-						<li><a href="/categoria/audio-musica/canciones-personalizadas/">Canciones Personalizadas</a></li>
+						<li><a href="/categoria/audio-musica/canciones-personalizadas-dedicatorias/">Canciones Personalizadas y Dedicatorias</a></li>
 						<li><a href="/categoria/audio-musica/otros/">Otros</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
 						<li class="titulo-categoria" id="programacion" >Programaci&oacute;n y Tecnolog&iacute;a</li>
-						<li><a href="/categoria/programacion-tecnologia/.net/">.Net</a></li>
-						<li><a href="/categoria/programacion-tecnologia/c-c++/">C/C++</a></li>
-						<li><a href="/categoria/programacion-tecnologia/css-html/">CSS y HTML</a></li>
-						<li><a href="/categoria/programacion-tecnologia/joomla-drupal/">Joomla y Drupal</a></li>
-						<li><a href="/categoria/programacion-tecnologia/base-datos/">Base de Datos</a></li>
-						<li><a href="/categoria/programacion-tecnologia/java/">Java</a></li>
-						<li><a href="/categoria/programacion-tecnologia/javascript/">JavaScript</a></li>
-						<li><a href="/categoria/programacion-tecnologia/psd-html/">PSD a HTML</a></li>
+						<li><a href="/categoria/programacion-tecnologia/python/">Python. Frameworks y Librer&iacute;as</a></li>
+						<li><a href="/categoria/programacion-tecnologia/base-datos/">Base de Datos Relacionales y No-Relacionales</a></li>
+						<li><a href="/categoria/programacion-tecnologia/ruby/">Ruby. Frameworks y Librer&iacute;as</a></li>
 						<li><a href="/categoria/programacion-tecnologia/wordpress/">WordPress</a></li>
-						<li><a href="/categoria/programacion-tecnologia/flash/">Flash</a></li> <!-- # x PENSAR:  eliminar? -->
+						<li><a href="/categoria/programacion-tecnologia/php/">PHP. Frameworks y Librer&iacute;as</a></li>
+						<li><a href="/categoria/programacion-tecnologia/videojuegos/">Videojuegos</a></li>
+						<li><a href="/categoria/programacion-tecnologia/app-escritorio/">Aplicaciones de Escritorio</a></li>
+						<li><a href="/categoria/programacion-tecnologia/diseno-web-arquitectura-informacion/">Dise&ntilde;o Web y Arquitectura de la Informaci&oacute;n</a></li>
+						<li><a href="/categoria/programacion-tecnologia/javascript/">JavaScript, Node.js, Canvas...</a></li>
+						<li><a href="/categoria/programacion-tecnologia/c-c++/">C/C++</a></li>
+						<li><a href="/categoria/programacion-tecnologia/java/">Java</a></li>
 						<li><a href="/categoria/programacion-tecnologia/ios-android-moviles/">iOS, Android y M&oacute;viles</a></li>
-						<li><a href="/categoria/programacion-tecnologia/php/">PHP</a></li>
-						<li><a href="/categoria/programacion-tecnologia/pr-pruebas-software/"><abbr title="Preguntas y Respuestas/">PR</abbr> y Pruebas de Software</a></li>
-						<li><a href="/categoria/programacion-tecnologia/tecnologia/">Tecnolog&iacute;a</a></li>
+						<li><a href="/categoria/programacion-tecnologia/pruebas-software-accesibilidad-usabilidad/">Pruebas/Testing de Software, Accesibilidad y Usabilidad</a></li>
+						<li><a href="/categoria/programacion-tecnologia/comercio-electronico/">Comercio Electr&oacute;nico</a></li>
+						<li><a href="/categoria/programacion-tecnologia/conversion-recuperacion-archivos/">Conversi&oacute;n y Recuperaci&oacute;n de Archivos</a></li>
+						<li><a href="/categoria/programacion-tecnologia/net/">.Net</a></li>
+						<li><a href="/categoria/programacion-tecnologia/joomla-drupal/">Joomla y Drupal</a></li>
 						<li><a href="/categoria/programacion-tecnologia/otros/">Otros</a></li>
 					</ul>
 				</div>
@@ -245,14 +243,11 @@
 			<div class="row fila-2">
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
-						<li class="titulo-categoria" id="mercadeo" >Marketing Digital</li> <!-- mercadeo/mercadotecnia -->
+						<li class="titulo-categoria" id="mercadeo">Marketing Digital</li> <!-- mercadeo/mercadotecnia -->
 						<li><a href="/categoria/marketing-digital/analisis-web/">An&aacute;lisis Web</a></li>
-						<li><a href="/categoria/marketing-digital/articulos-envios-rp/">Art&iacute;culos y Env&iacute;os de RP</a></li>
 						<li><a href="/categoria/marketing-digital/menciones-blogs/">Menciones en Blogs</a></li>
-						<li><a href="/categoria/marketing-digital/busqueda-dominios/">B&uacute;squeda de Dominios</a></li>
 						<li><a href="/categoria/marketing-digital/paginas-fans/">P&aacute;ginas de Fans</a></li>
-						<li><a href="/categoria/marketing-digital/seo/"><abbr title="Optimizaci&oacute;n en Motores de B&uacute;squeda">SEO</abbr></a></li>
-						<!-- <li><a href="#">Favoritos y Enlaces</a></li> -->
+						<li><a href="/categoria/marketing-digital/seo/">Optimizaci&oacute;n en Motores de B&uacute;squeda (SEO)</a></li>
 						<li><a href="/categoria/marketing-digital/marketing-redes-sociales/">Marketing en Redes Sociales</a></li>
 						<li><a href="/categoria/marketing-digital/generar-trafico-web/">Generar Tr&aacute;fico Web</a></li>
 						<li><a href="/categoria/marketing-digital/marketing-videos/">Marketing en Videos</a></li>
@@ -262,14 +257,14 @@
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
 						<li class="titulo-categoria" id="publicidad" >Publicidad y Propaganda</li>
-						<!-- <li><a href="#">Sostener tu Letrero</a></li> -->
-						<li><a href="/categoria/publicidad-propaganda/tu-mensaje-en-con/">Tu mensaje en/con...</a></li> <!-- en mi cadera, con piedras/ tu mensaje sobre: arena,mi cadera, ¿sobre PIEDRAS?-->
-						<li><a href="/categoria/publicidad-propaganda/volantes-folletos-regalos/">Volantes, Folletos y Regalos</a></li>
+						<li><a href="/categoria/publicidad-propaganda/tu-mensaje-en-con/">Tu mensaje en/con...</a></li> <!-- en mi cadera, con piedras/ tu mensaje sobre: arena,mi cadera, ¿sobre PIEDRAS? Sostener tu Letrero-->
+						<li><a href="/categoria/publicidad-propaganda/encabezados-anuncios/">Encabezados y Anuncios</a></li>
+						<li><a href="/categoria/publicidad-propaganda/volantes-folletos-regalos-publicitarios/">Volantes, Folletos y Regalos Publicitarios</a></li>
 						<li><a href="/categoria/publicidad-propaganda/anuncios-humanos/">Anuncios Humanos</a></li>
 						<li><a href="/categoria/publicidad-propaganda/comerciales/">Comerciales</a></li>
 						<li><a href="/categoria/publicidad-propaganda/mascotas-modelos/">Mascotas Modelos</a></li>
 						<li><a href="/categoria/publicidad-propaganda/publicidad-exteriores/">Publicidad en Exteriores</a></li>
-						<li><a href="/categoria/publicidad-propaganda/radio/">Radio</a></li>
+						<li><a href="/categoria/publicidad-propaganda/publicidad-radio/">Publicidad para Radio</a></li>
 						<li><a href="/categoria/publicidad-propaganda/promocion-musical/">Promoci&oacute;n Musical</a></li>
 						<li><a href="/categoria/publicidad-propaganda/publicidad-anuncios-web/">Publicidad en Anuncios Web</a></li>
 						<li><a href="/categoria/publicidad-propaganda/otros/">Otros</a></li>
@@ -280,12 +275,11 @@
 						<li class="titulo-categoria" id="negocios" >Negocios</li>
 						<li><a href="/categoria/negocios/planes-negocios/">Planes de Negocios</a></li>
 						<li><a href="/categoria/negocios/consejos-carrera-profesional/">Consejos para tu Carrera Profesional</a></li>
-						<!-- xHACER: <li>  !Entrepreneurship!</li> -->
 						<li><a href="/categoria/negocios/estudio-mercado/">Estudio de Mercado</a></li>
-						<li><a href="/categoria/negocios/presentaciones/">Presentaciones</a></li>
+						<li><a href="/categoria/negocios/presentacion-proyecto-ideas/">Presentaci&oacute;n para de Proyectos/Ideas</a></li>
 						<li><a href="/categoria/negocios/asistentecia-virtual/">Asistentecia Virtual</a></li>
 						<li><a href="/categoria/negocios/consejos-negocios/">Consejos para Negocios</a></li>
-						<li><a href="/categoria/negocios/servicios-marca/">Servicios de Marca</a></li>
+						<li><a href="/categoria/negocios/servicios-marca-registrada/">Servicios para tu Marca Registrada</a></li>
 						<li><a href="/categoria/negocios/consultoria-financiera/">Consultor&iacute;a Financiera</a></li>
 						<li><a href="/categoria/negocios/consultoria-legal/">Consultor&iacute;a Legal</a></li>
 						<li><a href="/categoria/negocios/otros/">Otros</a></li>
@@ -294,11 +288,8 @@
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
 						<li class="titulo-categoria" id="video" >Video y Animaci&oacute;n</li>
-						<li><a href="/categoria/video-animacion/comerciales/">Comerciales</a></li>
-						<li><a href="/categoria/video-animacion/edicion-efectos-post-produccion/">Edici&oacute;n, Efectos y Post Producci&oacute;n</a></li>
-						<li><a href="/categoria/video-animacion/animacion-3d/">Animaci&oacute;n y 3D</a></li>
-						<li><a href="/categoria/video-animacion/testimonios-comentarios/">Testimonios y Comentarios</a></li>
-						<li><a href="/categoria/video-animacion/marionetas/">Marionetas</a></li>
+						<li><a href="/categoria/video-animacion/edicion-efectos-produccion/">Edici&oacute;n, Efectos y Producci&oacute;n</a></li>
+						<li><a href="/categoria/video-animacion/animacion-2d-3d/">Animaci&oacute;n 2D y 3D</a></li>
 						<li><a href="/categoria/video-animacion/stop-motion/">Stop Motion</a></li>
 						<li><a href="/categoria/video-animacion/intros/">Intros</a></li>
 						<li><a href="/categoria/video-animacion/storyboarding/">Storyboarding</a></li>		
@@ -310,20 +301,15 @@
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
 						<li class="titulo-categoria" >Diversi&oacute;n y Entretenimiento</li>
-						<li><a href="/categoria/diversion-peticion/video-standup-sobre-tema-evento/">Video StandUp sobre Tema/Evento</a></li>
-						<li><a href="/categoria/diversion-peticion/chistes-escritos/">Chistes Escritos</a></li>
-						<li><a href="/categoria/diversion-peticion/chistes-vivo/">Chistes en Vivo</a></li>
-						<li><a href="/categoria/diversion-peticion/discurso-gracioso-evento/">Discurso Gracioso para Evento</a></li>
-						<li><a href="/categoria/diversion-peticion/personificacion-celebridades/">Personificaci&oacute;n de Celebridades</a></li>
-						<li><a href="/categoria/diversion-peticion/truco-magia-
-
-							/">
-
-							Truco de Magia y Predigitación</a></li>
-
-
-						<li><a href="/categoria/diversion-peticion/humor-grafico/">Humor Gr&aacute;fico</a></li>
-						<li><a href="/categoria/diversion-peticion/otros/">Otros</a></li>
+						<li><a href="/categoria/diversion-entretenimiento/video-standup/">Video StandUp sobre Tema/Evento</a></li>
+						<li><a href="/categoria/diversion-entretenimiento/chistes-escritos/">Chistes Escritos sobre Tema/Evento</a></li>
+						<li><a href="/categoria/diversion-entretenimiento/humor-grafico-memes/">Chistes Gr&aacute;ficos/Memes sobre Tema/Evento</a></li>
+						<li><a href="/categoria/diversion-entretenimiento/chistes-vivo/">Chistes en Vivo</a></li>
+						<li><a href="/categoria/diversion-entretenimiento/marionetas/">Marionetas</a></li>
+						<li><a href="/categoria/diversion-entretenimiento/discurso-gracioso-evento/">Discurso Gracioso para Evento</a></li>
+						<li><a href="/categoria/diversion-entretenimiento/personificacion-celebridades/">Personificaci&oacute;n de Celebridades</a></li>
+						<li><a href="/categoria/diversion-entretenimiento/trucos-magia-malabarismo/">Trucos de Magia y Malabarismo</a></li>
+						<li><a href="/categoria/diversion-entretenimiento/otros/">Otros</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 caja-serv caja-titulo">
@@ -331,10 +317,9 @@
 						<li class="titulo-categoria" id="estilovida" >Estilo de vida</li>
 						<li><a href="/categoria/estilo-vida/cuidado-animales-mascotas/">Cuidado de Animales y Mascotas</a></li>
 						<li><a href="/categoria/estilo-vida/consejos-relaciones/">Consejos sobre Relaciones</a></li>
-						<!-- <li><a href="#">Diet y Weight Loss (Nutricionistas)</a></li> -->
-						<!-- <li><a href="#">Salud y Ejercicio</a></li> -->
-						<li><a href="/categoria/estilo-vida/maquillaje-estilo-belleza/">Maquillaje, Estilo y Belleza</a></li>  <!-- x HACER: peligro -->
-						<li><a href="/categoria/estilo-vida/astrologia-tarot/">Astrolog&iacute;a y Tarot</a></li>
+						<li><a href="/categoria/estilo-vida/maquillaje-estilo-belleza/">Maquillaje, Estilo y Belleza</a></li>
+						<li><a href="/categoria/estilo-vida/ejercicios-rutinas/">Ejercicios y Rutinas (Entrenadores)</a></li>
+						<li><a href="/categoria/estilo-vida/dietas-nutricionistas">Dietas y Perdida de Peso (Nutricionistas)</a></li>
 						<li><a href="/categoria/estilo-vida/recetas-cocina/">Recetas de Cocina</a></li>
 						<li><a href="/categoria/estilo-vida/consejos-padres/">Consejos para Padres</a></li>
 						<li><a href="/categoria/estilo-vida/viajes/">Viajes</a></li>
@@ -344,14 +329,11 @@
 				<div class="col-md-3 caja-serv caja-titulo">
 					<ul class="categoria">
 						<li class="titulo-categoria" id="regalos" >Regalos</li>
-						<li><a href="/categoria/regalos/tarjetas-felicitacion/">Tarjetas de Felicitaci&oacute;n</a></li>  <!-- x HACER:  virtual tambien?? -->
+						<li><a href="/categoria/regalos/tarjetas-felicitaciones/">Tarjetas de Felicitaciones</a></li>
 						<li><a href="/categoria/regalos/video-felicitaciones/">Video Felicitaciones</a></li>
-						<!-- <li><a href="#">Unusual Gifts</a></li> -->
-						<li><a href="/categoria/regalos/arte-manualidades/">Arte y Manualidades</a></li>
-						<li><a href="/categoria/regalos/joyeria-hecha-mano/">Joyer&iacute;a Hecha a Mano</a></li>
-						<li><a href="/categoria/regalos/regalos-nerdos/">Regalos para Nerdos</a></li>
-						{% comment %}<li><a href="#">Tarjetas Postales desde...</a></li>
-						<li><a href="#">Artesan&iacute;as Recicladas</a></li>{% endcomment %}
+						<li><a href="/categoria/regalos/regalos-divertidos-inesperados">Ideas para Regalos Divertidos/Inesperados</a></li>
+						<li><a href="/categoria/regalos/manualidades-artesanias/">Ideas para Manualidades y Artesan&iacute;as</a></li>
+						<li><a href="/categoria/regalos/regalos-nerdos/">Ideas de Regalos para Nerdos</a></li>
 						<li><a href="/categoria/regalos/otros/">Otros</a></li>
 					</ul>
 				</div>
@@ -359,3 +341,6 @@
 		</div>
 	</div>
 </div>
+{% if logueado %}
+	{% include "en/modal-sugerencia.html" %}
+{% endif %}

@@ -1,4 +1,5 @@
 {% load i18n %}
+{% include "menu-superior.html" %}
 {% load static from staticfiles %}
 <script type="text/javascript" charset="utf-8">
 	function agregarInput(cadena, modal){
@@ -32,7 +33,7 @@
 </script>
 {% if mensaje %}
 	<div class="alert alert-warning fade in" style="text-align: center">
-		<i><b>HV informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		<i><b>HI informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 	</div>
 {% endif %}
 <div class="cuerpo">
@@ -69,7 +70,7 @@
 								{% endif %}
 							</div>
 							{% if logueado and perfil_logueado != servicio.url.vendedor and not perfil_logueado.es_venezolano %}
-									<a href="#" data-toggle="modal" data-target=".modal-crearcontrato" class="btn activar-chat pull-right">¿Negociar t&eacute;rminos?</a>
+								<a href="#" data-toggle="modal" data-target=".modal-crearcontrato" class="btn activar-chat pull-right">¿Negociar t&eacute;rminos?</a>
 							{% endif %}
 						</div>
 						{% comment %}<div class="col-md-6 extras">
@@ -83,7 +84,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-3">
-							<span>Atenci&oacute;n en:</span>
+							<span>Ayuda en:</span> {% comment %}<!-- xHACER:	# URGENTE nombrar esto de una mejor manera	-->{% endcomment %}
 							<select class="form-control form-controlado" name="traduccion_servicio" style="height: 28px;">
 								<option value="">Seleccione un idioma:</option>
 								{% get_language_info_list for idiomas_servicio as idiomas_servicio %}
@@ -102,13 +103,13 @@
 								{% load bolivizar %}
 								<p id="precio-contrato"><b>Precio:</b><br>{{ servicio.url.precio|floatformat:"-2" }} $</p>
 							{% else %}{% endcomment %}
-								<p id="precio-contrato"><b>Precio:</b><br>{{ servicio.url.precio|floatformat:"-2" }} $</p>
+							<p id="precio-contrato"><b>Precio:</b><br>{{ servicio.url.precio|floatformat:"-2" }} $</p>
 						</div>
 						<div class="col-md-3" id="div_boton_contratar">
 							{% if servicio.url.vendedor == perfil_logueado %}
 								<button type="button" id="traduce_luego_envia" data-toggle="modal" data-target=".modal-traducirserv" class="btn-contratar">Traducir</button>
 							{% elif not perfil_logueado %}
-								<a href="/" class="btn btn-contratar" style="margin-left: -2px;font-size: 13px;" title="Crear cuenta en HV">Registrate para<br>comprar!</a>
+								<a href="/" class="btn btn-contratar" style="margin-left: -2px;font-size: 13px;" title="Crear cuenta en HI">Registrate para<br>comprar!</a>
 							{% elif perfil_logueado.es_venezolano %}
 							{% else %}
 								<button type="submit" class="btn-contratar">Contratar</button>
@@ -121,7 +122,7 @@
 			</div>
 		</div>
 		<br>
-		<h2>Barra Estad&iacute;stica (Promedios)</h2>
+		<h2>Barra Estad&iacute;stica</h2>
 		<div class="row">
 			<div class="col-md-3 caja-estadistica-serv">
 				<p class="titulo-caja-estadistica">Experiencia</p><br>

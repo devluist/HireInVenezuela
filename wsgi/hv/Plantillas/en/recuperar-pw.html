@@ -2,21 +2,21 @@
 {% load static from staticfiles %}
 <div class="cuerpo">
 	<div class="container">
-		<h2>Recuperar contrase&ntilde;a</h2>
+		<h2>Recover password</h2>
 		<hr class="linea-hr">
 		{% if cambiar_contra %}
 			<form id="form-recupera-cta" action="/recuperar-cuenta/" method="post" accept-charset="utf-8">
 				{% csrf_token %}
-				<p>Ingrese su nueva contrase&ntilde;a:</p>
+				<p>Type your new password:</p>
 				<input type="password" name="pw">
 				<input type="hidden" name="correo_usr" value="{{correo_usr}}">
-				<input type="submit" value="Enviar">
+				<input type="submit" value="Send it">
 			</form>
 		{% else %}
 			<form id="form-recupera-cta" action="/recuperar-cuenta/" method="post" accept-charset="utf-8">
 				{% csrf_token %}
-				<input type="email" name="correo" placeholder="Ingrese su correo asociado a esta cuenta">
-				<input type="submit" value="Enviar">
+				<input type="email" name="correo" placeholder="Type your email associated to this account">
+				<input type="submit" value="Send it">
 			</form>
 		{% endif %}
 	</div>

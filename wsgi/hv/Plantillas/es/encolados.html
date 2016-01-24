@@ -1,8 +1,15 @@
 {% load i18n %}
+{% include "menu-superior.html" %}
 {% load static from staticfiles %}
+<script type="text/javascript" charset="utf-8">
+	function enviar(w) {
+		w[1].value = 1;
+		return true;
+	}
+</script>
 {% if mensaje %}
 	<div class="alert alert-warning fade in" style="text-align: center">
-		<i><b>HV informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		<i><b>HI informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 	</div>
 {% endif %}
 <div class="cuerpo">

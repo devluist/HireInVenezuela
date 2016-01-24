@@ -1,4 +1,5 @@
 {% load i18n %}
+{% include "menu-superior.html" %}
 {% load static from staticfiles %}
 <script type="text/javascript" charset="utf-8">
 	function enviar(w) {
@@ -6,33 +7,75 @@
 		return true;
 	}
 </script>
+{% if mensaje %}
+	<div class="alert alert-warning fade in" style="text-align: center">
+		<i><b>HI News:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	</div>
+{% endif %}
 <div class="cuerpo">
 	<div class="container">
-		<div class="col-md-5 caja-contacto" style="float:none;margin:0 auto;">
-			<div class="titulo-categoria"  style="background: #BE2A2D;">Waiting List/div>
-			{% if lista %}
-				{% for s in lista %}
-					<form action="/lista-solicitudes-servicio/" class="col-md-12" onsubmit="return enviar(this);" method="post" accept-charset="utf-8">
-						{% csrf_token %}
-						<span style="font-size:1.2em">{{ s.0.servicio }}</span>
-						<small class="pull-right"><b>Soliciter:</b> <a href="/perfil/{{ s.0.comprador }}/">@{{ s.0.comprador }}</a></small>
-						<small>{{ s.0.fecha|timesince }}</small>
-						<div style="margin: 0 20px">
-							{% for n in s.1 %}
-								<small class="clausula"><b>{{ forloop.counter }}.-</b> {{ n }}</small><br>
-							{% endfor %}
+		<div class="row">
+			<div class="col-md-5 caja-contacto caja-contacto-mod" style="{% if not lista %}background-color: #FFF;border: 1px solid #C8C7C7;{% endif %}">
+				<div class="titulo-categoria" style="margin: 0;">Waiting List ({{ aprobados|length }})</div>
+				{% if aprobados %}
+					{% for serv in aprobados %}
+						<div class="solicitud col-md-12">
+							<p>
+								<a href="/discusion/{{ serv.conversacion }}/{{ serv.id }}/" style="font-size:1.2em">{{ serv.nombre }}</a>
+								<small> {{ serv.fecha|timesince }} ago</small>
+								<small class="pull-right">
+									<b>Applicant:</b> <a href="/perfil/{{ serv.comprador }}/">@{{ serv.comprador }}</a><br>
+									<b>Language:</b> {{ serv.servicio.idioma }}
+								</small>
+							</p>
+							{% if serv.contrato_mod %}
+								<div style="margin: 0 20px">
+									<p>The user would like:</p>
+									{% for n in serv.contrato %}
+										<small class="clausula"><b>{{ forloop.counter }}.-</b> {{ n }}</small><br>
+									{% endfor %}
+								</div>
+							{% endif %}
 						</div>
-						<input type="hidden" name="opc" value="0">
-						<input type="hidden" name="ident" value="{{ s.0.id }}">
-						<button type="submit" name="aceptar" class="btn btn-success pull-right">Acept</button>
-						<button type="submit" name="rechazar" class="btn btn-danger pull-right">Reject</button>
-					</form>
-					<br>
-					<hr>
-				{% endfor %}
-			{% else %}
-				<p class="text-center"><br>With out request for now...</p>
-			{% endif %}
+					{% endfor %}
+				{% else %}
+					<p class="text-center" ><br>No request so far...</p>
+				{% endif %}
+			</div>
+			<div class="col-md-5 caja-contacto caja-contacto-mod col-md-offset-1" {% if not lista %}style="background-color: #FFF;border: 1px solid #C8C7C7;"{% endif %}>
+				<div class="titulo-categoria" style="background: #BE2A2D; margin: 0;">Will you accept the following? ({{ lista|length }})</div>
+				{% if lista %}
+					{% for sc in lista %}
+						<form action="/lista-solicitudes-servicio/" class="solicitud col-md-12" method="post" accept-charset="utf-8">
+							{% csrf_token %}
+							<p>
+								<span style="font-size:1.2em">{{ sc.nombre }}</span>
+								<small> {{ sc.fecha|timesince }} ago</small>
+								<small class="pull-right">
+									<b>Applicant:</b> <a href="/perfil/{{ sc.comprador }}/">@{{ sc.comprador }}</a><br>
+									<b>Language:</b> {{ sc.servicio.idioma }}
+								</small>
+							</p>
+							{% if sc.contrato_mod %}
+								<div style="margin: 0 20px">
+									<p>The user would like:</p>
+									{% for n in sc.contrato %}
+										<small class="clausula"><b>{{ forloop.counter }}.-</b> {{ n }}</small><br>
+									{% endfor %}
+								</div>
+							{% endif %}
+							<input type="hidden" name="opc" value="0">
+							<input type="hidden" name="ident" value="{{ sc.id }}">
+							<br>
+							<button type="submit" name="aceptar" style="clear: right;" class="acepto-solicitud btn btn-success pull-right">Accept</button>
+							<button type="submit" name="rechazar" class="btn btn-danger pull-right">Reject</button>
+							<br>
+						</form>
+					{% endfor %}
+				{% else %}
+					<p class="text-center" ><br>No request so far...</p>
+				{% endif %}
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,69 +1,94 @@
 {% load i18n %}
+{% include "menu-superior.html" %}
 {% load static from staticfiles %}
+{% if mensaje %}
+	<div class="alert alert-warning fade in" style="text-align: center">
+		<i><b>HI News:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	</div>
+{% endif %}
 <div class="cuerpo" style="margin-bottom: 50px;">
 	<div class="container">
 		<div class="row">
 			<div style="margin: 0 0 40px;border: 1px solid #DDD;padding: 0;background-color: #fff;">
-				<div class="titulo-categoria" style="background: #F7E296;color:#000">Personal Data <button type="button" class="btn btn-default btn-sm pull-right btn-borrar-cuenta"><b>&times; Delete Account</b></button></div>
-				<form action="/configuracion/" method="post" accept-charset="utf-8">
+				<div class="titulo-categoria" style="background: #F7E296;color:#000">Edit your Profile</div>
+				<form action="/configuracion/" id="form-cfg" onsubmit="return enviar_cfg();" method="post" accept-charset="utf-8">
 					{% csrf_token %}
 					<ul class="row categoria">
-						<div class="col-md-6">
-							<li><img src="{% static 'images/falta.png' %}" width="100px" height="90px" class="imag-perfil media-object"></li>
-							<li class="form-group" style="margin:0">
+						{% comment %}<div class="col-md-4">
+							<li><img src="/multimedia/images/falta.png" width="150px" height="200px" class="imag-perfil media-object"></li>
+							<li class="form-group" style="margin: 0 auto;text-align: center;">
 								<label for="exampleInputFile">Change Picture</label>
-								{% comment %}<input type="file" class="btn btn-default btn-sm btn-block" id="exampleInputFile">{% endcomment %}
+								{% comment %}<input type="file" class="btn btn-default btn-sm btn-block" id="exampleInputFile">{% end comment %}
 								<!-- <p class="help-block">Example block-level help text here.</p> -->
 							</li>
-						</div>
-						<div class="col-md-6">
-							<li><b>User:</b> @{{ perfil }}</li>
-							<li>
-								{% if nombre_completo %}
-									<b>Name and Lastname:</b> {{ nombre_completo }}
-								{% else %}
-									<input class="form-control input-sm caja-txt-form caja-txt-cfg" name="nombre" type="text" placeholder="Full name">
-								{% endif %}
+						</div>{% endcomment %}
+						<div class="col-md-5">
+							<li><b>Username:</b>  @{{ perfil }}</li>
+							<li class="row">
+								<b class="col-xs-12 col-md-5" style="padding: 0;">Name and Lastname:</b>
+								<span class="col-xs-12 col-md-7" style="padding: 0;">
+									<input class="form-control input-sm caja-txt-form caja-txt-cfg" name="nombre_completo" type="text" placeholder="Your Name" value="{{ perfil.nombre_completo }}">
+								</span>
 							</li><br>
-							<li>You need vacations?<br>
-								<p style="text-align: center;">
-									{% if vacas %}
-										<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="vacas" value="True" checked>Yes</label>
-										<label class="radio checkbox-inline"><input type="radio" name="vacas" value="False">No</label>
-									{% else %}
-										<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="vacas" value="True">Yes</label>
-										<label class="radio checkbox-inline"><input type="radio" name="vacas" value="False" checked>No</label>
-									{% endif %}
-								</p>
+							<li>
+								<span class="col-xs-12 col-md-3" style="padding:0">
+									<b>Edad:</b>
+									<input name="edad" class="form-control input-sm caja-txt-form caja-txt-cfg" type="text" placeholder="Age" value="{{ perfil.edad }}" style="width: 35px !important;display: inline-block;margin-left: 10px;text-align: center;">
+								</span>
+								<span class="col-xs-12 col-md-9">
+									<b>¿You're on vacation?</b>
+									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="vacacionando" value="0" {% if perfil.vacacionando == 0 %}checked{% endif %}>No</label>
+									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="vacacionando" value="1" {% if perfil.vacacionando == 1 %}checked{% endif %}>Si</label>
+								</span>
+							</li>
+							<li style="clear: left;">
+								<b>Gender:</b>
+								<span>
+									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="sexo" value="H" {% if perfil.sexo == "H" %}checked{% endif %}>Female</label>
+									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="sexo" value="M" {% if perfil.sexo == "M" %}checked{% endif %}>Male</label>
+									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="sexo" value="D" {% if perfil.sexo == "D" %}checked{% endif %}>Others</label>
+								</span>
+							</li>
+							{% comment %}<li>
+								<b>Ubicaci&oacute;n:</b><br>
+								{% if not perfil.es_venezolano  %}
+									<select name="pais" class="form-control formu input-sm caja-txt-form caja-txt-cfg">
+										<option>Country</option>
+										<option>2</option>
+									</select>
+								{% endif %}
+								<select name="estado" class="form-control formu input-sm caja-txt-form caja-txt-cfg">
+									<option>State</option>
+									<option>2</option>
+								</select>
+								<select name="ciudad" class="form-control formu input-sm caja-txt-form caja-txt-cfg">
+									<option>City</option>
+									<option>2</option>
+								</select>
+							</li>{% endcomment %}
+							<br>
+							<li><a href="#" data-toggle="modal" data-target=".modal-confirmar" >&times; Delete account</a></li>
+							{% comment %}<li><input name="ci" class="form-control input-sm caja-txt-form caja-txt-cfg" type="text" placeholder="CI/Rif/Pasaporte"></li><li><textarea name="" class="form-control form-controlado" rows="3" placeholder="Autorespuesta ante un saludo en la mensajer&iacute;a"></textarea></li>
+							<li><textarea name="" class="form-control form-controlado" rows="3" placeholder="Horario en que puedo chatear..."></textarea></li>
+							<li>{% endcomment %}
+						</div>
+						<div class="col-md-3">
+							<li><b>Languages you speak:</b><br>
+								<input type="hidden" id="lenguas" name="lenguas" value="">
+								<select id="lista_lenguas" multiple="multiple">
+									{% get_language_info_list for idiomas_disponibles as idiomas %}
+									{% for idioma in idiomas %}
+										<option value="{{ idioma.code }}" {% if idioma.code in idiomas_usr_habla %} selected="selected" {% endif %}>
+											<i class="glyphicon glyphicon-globe"></i> {{ idioma.name_local|capfirst }} ({{ idioma.code }})
+										</option>
+			                        {% endfor %}
+								</select>
 							</li>
 						</div>
 					</ul>
 					<ul class="row categoria">
 						<li class="separador"></li>
-						<div class="col-md-6">
-							<li><b>Location:</b><br>
-								<select class="form-control formu input-sm caja-txt-form caja-txt-cfg">
-									<option>Country</option>
-									<option>2</option>
-								</select>
-								<select class="form-control formu input-sm caja-txt-form caja-txt-cfg">
-									<option>Estate</option>
-									<option>2</option>
-								</select>
-								<select class="form-control formu input-sm caja-txt-form caja-txt-cfg">
-									<option>City</option>
-									<option>2</option>
-								</select>
-							</li><br>
-							<li><b>Edad:</b><input name="edad" class="form-control input-sm caja-txt-form caja-txt-cfg" type="text" placeholder="Age" value="{{ edad }}"></li>
-							{% comment %}<li><input name="ci" class="form-control input-sm caja-txt-form caja-txt-cfg" type="text" placeholder="CI/Rif/Pasaporte"></li>{% endcomment %}
-						</div>
-						<div class="col-md-6">
-							<li><a href="#">DEBO ALMACENAR DATOS DE PAYPAL??</a></li>
-							<li><textarea name="" class="form-control form-controlado" rows="3" placeholder="Automatic answer when some text you"></textarea></li>
-							<li><textarea name="" class="form-control form-controlado" rows="3" placeholder="Schedule when someone can reach you..."></textarea></li>
-							<li><button type="submit" class="btn btn-default btn-sm form-guardar pull-right">Save</button></li>
-						</div>
+						<li><button type="submit" class="btn btn-default btn-sm form-guardar pull-right">Save</button></li>
 					</ul>
 				</form>
 			</div>

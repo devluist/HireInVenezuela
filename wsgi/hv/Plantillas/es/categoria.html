@@ -1,4 +1,5 @@
 {% load i18n %}
+{% include "menu-superior.html" %}
 {% load static from staticfiles %}
 <script type="text/javascript" charset="utf-8">
 	function ir(pag) {
@@ -46,7 +47,7 @@
 						</a>
 					</div>
 				 	<div class="cara-principal">
-						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="1.000 Me Gusta para tu post, foto o video en Facebook">
+						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="">
 						<!-- xHACER: src={{ gs.imagen.url }}
 							# modificar los "alt" de las imagenes
 							# ver si hay en otras plantillas
@@ -77,9 +78,9 @@
 			<li><a href="?pagina=1">&laquo;</a></li>
 			{% for ind in rango %}
 				{% if ind != servicios.number %}
-					<li><a href="?pagina={{ind}}">{{ind}} <span class="sr-only">(current)</span></a></li>
+					<li><a href="?pagina={{ind}}">{{ind}} <span class="sr-only">(p&aacute;gina actual)</span></a></li>
 				{% else %}
-					<li class="active"><a href="?pagina={{ind}}">{{ind}} <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="?pagina={{ind}}">{{ind}} <span class="sr-only">(p&aacute;gina actual)</span></a></li>
 				{% endif %}
 			{% endfor %}
 			<li><a href="?pagina={{rango|length}}">&raquo;</a></li>
