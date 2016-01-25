@@ -62,8 +62,8 @@
 			$("#lenguas").val($("#lista_lenguas").val().toString());
 			return true;
 		}
-		$(function() {
-			{% if "encolados.html" in pag_activa %}
+		{% if "encolados.html" in pag_activa %}
+			$(function() {
 				$("button:submit[name='rechazar']").click(function(e){
 					e.preventDefault();
 					var padre = $(this).parent("form");
@@ -76,8 +76,8 @@
 					$(padre).find("input[name='opc']").val("1");
 					$(padre).submit();
 				});
-			{% endif %}
-		});
+			});
+		{% endif %}
 	</script>
 	{% if logueado %}
 		{% include "es/modal-sugerencia.html" %}

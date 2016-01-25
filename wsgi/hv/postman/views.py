@@ -98,7 +98,7 @@ class FolderMixin(NamespaceMixin, object):
             'by_message_url': reverse(viewname, args=[OPTION_MESSAGES], current_app=current_instance),
             'current_url': self.request.get_full_path(),
             'idiomas_disponibles': IDIOMAS_DISPONIBLES,
-            'idioma_actual': self.request.LANGUAGE_CODE,
+            'idioma': self.request.LANGUAGE_CODE,
             'gets': self.request.GET,  # useful to postman_order_by template tag
         }
         if self.request.user.is_authenticated():
@@ -222,7 +222,7 @@ class ComposeMixin(NamespaceMixin, object):
             'autocompleter_app': autocompleter_app,
             'next_url': self.request.GET.get('next') or _get_referer(self.request),
             'idiomas_disponibles': IDIOMAS_DISPONIBLES,
-            'idioma_actual': self.request.LANGUAGE_CODE,
+            'idioma': self.request.LANGUAGE_CODE,
             'current_url': self.request.get_full_path(),
         }
         if self.request.user.is_authenticated():
@@ -393,7 +393,7 @@ class DisplayMixin(NamespaceMixin, object):
             'archived': archived,
             'current_url': self.request.get_full_path(),
             'idiomas_disponibles': IDIOMAS_DISPONIBLES,
-            'idioma_actual': self.request.LANGUAGE_CODE,
+            'idioma': self.request.LANGUAGE_CODE,
             'serv_cola': serv_cola,
             'reply_to_pk': received.pk if received else None,
             'form': self.form_class(initial=received.quote(*self.formatters)) if received else None,
