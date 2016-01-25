@@ -59,7 +59,7 @@ def uerelizar(cad):  # que tiene forma de URL
 # xHACER: cargar en el index las categorias desde la BD y no estaticamente?
 # ver archivo vista_traduccionCategoria.txt
 def inicializar_categorias():
-	if not Categoria.objects.filter(id=1).exists():
+	if not UrlCategoria.objects.filter(id=1).exists():
 		c = UrlCategoria.objects.create(url="diseno-graficos-fotografia", padre=None)
 		Categoria.objects.create(url=c, nombre=u"Diseño, Gráficos y Fotografía", descripcion="")
 		u = UrlCategoria.objects.create(padre=c, url="historietas-caricaturas-personajes")
