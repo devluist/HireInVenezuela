@@ -49,8 +49,14 @@ HEADERS_PAYPAL = {
 SECRET_KEY = SECRETS['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# TEMPLATE_DEBUG = True   #xPENSAR: esto estaba en la mia lo dejo?
+DEBUG = True
+TEMPLATE_DEBUG = True   #xPENSAR: esto estaba en la mia lo dejo?
+
+
+#######################################################################################3
+#######################################################################################3 
+#######################################################################################3
+
 
 from socket import gethostname
 
