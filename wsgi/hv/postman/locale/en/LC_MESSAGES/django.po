@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-25 10:39-0430\n"
+"POT-Creation-Date: 2016-01-25 11:39-0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -166,7 +166,7 @@ msgstr ""
 msgid "Accepted"
 msgstr ""
 
-#: .\postman\models.py:37 .\postman\templates\postman\discusion.html:34
+#: .\postman\models.py:37 .\postman\templates\postman\discusion.html:35
 #: .\postman\templates\postman\view.html:21
 msgid "Rejected"
 msgstr ""
@@ -283,25 +283,32 @@ msgid ""
 "long term storage."
 msgstr ""
 
-#: .\postman\templates\postman\base.html:13
-msgid "Inbox"
+#: .\postman\templates\postman\base.html:5
+#: .\postman\templates\postman\discusion.html:6
+#: .\postman\templates\postman\menu-superior.html:38
+#: .\postman\templates\postman\menu-superior.html:42
+msgid "Messages"
 msgstr ""
 
 #: .\postman\templates\postman\base.html:14
+msgid "Inbox"
+msgstr ""
+
+#: .\postman\templates\postman\base.html:15
 #: .\postman\templates\postman\sent.html:3
 msgid "Sent Messages"
 msgstr ""
 
-#: .\postman\templates\postman\base.html:15
+#: .\postman\templates\postman\base.html:16
 #: .\postman\templates\postman\write.html:4
 msgid "Write"
 msgstr ""
 
-#: .\postman\templates\postman\base.html:16
+#: .\postman\templates\postman\base.html:17
 msgid "Archives"
 msgstr ""
 
-#: .\postman\templates\postman\base.html:17
+#: .\postman\templates\postman\base.html:18
 msgid "Trash"
 msgstr ""
 
@@ -318,7 +325,7 @@ msgid "by message"
 msgstr ""
 
 #: .\postman\templates\postman\base_folder.html:46
-#: .\postman\templates\postman\menu-superior.html:28
+#: .\postman\templates\postman\menu-superior.html:29
 #: .\postman\templates\postman\view.html:39
 msgid "Delete"
 msgstr ""
@@ -360,48 +367,49 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: .\postman\templates\postman\discusion.html:14
-msgid "HI News"
-msgstr ""
-
-#: .\postman\templates\postman\discusion.html:21
-#: .\postman\templates\postman\discusion.html:23
+#: .\postman\templates\postman\discusion.html:6
+#: .\postman\templates\postman\discusion.html:22
+#: .\postman\templates\postman\discusion.html:24
 msgid "Discussion"
 msgstr ""
 
-#: .\postman\templates\postman\discusion.html:21
-#: .\postman\templates\postman\discusion.html:23
+#: .\postman\templates\postman\discusion.html:15
+msgid "HI News"
+msgstr ""
+
+#: .\postman\templates\postman\discusion.html:22
+#: .\postman\templates\postman\discusion.html:24
 msgid "Back"
 msgstr ""
 
-#: .\postman\templates\postman\discusion.html:36
+#: .\postman\templates\postman\discusion.html:37
 #: .\postman\templates\postman\view.html:23
 msgid ":"
 msgstr ""
 
-#: .\postman\templates\postman\discusion.html:46
+#: .\postman\templates\postman\discusion.html:47
 msgid "Comment"
 msgstr ""
 
-#: .\postman\templates\postman\discusion.html:50
+#: .\postman\templates\postman\discusion.html:51
 #: .\postman\templates\postman\reply.html:4
 #: .\postman\templates\postman\view.html:47
 #: .\postman\templates\postman\view.html:51
 msgid "Reply"
 msgstr ""
 
-#: .\postman\templates\postman\discusion.html:58
+#: .\postman\templates\postman\discusion.html:59
 msgid "Options"
 msgstr ""
 
-#: .\postman\templates\postman\discusion.html:66
+#: .\postman\templates\postman\discusion.html:67
 msgid "Successful Operation"
 msgstr ""
 
-#: .\postman\templates\postman\discusion.html:68
-#: .\postman\templates\postman\discusion.html:70
-#: .\postman\templates\postman\discusion.html:74
-#: .\postman\templates\postman\discusion.html:76
+#: .\postman\templates\postman\discusion.html:69
+#: .\postman\templates\postman\discusion.html:71
+#: .\postman\templates\postman\discusion.html:75
+#: .\postman\templates\postman\discusion.html:77
 msgid "Request Mutual Cancellation"
 msgstr ""
 
@@ -492,97 +500,92 @@ msgstr ""
 msgid "Received"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:12
+#: .\postman\templates\postman\menu-superior.html:13
 msgid "Search"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:20
-#: .\postman\templates\postman\menu-superior.html:32
+#: .\postman\templates\postman\menu-superior.html:21
+#: .\postman\templates\postman\menu-superior.html:33
 msgid "Profile"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:25
+#: .\postman\templates\postman\menu-superior.html:26
 msgid "Edit Service"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:25
+#: .\postman\templates\postman\menu-superior.html:26
 msgid "Edit"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:28
+#: .\postman\templates\postman\menu-superior.html:29
 msgid "Delete Service"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:37
-#: .\postman\templates\postman\menu-superior.html:41
-msgid "Messages"
-msgstr ""
-
-#: .\postman\templates\postman\menu-superior.html:50
+#: .\postman\templates\postman\menu-superior.html:51
 msgid "more..."
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:59
+#: .\postman\templates\postman\menu-superior.html:60
 msgid "About Us"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:62
+#: .\postman\templates\postman\menu-superior.html:63
 msgid "Configuration"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:64
+#: .\postman\templates\postman\menu-superior.html:65
 msgid "Suggestions"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:67
+#: .\postman\templates\postman\menu-superior.html:68
 msgid "Log out"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:73
+#: .\postman\templates\postman\menu-superior.html:74
 msgid "Categories"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:75
+#: .\postman\templates\postman\menu-superior.html:76
 msgid "Design, Graphics & Photography"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:77
+#: .\postman\templates\postman\menu-superior.html:78
 msgid "Transcription, Translation & Drafting"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:79
+#: .\postman\templates\postman\menu-superior.html:80
 msgid "Audio & Music"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:81
+#: .\postman\templates\postman\menu-superior.html:82
 msgid "Programming & Tecnology"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:83
+#: .\postman\templates\postman\menu-superior.html:84
 msgid "Marketing Digital"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:85
+#: .\postman\templates\postman\menu-superior.html:86
 msgid "Propaganda & Publicity"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:87
+#: .\postman\templates\postman\menu-superior.html:88
 msgid "Business"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:89
+#: .\postman\templates\postman\menu-superior.html:90
 msgid "Video & Animation"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:91
+#: .\postman\templates\postman\menu-superior.html:92
 msgid "Fun & Entertainment"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:93
+#: .\postman\templates\postman\menu-superior.html:94
 msgid "Life Style"
 msgstr ""
 
-#: .\postman\templates\postman\menu-superior.html:95
+#: .\postman\templates\postman\menu-superior.html:96
 msgid "Gifts"
 msgstr ""
 

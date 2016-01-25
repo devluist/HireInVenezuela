@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load postman_tags %}
 {% block extrahead %}
+	<title>{% trans "Messages" %}: {{ current_url|cut:"/mensajeria/"|capfirst }}</title>
 	{% load static from staticfiles %}
 	{{ block.super }}
 	<link type="text/css" media="all" rel="stylesheet" href="{% static 'postman/css/postman.css' %}" />
