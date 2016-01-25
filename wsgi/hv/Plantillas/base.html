@@ -21,7 +21,6 @@
 		{% else %}{% comment %} <!-- xHACER:
 			# VALIDAR MUY BIEN ESTO: puede un usr acceder a paginas no registradas?? -->  {% endcomment %}
 			{% if logueado and idioma_actual %}
-				{% include idioma_actual+"/menu-superior.html" %}
 				{% block mensaje %}{% endblock %}
 				<div class="cuerpo">
 					<div class="container">		
