@@ -13,7 +13,7 @@ DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 WSGI_DIR = os.path.dirname(BASE_DIR)
 REPO_DIR = os.path.dirname(WSGI_DIR)
-DATA_DIR = 'C:/Users/iLaptop/xampp/htdocs/Django/buy/data' if desarrollando else os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR)
+DATA_DIR = 'C:/Users/iLaptop/xampp/htdocs/Django/buy/data/' if desarrollando else os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR)
 
 import sys
 sys.path.append(os.path.join(REPO_DIR, 'libs'))
@@ -123,7 +123,7 @@ if desarrollando:
 	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': 'data/buy',
+			'NAME': 'C:/Users/iLaptop/xampp/htdocs/Django/buy/data/buy.sql',
 			'USER': 'postgres',
 			'PASSWORD': 'qwerty2',
 			'HOST': 'localhost',
