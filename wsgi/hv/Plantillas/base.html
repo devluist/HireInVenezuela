@@ -45,6 +45,7 @@
 					{% csrf_token %}
 					<select class="form-control form-controlado" name="language" style="height: 28px;">
 						{% get_language_info_list for idiomas_disponibles as idiomas_disponibles %}
+						{% get_current_language as LANGUAGE_CODE %}
 						{% for idioma in idiomas_disponibles %}
 							<option value="{{ idioma.code }}" {% if idioma.code == LANGUAGE_CODE %} selected="selected" {% endif %}>
 								<i class="glyphicon glyphicon-globe"></i> {{ idioma.name_local|capfirst }}
