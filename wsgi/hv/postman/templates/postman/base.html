@@ -6,7 +6,7 @@
 	{{ block.super }}
 	<link type="text/css" media="all" rel="stylesheet" href="{% static 'postman/css/postman.css' %}" />
 {% endblock %}
-{% block mensaje %}{% include "menu-superior.html" %}{% endblock mensaje %}
+{% block mensaje %}{% include idioma+"/menu-superior.html" %}{% endblock mensaje %}
 {% block postman_menu %}
 	<div class="list-group col-md-3" id="postman-menu">
 		{% postman_unread as unread_count %}
@@ -17,5 +17,3 @@
 		<a class="list-group-item {% if current_url == '/mensajeria/trash/' %}active{% endif %}" href="{% url 'postman:trash' %}">{% trans "Trash" %}</a>
 	</div>
 {% endblock %}
-{% get_language_info_list for idiomas_disponibles as idiomas_disponibles %}
-{{LANGUAGE_CODE}}
