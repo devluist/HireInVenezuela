@@ -6,7 +6,7 @@
 	{{ block.super }}
 	<link type="text/css" media="all" rel="stylesheet" href="{% static 'postman/css/postman.css' %}" />
 {% endblock %}
-{% include "menu-superior.html" %}
+{% block mensaje %}{% include "menu-superior.html" %}{% endblock mensaje %}
 {% block postman_menu %}
 	<div class="list-group col-md-3" id="postman-menu">
 		{% postman_unread as unread_count %}
