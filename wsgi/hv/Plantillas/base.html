@@ -20,7 +20,7 @@
 			{% include pag_activa %}
 		{% else %}{% comment %} <!-- xHACER:
 			# VALIDAR MUY BIEN ESTO: puede un usr acceder a paginas no registradas?? -->  {% endcomment %}
-			{% if logueado and idioma_actual %}
+			{% if logueado %}
 				{% block mensaje %}{% endblock %}
 				<div class="cuerpo">
 					<div class="container">		

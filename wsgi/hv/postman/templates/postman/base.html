@@ -6,7 +6,7 @@
 	{{ block.super }}
 	<link type="text/css" media="all" rel="stylesheet" href="{% static 'postman/css/postman.css' %}" />
 {% endblock %}
-{% include idioma_actual+"/menu-superior.html" %}
+
 {% block postman_menu %}
 	<div class="list-group col-md-3" id="postman-menu">
 		{% postman_unread as unread_count %}
@@ -17,3 +17,4 @@
 		<a class="list-group-item {% if current_url == '/mensajeria/trash/' %}active{% endif %}" href="{% url 'postman:trash' %}">{% trans "Trash" %}</a>
 	</div>
 {% endblock %}
+{{ idioma_actual }}
