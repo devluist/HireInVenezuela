@@ -7,7 +7,7 @@ Django settings for hv project.
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-desarrollando = True if os.environ.get('OPENSHIFT_DATA_DIR') else False
+desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR') else True
 
 DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -121,18 +121,7 @@ WSGI_APPLICATION = 'hv.wsgi.application'
 
 print desarrollando
 
-if not desarrollando:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',  # 'django.db.backends.sqlite3',
-			'NAME': os.path.join(DATA_DIR, 'buy'),
-			'USER': 'adminci3pyaj',
-			'PASSWORD': 'ftijnkv9DCWE',
-			'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST'),
-			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT') # '5432'
-		}
-	}
-else:
+if desarrollando:
 	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -141,6 +130,17 @@ else:
 			'PASSWORD': 'qwerty2',
 			'HOST': 'localhost',
 			'PORT': '5432'
+		}
+	}
+else:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',  # 'django.db.backends.sqlite3',
+			'NAME': os.path.join(DATA_DIR, 'buy'),
+			'USER': 'adminci3pyaj',
+			'PASSWORD': 'ftijnkv9DCWE',
+			'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST'),
+			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT') # '5432'
 		}
 	}
 
