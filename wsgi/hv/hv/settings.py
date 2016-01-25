@@ -17,6 +17,13 @@ sys.path.append(os.path.join(REPO_DIR, 'libs'))
 import secrets
 SECRETS = secrets.getter(os.path.join(DATA_DIR, 'secrets.json'))
 
+## django los esconde:
+	# API
+	# KEY
+	# PASS
+	# SECRET
+	# SIGNATURE
+	# TOKEN
 from decimal import Decimal
 MI_CORREO_PAYPAL = "v11-presidente@hotmail.com"  # "luistena.developer@hotmail.com"
 IDIOMAS_DISPONIBLES = ["es", "en"]
@@ -119,8 +126,12 @@ WSGI_APPLICATION = 'hv.wsgi.application'
 
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': os.path.join(DATA_DIR, 'db.sqlite3'),
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',  # 'django.db.backends.sqlite3',
+		'NAME': os.path.join(DATA_DIR, 'buy'),
+		'USER': 'adminci3pyaj',
+		'PASSWORD': 'ftijnkv9DCWE',
+		'HOST': 'postgresql://$OPENSHIFT_POSTGRESQL_DB_HOST:$OPENSHIFT_POSTGRESQL_DB_PORT',
+		'PORT': '5432',
 	}
 }
 
@@ -159,8 +170,7 @@ STATIC_ROOT = os.path.join(WSGI_DIR, 'multimedia/')
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_HOST = ""  # xHACER: que host me brinda OpenShift pa los correos?
+# EMAIL_HOST = ""  # xHACER: que  SMTP server  me brinda OpenShift pa los correos?
 # EMAIL_PORT = 25
 
 
