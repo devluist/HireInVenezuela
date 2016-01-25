@@ -55,6 +55,11 @@ DEBUG = True
 #######################################################################################  DE BUG 
 #######################################################################################
 
+LOCALE_PATHS = (
+	'buy/wsgi/hv/postman/locale',
+	'postman/locale',
+	'C:/Users/iLaptop/xampp/htdocs/Django/buy/wsgi/hv/postman/locale'
+)
 
 from socket import gethostname
 
