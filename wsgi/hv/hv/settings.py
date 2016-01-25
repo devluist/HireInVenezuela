@@ -122,8 +122,8 @@ WSGI_APPLICATION = 'hv.wsgi.application'
 if desarrollando:
 	DATABASES = {
 		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': 'C:/Users/iLaptop/xampp/htdocs/Django/buy/data/buy.sql',
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',  # 'django.db.backends.sqlite3',
+			'NAME': 'buy',  # os.path.join(DATA_DIR, 'buy'),
 			'USER': 'postgres',
 			'PASSWORD': 'qwerty2',
 			'HOST': 'localhost',
@@ -133,8 +133,8 @@ if desarrollando:
 else:
 	DATABASES = {
 		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',  # 'django.db.backends.sqlite3',
-			'NAME': os.path.join(DATA_DIR, 'buy'),
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'buy',
 			'USER': 'adminci3pyaj',
 			'PASSWORD': 'ftijnkv9DCWE',
 			'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST', ""),
