@@ -121,19 +121,8 @@ WSGI_APPLICATION = 'hv.wsgi.application'
 
 print desarrollando
 
-if desarrollando:
+if not desarrollando:
 	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': 'data/buy',
-			'USER': 'postgres',
-			'PASSWORD': 'qwerty2',
-			'HOST': 'localhost',
-			'PORT': '5432'
-		}
-	}
-else:
-	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',  # 'django.db.backends.sqlite3',
 			'NAME': os.path.join(DATA_DIR, 'buy'),
@@ -141,6 +130,17 @@ else:
 			'PASSWORD': 'ftijnkv9DCWE',
 			'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST'),
 			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT') # '5432'
+		}
+	}
+else:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'data/buy',
+			'USER': 'postgres',
+			'PASSWORD': 'qwerty2',
+			'HOST': 'localhost',
+			'PORT': '5432'
 		}
 	}
 
