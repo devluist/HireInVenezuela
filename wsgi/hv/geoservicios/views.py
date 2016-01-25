@@ -48,8 +48,12 @@ for i, cat in enumerate(CATEGORIAS):
 
 # xHACER: esto no es mejor con iri_to_uri ??
 def uerelizar(cad):  # que tiene forma de URL
-
-	return cad.replace(" ", "-").replace(u"ñ", "n").replace(u"á", "a").replace(u"é", "e").replace(u"í", "i").replace(u"ó", "o").replace(u"ú", "u").lower()
+	cad = cad.replace(" ", "-").replace(u"ñ", "n").replace(u"á", "a").replace(u"é", "e").replace(u"í", "i").replace(u"ó", "o").replace(u"ú", "u").lower()
+	# [^a-zA-Z0-9-!()+]
+	temp = re.findall("([^a-zA-Z0-9-])+", cad)
+	for t in temp:
+		cad = cad.replace(t, "")
+	return cad
 
 
 # xHACER: cargar en el index las categorias desde la BD y no estaticamente?
@@ -433,7 +437,7 @@ def reembolsar(obj_encola):
 	}
 	datos_paypal = json.dumps(datos_paypal)
 	try:
-		peticion = urllib2.Request(url='https://svcs.sandbox.paypal.com/AdaptivePayments/Refund', data=datos_paypal, headers=headers)
+		peticion = urllib2.Request(url='https://svcs.sandbox.paypal.com/AdaptivePayments/Refund', data=datos_paypal, headers=HEADERS_PAYPAL)
 		com_paypal = urllib2.urlopen(peticion, timeout=30)
 	except urllib2.URLError, motivo:
 		# xHACER: reenviar a una pagina luego de un error en el reembolso (inicio, perfil ?)
@@ -450,7 +454,6 @@ def reembolsar(obj_encola):
 
 def pagar_vendedores(obj_encola):
 	inter = Intermediario.objects.get(obj_cola=obj_encola)
-	headers = HEADERS_PAYPAL
 	datos_paypal = {
 		"payKey": inter.clave_paypal,
 		"requestEnvelope": {
@@ -460,7 +463,7 @@ def pagar_vendedores(obj_encola):
 	}
 	datos_paypal = json.dumps(datos_paypal)
 	try:
-		peticion = urllib2.Request(url='https://svcs.sandbox.paypal.com/AdaptivePayments/ExecutePayment', data=datos_paypal, headers=headers)
+		peticion = urllib2.Request(url='https://svcs.sandbox.paypal.com/AdaptivePayments/ExecutePayment', data=datos_paypal, headers=HEADERS_PAYPAL)
 		com_paypal = urllib2.urlopen(peticion, timeout=30)
 	except urllib2.URLError, motivo:
 		# xHACER: reenviar a una pagina luego de un error en el reembolso (inicio, perfil ?)
@@ -708,7 +711,7 @@ def inicio(request):
 	servis = ServicioVirtual.objects.filter(activo=True, idioma=idioma, url__vendedor__eliminado=False).order_by("-fecha_publicacion")[:8]
 	for s in servis:
 		try:
-			# s.valoraciones = Contador.objects.get(servicio=s)
+			s.valoraciones = Contador.objects.get(servicio=s)
 			s.nivel = NivelUsuario.objects.get(usuario=s.url.vendedor)
 		except:
 			pass
@@ -1318,11 +1321,8 @@ def enlistar_usuario(request, usr):
 			encola = Cola.objects.create(servicio=serv, estatus="E", comprador=p, vendedor=url.vendedor, contrato=cont)
 		else:
 			encola = Cola.objects.create(servicio=serv, estatus="E", comprador=p, vendedor=url.vendedor, contrato=serv.contrato)
-		# xHACER:
-			# editar los headers app-id, usrs, url de la peticion al sandbox
 		precio_serv = encola.servicio.url.precio
 		comisiones = precio_serv - (precio_serv * COMISION_PAYPAL["ganancia"] / 100) - COMISION_PAYPAL["neto"] - (precio_serv * COMISION_HV / 100)
-		headers = HEADERS_PAYPAL
 		datos_paypal = {
 			# xHACER: falta enviar el precio de la comision para q se vea directo cuanto debe pagar
 			"actionType": "PAY_PRIMARY",
@@ -1351,7 +1351,7 @@ def enlistar_usuario(request, usr):
 		}
 		datos_paypal = json.dumps(datos_paypal)
 		try:
-			peticion = urllib2.Request(url='https://svcs.sandbox.paypal.com/AdaptivePayments/Pay', data=datos_paypal, headers=headers)
+			peticion = urllib2.Request(url='https://svcs.sandbox.paypal.com/AdaptivePayments/Pay', data=datos_paypal, headers=HEADERS_PAYPAL)
 			com_paypal = urllib2.urlopen(peticion, timeout=360)
 			resp_paypal = com_paypal.read()
 			com_paypal.close()
@@ -1363,7 +1363,7 @@ def enlistar_usuario(request, usr):
 			pass
 			# xHACER: terminar q pasa si no conecta con el servidor o si datos de paypal no vino como es
 		Cola.objects.get(id=encola.id).delete()
-		return HttpResponseRedirect("/categoria/" + unicode(url.subcategoria.padre) + "/" + unicode(url.subcategoria) + "/" + unicode(url) + "/?mensaje=error")
+		return HttpResponseRedirect("/categoria/" + unicode(url.subcategoria.padre) + "/" + unicode(url.subcategoria) + "/" + unicode(url) + "/?mensaje="+HEADERS_PAYPAL)
 	else:
 		return HttpResponseRedirect(reverse('geoservicios.views.inicio'))
 

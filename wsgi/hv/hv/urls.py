@@ -47,7 +47,7 @@ urlpatterns = patterns('geoservicios.views',
 
 	url('^categoria/(?P<cat>[a-zA-Z-]+)/$', 'ver_categoria'),
 	url('^categoria/(?P<cat>[a-zA-Z-]+)/(?P<subcat>[a-zA-Z-\+\.]+)/$', 'ver_subcategoria'),
-	url('^categoria/(?P<cat>[a-zA-Z-]+)/[a-zA-Z-+]+/(?P<serv>[0-9a-zA-Z-_()!\.,\']+)/$', 'ver_servicio'),
+	url('^categoria/(?P<cat>[a-zA-Z-]+)/[a-zA-Z-+]+/(?P<serv>[0-9a-zA-Z-]+)/$', 'ver_servicio'),  # xPENSAR: es seguro incluir el ' ya q los gringos lo usan mucho...?
 	#url('^cuadroHonor/$', 'ver_cuadro_honor'),
 
 	url('^enlistar-usuario/(?P<usr>[a-zA-Z0-9_]+)/$', 'enlistar_usuario'),
