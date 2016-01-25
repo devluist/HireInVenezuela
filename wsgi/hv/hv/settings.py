@@ -119,7 +119,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hv.wsgi.application'
 
-echo desarrollando
 print desarrollando
 
 if desarrollando:
