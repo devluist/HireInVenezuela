@@ -7,7 +7,7 @@ Django settings for hv project.
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-desarrollando = True if type(os.environ.get('OPENSHIFT_DATA_DIR')) == type(None) else False
+desarrollando = True if os.environ.get('OPENSHIFT_DATA_DIR') else False
 
 DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -123,11 +123,11 @@ if desarrollando:
 	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': 'buy',
-			'USER' : 'postgres',
-			'PASSWORD' : 'qwerty2',
-			'HOST' : 'localhost',
-			'PORT' : '5432'
+			'NAME': 'data/buy',
+			'USER': 'postgres',
+			'PASSWORD': 'qwerty2',
+			'HOST': 'localhost',
+			'PORT': '5432',
 		}
 	}
 else:
