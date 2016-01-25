@@ -9,7 +9,7 @@
 		<div class="collapse navbar-collapse" id="m-principal">
 			<form class="navbar-form navbar-left" role="search" action="/buscar/" method="get">
 				<div class="form-group">
-					<input type="text" class="form-control form-controlado" id="search-query" placeholder="Buscar" name="consulta">
+					<input type="text" class="form-control form-controlado" id="search-query" placeholder="{% trans 'Search' %} " name="consulta">
 				</div>
 				<button class="btn btn-default btn-mio glyphicon glyphicon-search" type="submit"></button>
 			</form>
@@ -17,28 +17,28 @@
 				{% if logueado %}
 					{% if perfil_propio %}
 						<li class="active">
-							<a href="/perfil/{{ perfil.usuario }}/" title="Perf&iacute;l"><i class="glyphicon glyphicon-user"></i> <span class="menu-gr">Perf&iacute;l</span></a>
+							<a href="/perfil/{{ perfil.usuario }}/" title="{% trans 'Profile' %}"><i class="glyphicon glyphicon-user"></i> <span class="menu-gr">{% trans "Profile" %}</span></a>
 						</li>
 					{% else %}
 						{% if servicio.descripcion and perfil == servicio.url.vendedor %}
 							<li class="menu-servicio">
-								<a href="#" data-toggle="modal" data-target=".modal-editarserv" title="Editar Servicio"><i class="glyphicon glyphicon-pencil"></i> <span class="menu-gr">Editar</span></a>
+								<a href="#" data-toggle="modal" data-target=".modal-editarserv" title="{% trans 'Edit Service' %}"><i class="glyphicon glyphicon-pencil"></i> <span class="menu-gr">{% trans "Edit" %}</span></a>
 							</li>
 							<li class="menu-servicio">
-								<a href="#" data-toggle="modal" data-target=".modal-eliminarserv" title="Eliminar Servicio"><i class="glyphicon glyphicon-trash"></i> <span class="menu-gr">Eliminar</span></a>
+								<a href="#" data-toggle="modal" data-target=".modal-eliminarserv" title="{% trans 'Delete Service' %} "><i class="glyphicon glyphicon-trash"></i> <span class="menu-gr">{% trans "Delete" %}</span></a>
 							</li>
 						{% endif %}
 						<li>
-							<a href="/perfil/{{ perfil_logueado.usuario }}/" title="Perf&iacute;l"><i class="glyphicon glyphicon-user"></i> <span class="menu-gr">Perf&iacute;l</span></a>
+							<a href="/perfil/{{ perfil_logueado.usuario }}/" title="{% trans 'Profile' %}"><i class="glyphicon glyphicon-user"></i> <span class="menu-gr">{% trans "Profile" %}</span></a>
 						</li>
 					{% endif %}
 					{% if current_url %}{# variable solo disponible en la pagina de mensajeria #}
 						<li class="active">
-							<a href="/mensajeria/" title="Mensajer&iacute;a"><i class="glyphicon glyphicon-comment"></i> <span class="menu-gr">Mensajer&iacute;a</span></a>
+							<a href="/mensajeria/" title="{% trans 'Messages' %}"><i class="glyphicon glyphicon-comment"></i> <span class="menu-gr">{% trans 'Messages' %}</span></a>
 						</li>
 					{% else %}
 						<li>
-							<a href="/mensajeria/" title="Mensajer&iacute;a"><i class="glyphicon glyphicon-comment"></i> <span class="menu-gr">Mensajer&iacute;a</span></a>
+							<a href="/mensajeria/" title="{% trans 'Messages' %}"><i class="glyphicon glyphicon-comment"></i> <span class="menu-gr">{% trans 'Messages' %}</span></a>
 						</li>
 					{% endif %}
 				{% endif %}
@@ -46,51 +46,50 @@
 				<li><a href="#" title="Noticias GS"><i class="glyphicon glyphicon-bell"></i> <span class="menu-gr">Noticias GS</span></a>
 				</li>{% endcomment %}
 				<li class="dropdown">
-					<a href="#" data-toggle="dropdown" title="m&aacute;s..."><!-- <i class="glyphicon glyphicon-plus"></i>  --><i class="glyphicon glyphicon-chevron-down"></i> <span class="menu-gr">m&aacute;s...</span></a>
+					<a href="#" data-toggle="dropdown" title="{% trans 'more...' %}"><!-- <i class="glyphicon glyphicon-plus"></i>  --><i class="glyphicon glyphicon-chevron-down"></i> <span class="menu-gr">{% trans 'more...' %}</span></a>
 					<ul class="dropdown-menu">
 						{% comment %}
 						<li><a href="/cuadroHonor/"><i class="glyphicon glyphicon-th"></i>Cuadro de Honor</a>
 						</li>{% endcomment %}
 						{% comment %}<li><a href="/blog/"><i class="glyphicon glyphicon-paperclip"></i>Blog / Gu&iacute;a</a>
 						</li>{% endcomment %}
-						<li><a href="/contacto/"><i class="glyphicon glyphicon-bullhorn"></i>Nosotros / Contactanos</a>
+						<li><a href="/contacto/"><i class="glyphicon glyphicon-bullhorn"></i>{% trans "About Us" %}</a>
 						</li>
 						{% if logueado %}
-							<li><a href="/configuracion/"><i class="glyphicon glyphicon-cog"></i>Configuraci&oacute;n</a>
+							<li><a href="/configuracion/"><i class="glyphicon glyphicon-cog"></i>{% trans "Configuration" %}</a>
 							</li>
-							<li><a href="#" data-toggle="modal" data-target=".modal-sugerencia"><i class="glyphicon glyphicon-pushpin"></i>Sugerencias</a>
+							<li><a href="#" data-toggle="modal" data-target=".modal-sugerencia"><i class="glyphicon glyphicon-pushpin"></i>{% trans "Suggestions" %}</a>
 							</li>
 							<li role="presentation" class="divider"></li>
-							<li><a href="/cierre-sesion/"><i class="glyphicon glyphicon-remove"></i>Cerrar Sesi&oacute;n</a>
+							<li><a href="/cierre-sesion/"><i class="glyphicon glyphicon-remove"></i>{% trans "Log out" %}</a>
 							</li>
 						{% endif %}
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" data-toggle="dropdown"><i class="glyphicon glyphicon-th-list"></i> Categor&iacute;as</a>
+					<a href="#" data-toggle="dropdown"><i class="glyphicon glyphicon-th-list"></i> {% trans "Categories" %}</a>
 					<ul class="dropdown-menu">
-						<li class=""><a href="/categoria/diseno-graficos-fotografia/">Gr&aacute;ficos, Dise&ntilde;o y Fotograf&iacute;a</a>
+						<li class=""><a href="/categoria/diseno-graficos-fotografia/">{% trans "Design, Graphics & Photography" %}</a>
 						</li>
-						<li class=""><a href="/categoria/transcripcion-traduccion-redaccion/">Transcripci&oacute;n, Traducci&oacute;n y Redacci&oacute;n</a>
+						<li class=""><a href="/categoria/transcripcion-traduccion-redaccion/">{% trans "Transcription, Translation & Drafting" %}</a>
 						</li>
-						<li class=""><a href="/categoria/audio-musica/">Audio y M&uacute;sica</a>
+						<li class=""><a href="/categoria/audio-musica/">{% trans "Audio & Music" %}</a>
 						</li>
-						<li class=""><a href="/categoria/programacion-tecnologia/">Programaci&oacute;n y Tecnolog&iacute;a</a>
+						<li class=""><a href="/categoria/programacion-tecnologia/">{% trans "Programming & Tecnology" %}</a>
 						</li>
-						<li class=""><a href="/categoria/marketing-digital/">Marketing Digital</a>
+						<li class=""><a href="/categoria/marketing-digital/">{% trans "Marketing Digital" %}</a>
 						</li>
-						<!-- mercadeo/mercadotecnia -->
-						<li class=""><a href="/categoria/publicidad-propaganda/">Publicidad y Propaganda</a>
+						<li class=""><a href="/categoria/publicidad-propaganda/">{% trans "Propaganda & Publicity" %}</a>
 						</li>
-						<li class=""><a href="/categoria/negocios/">Negocios</a>
+						<li class=""><a href="/categoria/negocios/">{% trans "Business" %}</a>
 						</li>
-						<li class=""><a href="/categoria/video-animacion/">Video y Animaci&oacute;n</a>
+						<li class=""><a href="/categoria/video-animacion/">{% trans "Video & Animation" %}</a>
 						</li>
-						<li class=""><a href="/categoria/diversion-entretenimiento/">Diversi&oacute;n y Entretenimiento</a>
+						<li class=""><a href="/categoria/diversion-entretenimiento/">{% trans "Fun & Entertainment" %}</a>
 						</li>
-						<li class=""><a href="/categoria/estilo-vida/">Estilo de vida</a>
+						<li class=""><a href="/categoria/estilo-vida/">{% trans "Life Style" %}</a>
 						</li>
-						<li class=""><a href="/categoria/regalos/">Regalos</a>
+						<li class=""><a href="/categoria/regalos/">{% trans "Gifts" %}</a>
 						</li>
 					</ul>
 				</li>
@@ -98,4 +97,3 @@
 		</div>
 	</div>
 </nav>
-menu modificado

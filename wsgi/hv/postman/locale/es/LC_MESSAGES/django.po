@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-postman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-25 09:55-0430\n"
+"POT-Creation-Date: 2016-01-25 10:39-0430\n"
 "PO-Revision-Date: 2012-10-19 14:04+0000\n"
 "Last-Translator: matiasherranz <matiasherranz@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -332,6 +332,7 @@ msgid "by message"
 msgstr "por mensaje"
 
 #: .\postman\templates\postman\base_folder.html:46
+#: .\postman\templates\postman\menu-superior.html:28
 #: .\postman\templates\postman\view.html:39
 msgid "Delete"
 msgstr "Eliminar"
@@ -511,6 +512,106 @@ msgstr "Mensajes recibidos"
 #: .\postman\templates\postman\inbox.html:6
 msgid "Received"
 msgstr "Recibido"
+
+#: .\postman\templates\postman\menu-superior.html:12
+msgid "Search"
+msgstr "Buscar"
+
+#: .\postman\templates\postman\menu-superior.html:20
+#: .\postman\templates\postman\menu-superior.html:32
+msgid "Profile"
+msgstr "Perfíl"
+
+#: .\postman\templates\postman\menu-superior.html:25
+msgid "Edit Service"
+msgstr "Editar Servicio"
+
+#: .\postman\templates\postman\menu-superior.html:25
+msgid "Edit"
+msgstr "Editar"
+
+#: .\postman\templates\postman\menu-superior.html:28
+#, fuzzy
+#| msgid "Delete"
+msgid "Delete Service"
+msgstr "Eliminar Servicio"
+
+#: .\postman\templates\postman\menu-superior.html:37
+#: .\postman\templates\postman\menu-superior.html:41
+#, fuzzy
+#| msgid "Message"
+msgid "Messages"
+msgstr "Mensajería"
+
+#: .\postman\templates\postman\menu-superior.html:50
+msgid "more..."
+msgstr "más..."
+
+#: .\postman\templates\postman\menu-superior.html:59
+msgid "About Us"
+msgstr "Nosotros / Contactanos"
+
+#: .\postman\templates\postman\menu-superior.html:62
+#, fuzzy
+#| msgid "Conversation"
+msgid "Configuration"
+msgstr "Configuración"
+
+#: .\postman\templates\postman\menu-superior.html:64
+msgid "Suggestions"
+msgstr "Sugerencias"
+
+#: .\postman\templates\postman\menu-superior.html:67
+msgid "Log out"
+msgstr "Cerrar Sesión"
+
+#: .\postman\templates\postman\menu-superior.html:73
+msgid "Categories"
+msgstr "Categorías"
+
+#: .\postman\templates\postman\menu-superior.html:75
+msgid "Design, Graphics & Photography"
+msgstr "Gráficos, Diseño y Fotografía"
+
+#: .\postman\templates\postman\menu-superior.html:77
+msgid "Transcription, Translation & Drafting"
+msgstr "Transcripción, Traducción y Redacción"
+
+#: .\postman\templates\postman\menu-superior.html:79
+msgid "Audio & Music"
+msgstr "Audio y Música"
+
+#: .\postman\templates\postman\menu-superior.html:81
+msgid "Programming & Tecnology"
+msgstr "Programación y Tecnología"
+
+#: .\postman\templates\postman\menu-superior.html:83
+msgid "Marketing Digital"
+msgstr "Marketing Digital"
+
+#: .\postman\templates\postman\menu-superior.html:85
+msgid "Propaganda & Publicity"
+msgstr "Publicidad y Propaganda"
+
+#: .\postman\templates\postman\menu-superior.html:87
+msgid "Business"
+msgstr "Negocios"
+
+#: .\postman\templates\postman\menu-superior.html:89
+msgid "Video & Animation"
+msgstr "Video y Animación"
+
+#: .\postman\templates\postman\menu-superior.html:91
+msgid "Fun & Entertainment"
+msgstr "Diversión y Entretenimiento"
+
+#: .\postman\templates\postman\menu-superior.html:93
+msgid "Life Style"
+msgstr "Estilo de vida"
+
+#: .\postman\templates\postman\menu-superior.html:95
+msgid "Gifts"
+msgstr "Regalos"
 
 #: .\postman\templates\postman\sent.html:6
 msgid "Sent"
