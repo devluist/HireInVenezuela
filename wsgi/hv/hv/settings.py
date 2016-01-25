@@ -130,8 +130,8 @@ DATABASES = {
 		'NAME': os.path.join(DATA_DIR, 'buy'),
 		'USER': 'adminci3pyaj',
 		'PASSWORD': 'ftijnkv9DCWE',
-		'HOST': '$OPENSHIFT_POSTGRESQL_DB_HOST',
-		'PORT': '$OPENSHIFT_POSTGRESQL_DB_PORT', # '5432',
+		'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST'),
+		'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT'), # '5432',
 	}
 }
 
