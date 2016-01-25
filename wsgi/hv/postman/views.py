@@ -99,6 +99,7 @@ class FolderMixin(NamespaceMixin, object):
             'current_url': self.request.get_full_path(),
             'idiomas_disponibles': IDIOMAS_DISPONIBLES,
             'idioma': self.request.LANGUAGE_CODE,
+            'pag_menu': self.request.LANGUAGE_CODE+"/menu-superior.html"
             'gets': self.request.GET,  # useful to postman_order_by template tag
         }
         if self.request.user.is_authenticated():
@@ -223,6 +224,7 @@ class ComposeMixin(NamespaceMixin, object):
             'next_url': self.request.GET.get('next') or _get_referer(self.request),
             'idiomas_disponibles': IDIOMAS_DISPONIBLES,
             'idioma': self.request.LANGUAGE_CODE,
+            'pag_menu': self.request.LANGUAGE_CODE+"/menu-superior.html"
             'current_url': self.request.get_full_path(),
         }
         if self.request.user.is_authenticated():
@@ -394,6 +396,7 @@ class DisplayMixin(NamespaceMixin, object):
             'current_url': self.request.get_full_path(),
             'idiomas_disponibles': IDIOMAS_DISPONIBLES,
             'idioma': self.request.LANGUAGE_CODE,
+            'pag_menu': self.request.LANGUAGE_CODE+"/menu-superior.html"
             'serv_cola': serv_cola,
             'reply_to_pk': received.pk if received else None,
             'form': self.form_class(initial=received.quote(*self.formatters)) if received else None,
