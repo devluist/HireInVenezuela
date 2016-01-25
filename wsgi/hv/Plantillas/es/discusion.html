@@ -6,7 +6,7 @@
 	<link type="text/css" media="all" rel="stylesheet" href="{% load static %}{% static 'postman/css/postman.css' %}" />
 {% endblock %}
 {% block mensaje %}
-	{% comment %}{% include "es/menu-superior.html" %}{% endcomment %}
+	{% include "es/menu-superior.html" %}
 	{% if mensaje %}
 		<div class="alert alert-warning fade in" style="text-align: center">
 			{% comment %}<i><b>HI informa:</b></i> El otro usuario ha solicitado una cancelación mutua. Si est&aacute;s de acuerdo por favor haz click en el bot&oacute;n de la derecha "Solicitar Cancelaci&oacute;n Mutua" o sino puedes solicitar la ayuda de Atenci&oacute;n al Cliente.<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>{% endcomment %}
