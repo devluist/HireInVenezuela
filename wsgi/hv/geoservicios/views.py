@@ -1363,7 +1363,7 @@ def enlistar_usuario(request, usr):
 			pass
 			# xHACER: terminar q pasa si no conecta con el servidor o si datos de paypal no vino como es
 		Cola.objects.get(id=encola.id).delete()
-		return HttpResponseRedirect("/categoria/" + unicode(url.subcategoria.padre) + "/" + unicode(url.subcategoria) + "/" + unicode(url) + "/?mensaje="+HEADERS_PAYPAL)
+		return HttpResponseRedirect("/categoria/" + unicode(url.subcategoria.padre) + "/" + unicode(url.subcategoria) + "/" + unicode(url) + "/?mensaje=error")
 	else:
 		return HttpResponseRedirect(reverse('geoservicios.views.inicio'))
 
