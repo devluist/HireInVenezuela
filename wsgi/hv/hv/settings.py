@@ -7,7 +7,7 @@ Django settings for hv project.
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR') else True
+desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
 
 DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -72,7 +72,7 @@ from socket import gethostname
 
 ALLOWED_HOSTS = [
 	gethostname(), # For internal OpenShift load balancer security purposes.
-	os.environ.get('OPENSHIFT_APP_DNS'), # Dynamically map to the OpenShift gear name.
+	os.environ.get('OPENSHIFT_APP_DNS',""), # Dynamically map to the OpenShift gear name.
 	#'example.com', # First DNS alias (set up in the app)
 	#'www.example.com', # Second DNS alias (set up in the app)
 ]
@@ -119,8 +119,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hv.wsgi.application'
 
-print desarrollando
-
 if desarrollando:
 	DATABASES = {
 		'default': {
@@ -139,8 +137,8 @@ else:
 			'NAME': os.path.join(DATA_DIR, 'buy'),
 			'USER': 'adminci3pyaj',
 			'PASSWORD': 'ftijnkv9DCWE',
-			'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST'),
-			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT') # '5432'
+			'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST', ""),
+			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT', "") # '5432'
 		}
 	}
 
