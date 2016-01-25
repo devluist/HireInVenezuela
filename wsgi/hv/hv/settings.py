@@ -50,8 +50,6 @@ SECRET_KEY = SECRETS['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-TEMPLATE_DEBUG = True   #xPENSAR: esto estaba en la mia lo dejo?
-
 
 #######################################################################################
 #######################################################################################  DE BUG 
