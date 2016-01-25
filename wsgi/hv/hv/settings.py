@@ -121,13 +121,13 @@ WSGI_APPLICATION = 'hv.wsgi.application'
 
 if desarrollando:
 	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': 'data/buy',
-			'USER': 'postgres',
-			'PASSWORD': 'qwerty2',
-			'HOST': 'localhost',
-			'PORT': '5432'
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'data/buy',
+			'USER': 'postgres',
+			'PASSWORD': 'qwerty2',
+			'HOST': 'localhost',
+			'PORT': '5432'
 		}
 	}
 else:
