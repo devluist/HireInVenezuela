@@ -119,6 +119,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hv.wsgi.application'
 
+echo desarrollando
+print desarrollando
+
 if desarrollando:
 	DATABASES = {
 		'default': {
@@ -127,7 +130,7 @@ if desarrollando:
 			'USER': 'postgres',
 			'PASSWORD': 'qwerty2',
 			'HOST': 'localhost',
-			'PORT': '5432',
+			'PORT': '5432'
 		}
 	}
 else:
@@ -138,7 +141,7 @@ else:
 			'USER': 'adminci3pyaj',
 			'PASSWORD': 'ftijnkv9DCWE',
 			'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST'),
-			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT'), # '5432',
+			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT') # '5432'
 		}
 	}
 
