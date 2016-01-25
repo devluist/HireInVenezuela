@@ -9,6 +9,9 @@ if [ ! -f "$OPENSHIFT_DATA_DIR"secrets.json ]; then
 	python "$OPENSHIFT_REPO_DIR"libs/secrets.py > "$OPENSHIFT_DATA_DIR"secrets.json
 fi
 
+source $OPENSHIFT_APP_DIR/virtenv/bin/activate
+export PYTHON_EGG_CACHE=$OPENSHIFT_APP_DIR/virtenv/lib/python-2.7
+
 echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/hv/manage.py migrate --noinput'"
 python "$OPENSHIFT_REPO_DIR"wsgi/hv/manage.py migrate --noinput
 
