@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load postman_tags %}
+{% block extrahead %}
+	{{ block.super }}
+	<link type="text/css" media="all" rel="stylesheet" href="{% load static %}{% static 'postman/css/postman.css' %}" />
+{% endblock %}
+{% block mensaje %}
+	{% include "es/menu-superior.html" %}
+	{% if mensaje %}
+		<div class="alert alert-warning fade in" style="text-align: center">
+			{% comment %}<i><b>HI informa:</b></i> El otro usuario ha solicitado una cancelación mutua. Si est&aacute;s de acuerdo por favor haz click en el bot&oacute;n de la derecha "Solicitar Cancelaci&oacute;n Mutua" o sino puedes solicitar la ayuda de Atenci&oacute;n al Cliente.<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>{% endcomment %}
+			<i><b>HI informa:</b></i> {{ mensaje }}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		</div>
+	{% endif %}
+{% endblock %}
+{% block content %}
+	<div id="postman" class="col-md-8">
+		{% if perfil == serv_cola.comprador %}
+			<h1>{% trans "Discusión" %}<small><a style="font-size:.4em;float: right;margin-top: 22px;" href="/lista-solicitudes-servicio/">&larr; Volver</a></small></h1>
+		{% elif perfil == serv_cola.vendedor %}
+		 	<h1>{% trans "Discusión" %}<small><a style="font-size:.4em;float: right;margin-top: 22px;" href="/perfil/{{ perfil }}/">&larr; Volver</a></small></h1>
+		{% endif %}
+		{% for message in pm_messages %}
+			<div class="pm_message{% if message.is_pending %} pm_pending{% endif %}{% if message.is_rejected %} pm_rejected{% endif %}{% if message.sender == user and message.sender_archived or message.recipient == user and message.recipient_archived %} pm_archived{% endif %}{% if message.sender == user and message.sender_deleted_at or message.recipient == user and message.recipient_deleted_at %} pm_deleted{% endif %}{% if message.recipient == user and not message.read_at %} pm_unread{% endif %}">
+				<div class="pm_header">
+					<span class="pm_sender">{{ message.obfuscated_sender|or_me:user }}</span> &raquo;
+					<span class="pm_recipient">{{ message.obfuscated_recipient|or_me:user }}</span> |
+					<span class="pm_date">{{ message.sent_at|date:"DATETIME_FORMAT"}}</span> |
+					<b><span class="pm_subject">{{ message.subject }}</span></b>
+					{% if message.is_rejected %}
+						<div class="pm_status">
+							{% trans "Rejected" %}
+							{% if message.moderation_reason %}
+								{% trans ":" %} {{ message.moderation_reason }}
+							{% endif %}
+						</div>
+					{% endif %}
+				</div>
+				<div class="pm_body">{{ message.body|linebreaksbr }}</div>
+			</div>
+			{% if forloop.last %}
+				{% if reply_to_pk %}
+					<hr />
+					<h3>{% trans 'Comentar' %}</h3>
+					<form action="{% url 'postman:reply' reply_to_pk %}?next=/discusion/{{ message.thread.id }}/{{ serv_cola.id }}/" method="post">
+						{% csrf_token %}
+						<div id="pm_reply">{{ form.body }}</div>
+						<button type="submit" class="btn btn-default btn-sm form-guardar pull-right">{% trans 'Reply' %}</button>
+						<br style="clear: both;">
+					</form>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	</div>
+	<div class="col-md-3 col-md-offset-1" id="caja-opc-discusion">
+		<div id="titulo">Opciones:</div>
+		<form action="/comprando/" method="post" accept-charset="utf-8">
+			{% csrf_token %}
+			<input type="hidden" name="serv-cola" value="{{ serv_cola.id }}">
+			<input type="hidden" name="conversa" value="{{ pm_messages.0.thread.id }}">
+			{% comment %}<button type="submit" value="1" name="ac" class="btn btn-warning">Solicitar Atenci&oacute;n al Cliente</button>{% endcomment %}
+			{% if not perfil.es_venezolano %}
+				<button type="submit" value="1" name="exito" class="btn btn-primary">Operaci&oacute;n Exitosa</button>
+				{% if serv_cola.comprador_cancela %}
+					<button type="submit" disabled="disabled" value="1" name="mutuo-cancel"  class="btn btn-default disabled">Solicitar Cancelaci&oacute;n Mutua</button>
+				{% else %}
+					<button type="submit" value="1" name="mutuo-cancel"  class="btn btn-danger">Solicitar Cancelaci&oacute;n Mutua</button>
+				{% endif %}
+			{% else %}
+				{% if serv_cola.vendedor_cancela %}
+					<button type="submit" disabled="disabled" value="1" name="mutuo-cancel"  class="btn btn-default disabled">Solicitar Cancelaci&oacute;n Mutua</button>
+				{% else %}
+					<button type="submit" value="1" name="mutuo-cancel"  class="btn btn-danger">Solicitar Cancelaci&oacute;n Mutua</button>
+				{% endif %}
+			{% endif %}
+			DISCUSION MODIFICADO
+		</form>
+	</div>
+{% endblock %}
