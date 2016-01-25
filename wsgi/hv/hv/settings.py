@@ -6,11 +6,14 @@ Django settings for hv project.
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
+desarrollando = True if type(os.environ.get('OPENSHIFT_DATA_DIR')) == type(None) else False
+
 DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 WSGI_DIR = os.path.dirname(BASE_DIR)
 REPO_DIR = os.path.dirname(WSGI_DIR)
-DATA_DIR = 'C:/Users/iLaptop/xampp/htdocs/Django/buy/data' if (type(os.environ.get('DEBUG')) == type(None) or os.environ.get('DEBUG') == False ) else os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR)
+DATA_DIR = 'C:/Users/iLaptop/xampp/htdocs/Django/buy/data' if desarrollando else os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR)
 
 import sys
 sys.path.append(os.path.join(REPO_DIR, 'libs'))
@@ -49,17 +52,14 @@ HEADERS_PAYPAL = {
 	"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
 }
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = SECRETS['secret_key']
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 #######################################################################################
-#######################################################################################  DE BUG 
+#######################################################################################  DEBUG 
 #######################################################################################
 
 LOCALE_PATHS = (
@@ -76,8 +76,6 @@ ALLOWED_HOSTS = [
 	#'example.com', # First DNS alias (set up in the app)
 	#'www.example.com', # Second DNS alias (set up in the app)
 ]
-
-# Application definition
 
 INSTALLED_APPS = (
 	'django.contrib.admin',
@@ -121,19 +119,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hv.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.postgresql_psycopg2',  # 'django.db.backends.sqlite3',
-		'NAME': os.path.join(DATA_DIR, 'buy'),
-		'USER': 'adminci3pyaj',
-		'PASSWORD': 'ftijnkv9DCWE',
-		'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST'),
-		'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT'), # '5432',
+if desarrollando:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'buy',
+			'USER' : 'postgres',
+			'PASSWORD' : 'qwerty2',
+			'HOST' : 'localhost',
+			'PORT' : '5432'
+		}
 	}
-}
+else:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',  # 'django.db.backends.sqlite3',
+			'NAME': os.path.join(DATA_DIR, 'buy'),
+			'USER': 'adminci3pyaj',
+			'PASSWORD': 'ftijnkv9DCWE',
+			'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST'),
+			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT'), # '5432',
+		}
+	}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -175,7 +182,7 @@ ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
 
 
 #####################
-# xDEPURAR: solo para jugar con ipython
+# solo para jugar con ipython
 # DJANGO_SETTINGS_MODULE = 'hv.settings'
 
 # super usr=jefe , pw= jefe@a.a
