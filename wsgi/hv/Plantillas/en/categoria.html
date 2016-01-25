@@ -1,4 +1,5 @@
 {% load i18n %}
+{% block extrahead %}<title>{% if categoria.subcategoria %}Sub-category: {{categoria.subcategoria}}{% else %}Category: {{categoria.nombre}}{% endif %}</title>{% endblock %}
 {% include "en/menu-superior.html" %}
 {% load static from staticfiles %}
 <script type="text/javascript" charset="utf-8">

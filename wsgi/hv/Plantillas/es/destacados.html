@@ -1,4 +1,5 @@
 {% load i18n %}
+{% block extrahead %}<title>{% if vista == "nuevos" %}New{% else %}Best{% endif %} Services</title>{% endblock %}
 {% include "es/menu-superior.html" %}
 {% load static from staticfiles %}
 <div class="cuerpo">
@@ -53,9 +54,9 @@
 			<li><a href="?consulta={{ consulta }}&pagina=1">&laquo;</a></li>
 			{% for ind in rango %}
 				{% if ind != lista_servicios.number %}
-					<li><a href="?consulta={{ consulta }}&pagina={{ind}}">{{ind}} <span class="sr-only">(current)</span></a></li>
+					<li><a href="?consulta={{ consulta }}&pagina={{ind}}">{{ind}} <span class="sr-only">(página actual)</span></a></li>
 				{% else %}
-					<li class="active"><a href="?consulta={{ consulta }}&pagina={{ind}}">{{ind}} <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="?consulta={{ consulta }}&pagina={{ind}}">{{ind}} <span class="sr-only">(página actual)</span></a></li>
 				{% endif %}
 			{% endfor %}
 			<li><a href="?consulta={{ consulta }}&pagina={{rango|length}}">&raquo;</a></li>

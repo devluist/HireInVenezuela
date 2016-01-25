@@ -1,9 +1,10 @@
 {% load i18n %}
+{% block extrahead %}<title>{% if vista == "nuevos" %}New{% else %}Best{% endif %} Services</title>{% endblock %}
 {% include "en/menu-superior.html" %}
 {% load static from staticfiles %}
 <div class="cuerpo">
 	<div class="container">
-		<h2>Servicios {% if vista == "nuevos" %}recientes{% else %}mejor valorados{% endif %}</h2>
+		<h2>{% if vista == "nuevos" %}New{% else %}Best{% endif %} Services</h2>
 		<hr class="linea-hr">
 		<div class="row">
 			{% for serv in lista_servicios %}
@@ -12,22 +13,22 @@
 						<p class="usuario"><a href="/perfil/{{ serv.url.vendedor }}/"><i class="glyphicon glyphicon-user"></i>  @{{ serv.url.vendedor }}</a></p>
 						<a class="enlace-serv" href="/categoria/{{ serv.url.subcategoria.padre }}/{{ serv.url.subcategoria }}/{{ serv.url }}/">
 							<p class="datos-extra">
-								<span class="titulo-extras">Nivel:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> {{ serv.nivel }}</span>
+								{% comment %}<span class="titulo-extras">Level:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> {{ serv.nivel }}</span>
 								{% if serv.valoraciones %}
-									<span class="titulo-extras">Promedio:</span><span><i class="glyphicon glyphicon-star color-oro"></i> {{ serv.valoraciones.promedio }} / 10</span>
-									<span class="titulo-extras">Experiencia:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> {{ serv.valoraciones.experiencia }}</span>
+									<span class="titulo-extras">Average:</span><span><i class="glyphicon glyphicon-star color-oro"></i> {{ serv.valoraciones.promedio }} / 10</span>
+									<span class="titulo-extras">Experience:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> {{ serv.valoraciones.experiencia }}</span>
 									<span class="vermas"><i class="glyphicon glyphicon-chevron-right" style=""></i></span>
 								{% else %}
-									<span class="titulo-extras">Promedio:</span><span><i class="glyphicon glyphicon-star color-oro"></i> Sin calificar</span>
-									<span class="titulo-extras">Experiencia:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> 0</span>
+									<span class="titulo-extras">Average:</span><span><i class="glyphicon glyphicon-star color-oro"></i> Unrated</span>
+									<span class="titulo-extras">Experience:</span><span><i class="glyphicon glyphicon-bookmark color-oro"></i> 0</span>{% endcomment %}
 									<span class="vermas"><i class="glyphicon glyphicon-chevron-right" style=""></i></span>
-								{% endif %}
+								{% comment %}{% endif %}{% endcomment %}
 							</p>
 						</a>
 					</div>
 				 	<div class="cara-principal">
-						<img src="{{ serv.imagen.url }}" width="215" height="130" alt="">
-				 		<!-- <img data-src="holder.js/300x200" alt="..."> -->
+						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="Right now the server cant upload images">
+				 		{% comment %}<!-- <img{{ serv.imagen.url }} data-src="holder.js/300x200" alt="..."> -->{% endcomment %}
 					 	<div class="dir-serv">
 							<div class="row">
 								<h2 class="col-xs-9 nomb-serv">{{ serv }}</h2>
