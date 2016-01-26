@@ -54,7 +54,7 @@ HEADERS_PAYPAL = {
 
 
 SECRET_KEY = SECRETS['secret_key']
-DEBUG = True
+DEBUG = False
 
 
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
