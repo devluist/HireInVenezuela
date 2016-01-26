@@ -162,7 +162,7 @@ if desarrollando:
 		os.path.join(WSGI_DIR, 'static/'),
 	)
 else:
-	STATIC_ROOT = os.path.join(WSGI_DIR, 'static/')
+	STATIC_ROOT = os.path.join(WSGI_DIR, 'multimedia/')
 
 
 if desarrollando:
