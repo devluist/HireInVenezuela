@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-25 11:39-0430\n"
+"POT-Creation-Date: 2016-01-25 21:02-0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -562,7 +562,7 @@ msgid "Programming & Tecnology"
 msgstr ""
 
 #: .\postman\templates\postman\menu-superior.html:84
-msgid "Marketing Digital"
+msgid "Digital Marketing"
 msgstr ""
 
 #: .\postman\templates\postman\menu-superior.html:86

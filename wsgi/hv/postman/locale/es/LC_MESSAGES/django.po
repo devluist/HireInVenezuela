@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-postman\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-25 11:39-0430\n"
+"POT-Creation-Date: 2016-01-25 21:01-0430\n"
 "PO-Revision-Date: 2012-10-19 14:04+0000\n"
 "Last-Translator: matiasherranz <matiasherranz@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -589,7 +589,7 @@ msgid "Programming & Tecnology"
 msgstr "Programación y Tecnología"
 
 #: .\postman\templates\postman\menu-superior.html:84
-msgid "Marketing Digital"
+msgid "Digital Marketing"
 msgstr "Marketing Digital"
 
 #: .\postman\templates\postman\menu-superior.html:86
@@ -683,6 +683,9 @@ msgstr "Mensajes o conversaciones eliminados con éxito."
 #: .\postman\views.py:488
 msgid "Messages or conversations successfully recovered."
 msgstr "Mensajes o conversaciones recuperados con éxito."
+
+#~ msgid "Marketing Digital"
+#~ msgstr "Marketing Digital"
 
 #~ msgid "Messaging"
 #~ msgstr "Mensajería"
