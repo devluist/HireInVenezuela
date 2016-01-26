@@ -74,7 +74,7 @@
 							<li>{% endcomment %}
 						</div>
 						<div class="col-md-3">
-							<li><b>Languages you speak:</b><br>
+							<li><b>Languages you speak:</b><br>(Hold <b>Ctrl</b> Key to select more)<br><br>
 								<input type="hidden" id="lenguas" name="lenguas" value="">
 								<select id="lista_lenguas" multiple="multiple">
 									{% get_language_info_list for idiomas_disponibles as idiomas %}
@@ -96,4 +96,7 @@
 		</div>
 	</div>
 </div>
+{% if logueado %}
+	{% include "en/modal-confirmar.html" %}
+{% endif %}
 {% comment %}<div class="footer"  style="position: fixed;bottom: 0;">{% endcomment %}

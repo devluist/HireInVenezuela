@@ -19,11 +19,13 @@
 					<b>Correo:</b> contacto-hi@gmail.com<br>
 					{% comment %}<b class="facebook">f</b><a href="facebook.com/Buy-2Venezuela" class="enlace-sesion">facebook.com/Buy-2Venezuela</a><br>
 					<b class="twitter">t</b><a href="twitter.com/Buy-2Venezuela" class="enlace-sesion">twitter.com/Buy-2Venezuela</a><br><br>{% endcomment %}
-					<button data-toggle="modal" data-target=".modal-sugerencia" class="form-envia pull-right"><b>D&eacute;janos un mensaje!</b></button>
+					{% if logueado %}
+						<button data-toggle="modal" data-target=".modal-sugerencia" class="form-envia pull-right"><b>D&eacute;janos un mensaje!</b></button>
+					{% endif %}
 				</p>
 			</div>
 		</div>
 	</div>
 	<br><br>
 </div>
-{% comment %}<div class="footer"  style="position: fixed;bottom: 0;">{% endcomment %
+{% comment %}<div class="footer"  style="position: fixed;bottom: 0;">{% endcomment %}

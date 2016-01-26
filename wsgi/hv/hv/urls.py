@@ -1,25 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" hv URL Configuration
-	The `urlpatterns` list routes URLs to views. For more information please see:
-		https://docs.djangoproject.com/en/1.8/topics/http/urls/
-	Examples:
-	Function views
-		1. Add an import:  from my_app import views
-		2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-	Class-based views
-		1. Add an import:  from other_app.views import Home
-		2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-	Including another URLconf
-		1. Add an import:  from blog import urls as blog_urls
-		2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
-"""
-
-# xHACER: las siguientes dos lineas son temporales, solo dunrante desarrollo
-# from django.conf import settings
-# from django.conf.urls.static import static
-
-
+from settings import desarrollando
 from postman.views import ConversationView
 from django.conf.urls import patterns, url, include
 from django.contrib import admin
@@ -67,7 +48,12 @@ urlpatterns = patterns('geoservicios.views',
 	url('^admin/', include(admin.site.urls)),
 
 	# xHACER:  url('^borrar/(?P<id_tlmsj>\\d+)/$', 'borrar'),
-)  # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # xHACER: temporal, solo dunrante desarrollo
+) 
+
+if desarrollando:
+	from django.conf.urls.static import static
+	from settings import STATIC_ROOT, STATIC_URL, MEDIA_URL, MEDIA_ROOT
+	urlpatterns += static(STATIC_URL, document_root=STATIC_ROOT) + static(MEDIA_URL, document_root=MEDIA_ROOT)
 
 # xHACER: se pueden eliminar lo q no es una vista y pasar a funciones/form que simplementen procesen, x ejm:
 	# enlistar-usuario

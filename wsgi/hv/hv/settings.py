@@ -63,7 +63,6 @@ DEBUG = True
 #######################################################################################
 
 LOCALE_PATHS = (
-	'buy/wsgi/hv/postman/locale',
 	'postman/locale',
 	'C:/Users/iLaptop/xampp/htdocs/Django/buy/wsgi/hv/postman/locale'
 )
@@ -155,21 +154,21 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(WSGI_DIR, 'multimedia/')
-# STATICFILES_DIRS = (
-	# os.path.join(BASE_DIR, 'postman/static/'),
-# )
+if desarrollando:
+	STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+	STATICFILES_DIRS = (
+		os.path.join(WSGI_DIR, 'static/'),
+	)
+else:
+	STATIC_ROOT = os.path.join(WSGI_DIR, 'static/')
 
-##################################
-##################################
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(DATA_DIR, 'subidos/')  # '~/hv/Multimedia/images/'
-# xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
+if desarrollando:
+	MEDIA_URL = '/media/'
+	MEDIA_ROOT = os.path.join(DATA_DIR, 'subidos/')  # '~/hv/Multimedia/images/'
+	# xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
 
 
 # URL prefix for admin static files -- CSS, JavaScript and images.

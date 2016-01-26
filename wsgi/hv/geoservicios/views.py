@@ -1156,13 +1156,13 @@ def registrar_usr(request):
 
 def ver_categoria(request, cat):
 	# xHACER:  usar un paginador, validar cat, usar el promedio para ordenar las cat
+	idioma = request.LANGUAGE_CODE
 	cat = get_object_or_404(UrlCategoria, url=cat)
-	cat.nombre = str(Categoria.objects.get(url=cat))
+	cat.nombre = str(Categoria.objects.get(url=cat, idioma=idioma))
 
 	urlsubcategorias = UrlCategoria.objects.filter(padre=cat)
-	subcategorias = Categoria.objects.filter(url__in=urlsubcategorias)
+	subcategorias = Categoria.objects.filter(url__in=urlsubcategorias, idioma=idioma)
 
-	idioma = request.LANGUAGE_CODE
 	urls = UrlServicio.objects.filter(subcategoria__in=urlsubcategorias, vendedor__eliminado=False)
 	lista_servs = ServicioVirtual.objects.filter(activo=True, idioma=idioma, url__in=urls)
 	# xHACER: esta idea se puede mejorar, creando un solo objeto con los datos de ambos (urls y lista_servs)
@@ -1203,15 +1203,15 @@ def ver_categoria(request, cat):
 
 def ver_subcategoria(request, cat, subcat):
 	# xHACER:  usar un paginador, limpiar subcat,
+	idioma = request.LANGUAGE_CODE
 	cat = get_object_or_404(UrlCategoria, url=cat)
-	cat.nombre = str(Categoria.objects.get(url=cat))
+	cat.nombre = str(Categoria.objects.get(url=cat, idioma=idioma))
 	cat.urlsubcategoria = UrlCategoria.objects.get(url=subcat, padre=cat)  # existen varias url "otros", debo delimitar
-	cat.subcategoria = str(Categoria.objects.get(url=cat.urlsubcategoria))
+	cat.subcategoria = str(Categoria.objects.get(url=cat.urlsubcategoria, idioma=idioma))
 
 	urlsubcategorias = UrlCategoria.objects.filter(padre=cat)
-	subcategorias = Categoria.objects.filter(url__in=urlsubcategorias)
+	subcategorias = Categoria.objects.filter(url__in=urlsubcategorias, idioma=idioma)
 
-	idioma = request.LANGUAGE_CODE
 	urls = UrlServicio.objects.filter(subcategoria=cat.urlsubcategoria, vendedor__eliminado=False)
 	lista_servs = ServicioVirtual.objects.filter(activo=True, idioma=idioma, url__in=urls)
 	for i, serv in enumerate(lista_servs):
@@ -1289,9 +1289,9 @@ def ver_servicio(request, cat, serv):
 			pass
 	if band:  # xHACER: como predeterminar al idioma de la pag de una mejor manera?
 		serv = ServicioVirtual.objects.get(url=url, idioma=idioma)
-	cat.nombre = str(Categoria.objects.get(url=cat))
+	cat.nombre = str(Categoria.objects.get(url=cat, idioma=idioma))
 	cat.urlsubcategoria = serv.url.subcategoria
-	cat.subcategoria = str(Categoria.objects.get(url=serv.url.subcategoria))
+	cat.subcategoria = str(Categoria.objects.get(url=serv.url.subcategoria, idioma=idioma))
 	idiomas_servicio = []
 	for servis in ServicioVirtual.objects.filter(url=url, activo=True, eliminado=False):
 		idiomas_servicio.append(servis.idioma)
@@ -1347,9 +1347,9 @@ def ver_perfil(request, usr):
 	# numero de impresiones de anuncios en las busquedas
 	# cant de usuarios atendidos por servicio
 	# cant de servicios rechazados mutuamente
+	idioma = request.LANGUAGE_CODE
 	try:
-		perfil = get_object_or_404(Perfil, usuario__username=usr, eliminado=False)
-		idioma = request.LANGUAGE_CODE
+		perfil = get_object_or_404(Perfil, usuario__username=usr, eliminado=False)	
 	except:
 		data = {}
 		data["mensaje"] = "Este usuario ha borrado su cuenta o no existe"
@@ -1516,7 +1516,7 @@ def crear_servicio(request):
 				elif precio < 5:
 					datos["mensaje"] = u"No se puede sobrepasar el precio piso (de 5 $) para ofrecer Servicios"
 				else:
-					datos["mensaje"] = e
+					datos["mensaje"] = "Codigo de error: NXQPSA. Por Favor intentelo nuevamente y si persiste haganoslo saber y le atenderemos. Gracias!"  # No Xe Que PaSo Aqui  jajajaj
 				if request.user.is_authenticated():
 					perfil2 = get_object_or_404(Perfil, usuario__username = usr)
 					datos['logueado'] = True
@@ -1766,7 +1766,7 @@ def configurar_cta(request):
 			else:
 				datos["idiomas_usr_habla"] = idioma
 		except KeyError, e:
-			datos["mensaje"] = e
+			datos["mensaje"] = "Codigo de error: NXQPT. Por Favor intentelo nuevamente y si persiste haganoslo saber y le atenderemos. Gracias!"  # No Xe Que PaSo Tampoco  jajajaj
 		return render(request, 'base.html', datos)
 	else:
 		return HttpResponseRedirect(reverse('geoservicios.views.inicio'))
@@ -1784,17 +1784,17 @@ def borrar_cta(request):
 		try:
 			p.eliminado = True
 			p.save()
-			ServicioVirtual.objects.filter(url__vendedor=p)
-			ServicioVirtual.objects.filter(url__vendedor=p).update(eliminado=True)
+			if ServicioVirtual.objects.filter(url__vendedor=p):
+				ServicioVirtual.objects.filter(url__vendedor=p).update(eliminado=True)
 			# ServicioSatelite.objects.filter(servicio=s).update(eliminado=True)
 			Cola.objects.filter(comprador=p).delete()
 			# Contador.objects.filter(servicio__url__vendedor=p).delete()  # este pudiese ser, q mande a sacar el promedio con lo q tiene el contador hasta ahora, y luego elimina
-			Disponibilidad.objects.filter(servicio__vendedor=p).delete()
+			# Disponibilidad.objects.filter(servicio__vendedor=p).delete()
 			logout(request)
 			datos["mensaje"] = "Su cuenta ha sido cerrada. Puedes volver cuando quieras, Te extrañaremos!  =("
 
 		except BaseException, e:
-			datos["mensaje"] = e
+			datos["mensaje"] = "Codigo de error: NXQEPD. Por Favor intentelo nuevamente y si persiste haganoslo saber y le atenderemos. Gracias!"  # No Xe Que Esta Pasando Dios mio  jajajaj
 
 		return render(request, 'base.html', datos)
 	else:
