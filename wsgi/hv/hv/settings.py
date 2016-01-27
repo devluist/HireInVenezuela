@@ -31,7 +31,6 @@ IDIOMAS_DISPONIBLES = ["es", "en"]
 	# "fr-FR":
 	# "da-DE":  # or "de-DE":
 
-
 ## django los esconde las variables que contienen: API, KEY, PASS, SECRET, SIGNATURE, TOKEN
 desarrollando_en_paypal = True
 
@@ -159,9 +158,6 @@ else:
 		}
 	}
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
-
 LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
@@ -189,9 +185,6 @@ if desarrollando:
 	# xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
 
 
-# URL prefix for admin static files -- CSS, JavaScript and images.
-# Make sure to use a trailing slash.
-# Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
 
 # EMAIL_HOST = ""  # xHACER: que  SMTP server  me brinda OpenShift pa los correos?
