@@ -1,0 +1,27 @@
+{% load i18n %}
+{% block extrahead %}<title>Oportunidades de {{ tipo_oport }}</title>{% endblock %}
+{% include "es/menu-superior.html" %}
+{% load static from staticfiles %}
+<div class="cuerpo">
+	<div class="container" style="margin:0 auto">
+		{% if tipo_oport == "inversion" %}
+		 	<h2>Investment Opportunities</h2>
+		 	<hr class="linea-hr">
+		 	<br>
+			<p style="margin:0 40px">Behind every great dream there is a financial machinery that promotes it. You can become part of us and help us meet and achieve this dream.
+			<br><br>
+			We have excellent opportunities for you incorporate you on our list of investors. To do this you just have to register and send us a message with your contact information in our section <a href="/contacto/">About Us</a> in the <b>"Leave a message"</b> button. Come together to grow, we are waiting for you.</p>
+		{% elif tipo_oport == "empleo" %}
+		 	<h2>Job Opportunities</h2>
+		 	<hr class="linea-hr">
+		 	<br>
+			<p style="margin:0 40px">Para poder crecer necesitamos del Equipo que nos impulse cada vez mas alto, por ello para esta naciente empresa nos es vital contar con un personal talentoso. Si te consideras capaz de asumir y superar nuevos retos, tenemos una vacante para ti.
+			<br><br>
+			Actualmente necesitamos personal preparado en las siguientes areas: Base de Datos No Relacionales, Programador Backend (Pyhon-Django), Programador para Testing en Python, Programador Frontend, Analista de Sistema y Gestor de Proyectos.
+			<br><br>
+			Sigues interesado entonces envíanos tu curriculum en formato PDF a nuestro correo de contacto <i style="border-bottom: 2px solid;">contacto-hi<b> (ARROBA) </b>gmail<b> (PUNTO) </b>com</i>, resaltando los siguientes puntos: foto, lugar donde vives, si tienes experiencia previa en alguna de estas areas. Vamos juntos a crecer, te estamos esperando.</p>
+			{% comment %}tienes posibilidad de vivir en Sucre (no necesario, pero si importante saberlo).{% endcomment %}
+		{% endif %}
+	</div>
+</div>
+<br><br><br>

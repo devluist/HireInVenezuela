@@ -19,16 +19,7 @@ import sys
 sys.path.append(os.path.join(REPO_DIR, 'libs'))
 import secrets
 SECRETS = secrets.getter(os.path.join(DATA_DIR, 'secrets.json'))
-
-## django los esconde:
-	# API
-	# KEY
-	# PASS
-	# SECRET
-	# SIGNATURE
-	# TOKEN
-from decimal import Decimal
-MI_CORREO_PAYPAL = "v11-presidente@hotmail.com"  # "luistena.developer@hotmail.com"
+# ANIO_INICIO_CH = 2015  # CH: cuadro de honor
 IDIOMAS_DISPONIBLES = ["es", "en"]
 	# "es":
 	# "en-US":
@@ -39,22 +30,52 @@ IDIOMAS_DISPONIBLES = ["es", "en"]
 	# "zh-CN":
 	# "fr-FR":
 	# "da-DE":  # or "de-DE":
-#PRECIO_POR_DOLAR = 1000
+
+
+## django los esconde las variables que contienen: API, KEY, PASS, SECRET, SIGNATURE, TOKEN
+desarrollando_en_paypal = True
+
+if desarrollando_en_paypal:
+	ACCESO_API_PAYPAL = {
+		"HEADERS_API": {
+			"X-PAYPAL-SECURITY-USERID": "v11-presidente_api1.hotmail.com",
+			"X-PAYPAL-SECURITY-PASSWORD": "YDJ4JY78B4PJ49NM",
+			"X-PAYPAL-SECURITY-SIGNATURE": "AFcWxV21C7fd0v3bYYYRCpSSRl31A19Xg5YCxz26FXh2mHNU6iUanMTY",
+			"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
+			"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
+			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+		},
+		"CORREO_API": "v11-presidente@hotmail.com",
+		"URL_REFUND": "https://svcs.sandbox.paypal.com/AdaptivePayments/Refund",
+		"URL_EXECUTE": "https://svcs.sandbox.paypal.com/AdaptivePayments/ExecutePayment",
+		"URL_PAY": "https://svcs.sandbox.paypal.com/AdaptivePayments/Pay",
+		"URL_GOPAY": "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
+	}
+else:
+	ACCESO_API_PAYPAL = {
+		"HEADERS_API": {
+			"X-PAYPAL-SECURITY-USERID": "luistena.developer_api1.hotmail.com",
+			"X-PAYPAL-SECURITY-PASSWORD": "2KYBFK4XZRP6CAUB",
+			"X-PAYPAL-SECURITY-SIGNATURE": "A3gtadA.qm-wBsRRzcYXSiDI4VENAX3WSHA1VSmNyC10FMVOPDPc28wb",
+			"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
+			"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
+			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+		},
+		"CORREO_API": "luistena.developer@hotmail.com",
+		"URL_REFUND": "https://svcs.paypal.com/AdaptivePayments/Refund",
+		"URL_EXECUTE": "https://svcs.paypal.com/AdaptivePayments/ExecutePayment",
+		"URL_PAY": "https://svcs.paypal.com/AdaptivePayments/Pay",
+		"URL_GOPAY": "https://www.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
+	}
+
+from decimal import Decimal
 COMISION_PAYPAL = {"ganancia": Decimal("5.4"), "neto": Decimal("0.3")}
 COMISION_HV = 30
-# ANIO_INICIO_CH = 2015  # CH: cuadro de honor
-HEADERS_PAYPAL = {
-	"X-PAYPAL-SECURITY-USERID": "v11-presidente_api1.hotmail.com",
-	"X-PAYPAL-SECURITY-PASSWORD": "YDJ4JY78B4PJ49NM",
-	"X-PAYPAL-SECURITY-SIGNATURE": "AFcWxV21C7fd0v3bYYYRCpSSRl31A19Xg5YCxz26FXh2mHNU6iUanMTY",
-	"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
-	"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
-	"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-}
+#PRECIO_POR_DOLAR = 1000
 
 
 SECRET_KEY = SECRETS['secret_key']
-DEBUG = True
+DEBUG = True  # False
 
 
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/

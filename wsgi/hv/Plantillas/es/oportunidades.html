@@ -1,0 +1,27 @@
+{% load i18n %}
+{% block extrahead %}<title>Oportunidades de {{ tipo_oport }}</title>{% endblock %}
+{% include "es/menu-superior.html" %}
+{% load static from staticfiles %}
+<div class="cuerpo">
+	<div class="container" style="margin:0 auto">
+		{% if tipo_oport == "inversion" %}
+		 	<h2>Oportunidades de Inversi&oacute;n</h2>
+		 	<hr class="linea-hr">
+		 	<br>
+			<p style="margin:0 40px">Detr&aacute;s de todo gran sueño existe una maquinaria financiera que la promueve. Tu puedes formar parte de la nuestra y ayudarnos a cumplir y llevar adelante este gran sueño.
+			<br><br>
+			Tenemos excelentes oportunidades para que te incorpores en nuestra lista de inversionistas. Para hacerlo solo debes registrarte y enviarnos un mensaje con tus datos de contacto, en nuestra secci&oacute;n <a href="/contacto/">Nosotros / Cont&aacute;ctenos</a> en el bot&oacute;n <b>"D&eacute;janos un mensaje"</b>. Vamos juntos a crecer, te estamos esperando.</p>
+		{% elif tipo_oport == "empleo" %}
+		 	<h2>Oportunidades de Empleo</h2>
+		 	<hr class="linea-hr">
+		 	<br>
+			<p style="margin:0 40px">Para poder crecer necesitamos del Equipo que nos impulse cada vez mas alto, por ello para esta naciente empresa nos es vital contar con un personal talentoso. Si te consideras capaz de asumir y superar nuevos retos, tenemos una vacante para ti.
+			<br><br>
+			Actualmente necesitamos personal preparado en las siguientes &aacute;reas: Base de Datos No Relacionales, Programador Backend (Pyhon-Django), Programador para Testing en Python, Programador Frontend, Analista de Sistema y Gestor de Proyectos.
+			<br><br>
+			Sigues interesado entonces envíanos tu curriculum en formato PDF a nuestro correo de contacto <i style="border-bottom: 2px solid;">contacto-hi<b> (ARROBA) </b>gmail<b> (PUNTO) </b>com</i>, resaltando los siguientes puntos: foto, lugar donde vives, si tienes experiencia previa en alguna de estas &aacute;reas. Vamos juntos a crecer, te estamos esperando.</p>
+			{% comment %}tienes posibilidad de vivir en Sucre (no necesario, pero si importante saberlo).{% endcomment %}
+		{% endif %}
+	</div>
+</div>
+<br><br><br>

@@ -12,8 +12,7 @@ urlpatterns = patterns('geoservicios.views',
 	url('^$', 'inicio'),
 
 	url('^buscar/$', 'buscar'),
-	url('^(?P<vista>nuevos)-servicios/$', 'destacados'),
-	url('^(?P<vista>mejores)-servicios/$', 'destacados'),
+	url('^(?P<vista>nuevos|mejores)-servicios/$', 'destacados'),
 
 	url('^sesionarme/$', 'sesionar_usr'),
 	url('^cierre-sesion/$', 'cerrar_sesion'),
@@ -22,7 +21,7 @@ urlpatterns = patterns('geoservicios.views',
 	url('^perfil/(?P<usr>[a-zA-Z0-9_]+)/$', 'ver_perfil'),
 	url('^configuracion/$', 'configurar_cta'),
 	url('^borrar-cta/$', 'borrar_cta'),
-	url('^lengua/$', 'idioma'),
+	url('^lengua/$', 'cambiar_idioma'),
 	url('^recuperar-cuenta/clave=(?P<clave>[a-zA-Z0-9-_\+]+)&correo=(?P<correo>[a-zA-Z0-9-_]+@[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+)$', 'recuperar_pw'),
 	url('^recuperar-cuenta/$', 'recuperar_pw'),
 
@@ -39,6 +38,7 @@ urlpatterns = patterns('geoservicios.views',
 	url('^facturas/$', 'facturados'),
 
 	url('^sugerencia/$', 'sugerir'),
+	url('^oportunidades-(?P<tipo>inversion|empleo)/$', 'mostrar_oportunidad'),
 	url('^contacto/$', 'contactar_empresa'),
 
 	url(r'^discusion/(?P<thread_id>[\d]+)/(?P<obj_cola>[\d]+)/$', ConversationView.as_view(template_name='postman/discusion.html'), name='view_conversation'),
@@ -48,7 +48,7 @@ urlpatterns = patterns('geoservicios.views',
 	url('^admin/', include(admin.site.urls)),
 
 	# xHACER:  url('^borrar/(?P<id_tlmsj>\\d+)/$', 'borrar'),
-) 
+)
 
 if desarrollando:
 	from django.conf.urls.static import static
