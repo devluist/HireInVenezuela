@@ -8,6 +8,7 @@ Django settings for hv project.
 import os
 
 desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
+desarrollando_en_paypal = True
 
 DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -32,7 +33,6 @@ IDIOMAS_DISPONIBLES = ["es", "en"]
 	# "da-DE":  # or "de-DE":
 
 ## django los esconde las variables que contienen: API, KEY, PASS, SECRET, SIGNATURE, TOKEN
-desarrollando_en_paypal = True
 
 if desarrollando_en_paypal:
 	ACCESO_API_PAYPAL = {
@@ -187,8 +187,15 @@ if desarrollando:
 
 ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
 
-# EMAIL_HOST = ""  # xHACER: que  SMTP server  me brinda OpenShift pa los correos?
-# EMAIL_PORT = 25
+if desarrollando:
+	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+	EMAIL_USE_TLS = True
+	EMAIL_HOST = 'smtp-mail.outlook.com'
+	EMAIL_HOST_USER = 'des.luistena@outlook.com'
+	EMAIL_HOST_PASSWORD = 'm@m@rr@d3cl@v32'
+	EMAIL_PORT = 587
 
 
 #####################

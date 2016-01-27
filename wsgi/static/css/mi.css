@@ -176,7 +176,7 @@ body{
 }
 /* xHACER:  	# optimizar caja-serv y perfil en uno solo */
 .caja-perfil {
-	height: 270px;
+	height: 270px !important;
 	float: left;
 	margin: 0 15px 35px 0;
 	border: 1px solid #DDD;
@@ -997,6 +997,7 @@ small#beta {
     color: #000;
     font-weight: bolder;
 }
+
 
 
 /*

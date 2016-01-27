@@ -10,7 +10,8 @@
 		var s = document.createElement("span");
 		var btn = "btn-inputs-"+modal;
 		var f = document.getElementById(btn);
-		n = ++n.value;
+		if (n.value!=0) {n = ++n.value;}
+		else {n = 2;}
 		if (s.innerText)
 			{s.innerText = n+".-"}
 		else
@@ -18,6 +19,7 @@
 		s.className = "col-md-1";
 		i.type = "text";
 		i.name = "clausula-"+(n-1);
+		document.getElementById(clau).value = n;
 		i.className = "clausulas form-controlado col-md-11";
 		document.getElementById(cadena).insertBefore(s, f);
 		document.getElementById(cadena).insertBefore(i, f);
@@ -123,7 +125,7 @@
 			</div>
 		</div>
 		<br>
-		<h2>Barra Estad&iacute;stica</h2>
+		{% comment %}<h2>Barra Estad&iacute;stica</h2>
 		<div class="row">
 			<div class="col-md-3 caja-estadistica-serv">
 				<p class="titulo-caja-estadistica">Experiencia</p><br>
@@ -141,7 +143,7 @@
 				<p class="titulo-caja-estadistica">Atenci&oacute;n con los Usuario</p><br>
 				<p>{% if atencion %}{{ atencion }}{% else %}0{% endif %} / 10 ptos.</p>
 			</div>
-		</div>
+		</div>{% endcomment %}
 	</div>
 	<br><br>
 </div>
@@ -157,12 +159,12 @@
 					{% csrf_token %}
 					<div class="modal-body row">
 						<p id="formu-serv">
-							<b>Clausulas del Contrato:</b><br>
+							<b>Clausulas del nuevo Contrato:</b><br>
 							<span class="col-md-1">1.-</span>
 							<input type="text" name="clausula-0" class="clausulas form-controlado col-md-11">
 							<a href="#" id="btn-inputs-negociar" onclick="agregarInput('formu-serv','negociar')" class="btn btn-default">+</a>
 						</p>
-						<input type="hidden" id="Nclausulas-negociar" name="Nclausulas" value="1">
+						<input type="hidden" id="Nclausulas-negociar" name="Nclausulas" value="0">{% comment %}Este valor tambien se refleja en las vistas de otras operaciones como Traducir_servicio o Editar servicio... si el valor es cero ta bien pero recuerda arriba en el js modificar para que sume 2 en la primera iteracion{% endcomment %}
 						<input type="hidden" name="serv" value="{{ servicio.url }}">
 					</div>
 					<div class="modal-footer">
@@ -187,10 +189,13 @@
 							<b>Idioma</b>
 							<select name="serv_traducido">
 								{% get_language_info_list for idiomas_disponibles as idiomas_disponibles %}
+								{% get_current_language as LANGUAGE_CODE %}
 								{% for idioma in idiomas_disponibles %}
-									<option value="{{ idioma.code }}">
-										<i class="glyphicon glyphicon-globe"></i> {{ idioma.name_local|capfirst }}
-									</option>
+									{% if idioma.code != LANGUAGE_CODE %}
+										<option value="{{ idioma.code }}">
+											<i class="glyphicon glyphicon-globe"></i> {{ idioma.name_local|capfirst }}
+										</option>
+									{% endif %}
 								{% endfor %}
 							</select><br>
 							<div class="row">
@@ -212,7 +217,7 @@
 							</div>
 							{% comment %} xHACER: <a href="#" id="btn-inputs-traducir" onclick="agregarInput()" class="btn btn-default">+</a>{% endcomment %}
 						</p>
-						<input type="hidden" id="Nclausulas" name="Nclausulas" value="{% if contrato %}{{ contrato|length }}{% else %}1{% endif %}">
+						<input type="hidden" id="Nclausulas" name="Nclausulas" value="{% if contrato %}{{ contrato|length }}{% else %}0{% endif %}">
 						<input type="hidden" name="serv" value="{{ servicio.url }}">
 					</div>
 					<div class="modal-footer">
@@ -248,7 +253,7 @@
 								{% endif %}
 								<a href="#" id="btn-inputs-editar" onclick="agregarInput('form-edit-serv','editar')" class="btn btn-default">+</a>
 							</p>
-							<input type="hidden" id="Nclausulas-editar" name="Nclausulas" value="{% if contrato %}{{ contrato|length }}{% else %}1{% endif %}">
+							<input type="hidden" id="Nclausulas-editar" name="Nclausulas" value="{% if contrato %}{{ contrato|length }}{% else %}0{% endif %}">
 							<input type="hidden" name="idioma_serv" value="{{ servicio.idioma }}">
 							<input type="hidden" name="editar" value="1">
 						</div>
@@ -277,7 +282,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-							<button type="submit" class="btn btn-primary">Eliminar</button>
+							<button type="submit" class="btn btn-danger">Eliminar</button>
 						</div>
 					</form>
 				</div>

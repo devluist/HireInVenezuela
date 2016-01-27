@@ -702,7 +702,7 @@ def reembolsar(obj_encola):
 		com_paypal = urllib2.urlopen(peticion, timeout=30)
 	except urllib2.URLError, motivo:
 		# xHACER: reenviar a una pagina luego de un error en el reembolso (inicio, perfil ?)
-		return HttpResponseRedirect("pass" + "?mensaje=error")
+		return 0
 		# xHACER: terminar q pasa si no conecta con el servidor
 	resp_paypal = com_paypal.read()
 	com_paypal.close()
@@ -711,6 +711,7 @@ def reembolsar(obj_encola):
 		inter.delete()
 		obj_encola.delete()
 		return 1
+	return 0
 
 
 def pagar_vendedores(obj_encola):
@@ -727,8 +728,8 @@ def pagar_vendedores(obj_encola):
 		peticion = urllib2.Request(url=ACCESO_API_PAYPAL["URL_EXECUTE"], data=datos_paypal, headers=ACCESO_API_PAYPAL["HEADERS_API"])
 		com_paypal = urllib2.urlopen(peticion, timeout=30)
 	except urllib2.URLError, motivo:
-		# xHACER: reenviar a una pagina luego de un error en el reembolso (inicio, perfil ?)
-		return HttpResponseRedirect("pass" + "?mensaje=error")
+		# xHACER: reenviar a una pagina luego de un error (inicio, perfil ?)
+		return 0
 		# xHACER: terminar q pasa si no conecta con el servidor
 	resp_paypal = com_paypal.read()
 	com_paypal.close()
@@ -737,6 +738,7 @@ def pagar_vendedores(obj_encola):
 		inter.delete()
 		obj_encola.delete()
 		return 1
+	return 0
 
 
 # xHACER:
@@ -847,20 +849,20 @@ def recuperar_pw(request, clave="", correo=""):
 					enigma = TimestampSigner("c4mb13-d3-v1d4-3l" + str(datetime(2014, 12, 31)), salt="j0d3t3-h@ck3r")
 					contra = enigma.sign(correo).split(":")
 					asunto = {
-						"es": "Restablecer acceso a cuenta HireVenezuela.com. Tienes menos de 1 dia",
+						"es": "Restablecer acceso a cuenta buy-2venezuela.com. Tienes menos de 1 dia",
 						"en": ""
 					}[idioma]
 					msj = {
-						"es": u"Ud. ha notificado imposibilidad para acceder a <b>HireVenezuela.com<b><br><br>Ingrese a la siguiente URL para <a href='www.hirevenezuela.com/recuperar-cuenta/clave=" + contra[1] + "+" + contra[2] + "&correo=" + correo + "' />recuperar su cuenta</a>",
+						"es": u"Ud. ha notificado imposibilidad para acceder a <b>buy-2venezuela.com<b><br><br>Ingrese a la siguiente URL para <a href='buy-2venezuela.com/recuperar-cuenta/clave=" + contra[1] + "+" + contra[2] + "&correo=" + correo + "' />recuperar su cuenta</a>",
 						"en": ""
 					}[idioma]
-					emisor_correo = "luistena.example.com"
+					from hv.settings import EMAIL_HOST_USER
 					try:
-						send_mail(asunto, msj, emisor_correo, ['admin@example.com'])
+						send_mail(asunto, msj, EMAIL_HOST_USER, [receptor.email])
 					except BadHeaderError:
 						datos["mensaje"] = 'Error: Cabecera del correo invalida.'
 					else:
-						datos["mensaje"] = u"Ha sido enviado un correo con las instrucciones para recuperar el acceso a su cuenta HireVenezuela.com. La URL estará activa durante un dia solamente"
+						datos["mensaje"] = u"Ha sido enviado un correo con las instrucciones para recuperar el acceso a su cuenta buy-2venezuela.com. La URL estará activa durante un dia solamente"
 			elif pw:
 				try:
 					u = User.objects.get(email=correo_usr)
@@ -1112,6 +1114,10 @@ def proceso_compra(request):
 						datos["mensaje"] = "Se ha reembolsado todo el dinero exitosamente."
 					else:
 						datos["mensaje"] = "Debido a un error no se ha podido reembolsar el dinero. Por favor intentelo nuevamente."
+						if p == serv_cola.comprador:
+							Cola.objects.filter(id=serv_cola.id).update(comprador_cancela=False)
+						elif p == serv_cola.vendedor:
+							Cola.objects.filter(id=serv_cola.id).update(vendedor_cancela=False)
 					return render(request, 'base.html', datos)
 			conversa = str(request.POST.get('conversa'))
 			return HttpResponseRedirect('/discusion/'+conversa+'/'+str(serv_cola.id)+'/'+msj+'/')
@@ -1273,12 +1279,14 @@ def ver_servicio(request, cat, serv):
 			elif request.POST.get("editar", None):
 				idioma_serv = request.POST["idioma_serv"]
 				cont = ""
-				n_clausulas = int(request.POST.get('Nclausulas', 1))
-				for k in range(n_clausulas):
-					n = 'clausula-' + str(k)
-					if request.POST[n] != "":
-						cont += request.POST[n] + "<br>"
-				cont = cont[: len(cont) - 4]  # le quito el ultimo <br>
+				n_clausulas = request.POST.get("Nclausulas", None)  # modificado! n_clausulas = int(request.POST.get('Nclausulas', 1))
+				if n_clausulas is not None:
+					n_clausulas = int(n_clausulas)
+					for k in range(n_clausulas):
+						n = 'clausula-' + str(k)
+						if request.POST[n] != "":
+							cont += request.POST[n] + "<br>"
+					cont = cont[: len(cont) - 4]  # le quito el ultimo <br>
 				ServicioVirtual.objects.filter(url=url, idioma=idioma_serv).update(nombre=request.POST["nomb"], descripcion=request.POST["descrip"], contrato=cont)
 				if idioma_serv != idioma:
 					serv = ServicioVirtual.objects.get(url=url, idioma=idioma_serv)
@@ -1359,7 +1367,7 @@ def ver_perfil(request, usr):
 	# cant de servicios rechazados mutuamente
 	idioma = request.LANGUAGE_CODE
 	try:
-		perfil = get_object_or_404(Perfil, usuario__username=usr, eliminado=False)	
+		perfil = get_object_or_404(Perfil, usuario__username=usr, eliminado=False)
 	except:
 		data = {}
 		data["mensaje"] = "Este usuario ha borrado su cuenta o no existe"
@@ -1439,24 +1447,27 @@ def traducir_servicio(request):
 		url_existe = UrlServicio.objects.filter(url=url).exists()
 		if url_existe:
 			url = UrlServicio.objects.get(url=url)
-			usr = request.user
-			p = Perfil.objects.get(usuario=usr)
-			# xHACER:
-				# limpiar todos los datos de entrada
-				# revisar q no se traduzca al mismo idioma o devuelva un error
 			idioma = request.POST["serv_traducido"]
-			nomb = request.POST['nomb']
-			descrip = request.POST['descrip']
-			cont = ""
-			n_clausulas = int(request.POST.get('Nclausulas', 1))
-			for k in range(n_clausulas):
-				n = 'clausula-' + str(k)
-				if request.POST[n] != "":
-					cont += request.POST[n] + "<br>"
-			if n_clausulas:
-				cont = cont[: len(cont) - 4]  # le quito el ultimo <br>
-			s = ServicioVirtual.objects.create(url=url, idioma=idioma, nombre=nomb, descripcion=descrip, contrato=cont, imagen=url.obj_servicio.get().imagen)
-			Contador.objects.create(servicio=s, experiencia=0, atencion=0, calidad=0, promedio=0, tiempo_entrega=0)
+			if url.obj_servicio.get().idioma != idioma:
+				nomb = request.POST['nomb']
+				usr = request.user
+				p = Perfil.objects.get(usuario=usr)
+				# xHACER:
+					# limpiar todos los datos de entrada
+					# revisar q no se traduzca al mismo idioma o devuelva un error
+				descrip = request.POST['descrip']
+				cont = ""
+				n_clausulas = request.POST.get("Nclausulas", None)  # n_clausulas = int(request.POST.get('Nclausulas', 0))
+				if n_clausulas is not None:
+					n_clausulas = int(n_clausulas)
+					for k in range(n_clausulas):
+						n = 'clausula-' + str(k)
+						if request.POST[n] != "":
+							cont += request.POST[n] + "<br>"
+					cont = cont[: len(cont) - 4]  # le quito el ultimo <br>
+				s = ServicioVirtual.objects.create(url=url, idioma=idioma, nombre=nomb, descripcion=descrip, contrato=cont)  # , imagen=url.obj_servicio.get().imagen)
+				Contador.objects.create(servicio=s, experiencia=0, atencion=0, calidad=0, promedio=0, tiempo_entrega=0)
+			# xHACER: q tenga un else q mande un mensaje de error si es el mismo lenguaje al q quiere traducir
 			return HttpResponseRedirect('/categoria/' + url.subcategoria.padre.url + "/" + url.subcategoria.url + "/" + url.url + "/")
 		return HttpResponseRedirect(reverse('geoservicios.views.inicio'))
 
@@ -1488,12 +1499,14 @@ def crear_servicio(request):
 			# 		for chunk in request.FILES['img_serv'].chunks():
 			# 			destination.write(chunk)
 			cont = ""
-			n_clausulas = int(request.POST.get('Nclausulas', 1))
-			for k in range(n_clausulas):
-				n = 'clausula-' + str(k)
-				if request.POST[n] != "":
-					cont += request.POST[n] + "<br>"
-			cont = cont[: len(cont) - 4]  # le quito el ultimo <br>
+			n_clausulas = request.POST.get("Nclausulas", None)  # n_clausulas = int(request.POST.get('Nclausulas', 0))  # modificado! 1
+			if n_clausulas is not None:
+				n_clausulas = int(n_clausulas)
+				for k in range(n_clausulas):
+					n = 'clausula-' + str(k)
+					if request.POST[n] != "":
+						cont += request.POST[n] + "<br>"
+				cont = cont[: len(cont) - 4]  # le quito el ultimo <br>
 			id_subc = int(request.POST['subc'])
 			id_cat = int(request.POST['subcategoria'])
 			subc = LISTA_SUBCATEGORIAS[id_cat][1][id_subc]
@@ -1580,10 +1593,10 @@ def enlistar_usuario(request, usr):
 				"mensaje": "No puedes comprar tus propios servicios"
 			}
 			return render(request, 'base.html', datos)
-		num_clausulas = request.POST.get("Nclausulas", None)
-		if num_clausulas is not None:
+		n_clausulas = request.POST.get("Nclausulas", None)
+		if n_clausulas is not None:
 			cont = ""
-			n_clausulas = int(num_clausulas)
+			n_clausulas = int(n_clausulas)
 			for k in range(n_clausulas):
 				n = 'clausula-' + str(k)
 				if request.POST[n] != "":
@@ -1603,12 +1616,12 @@ def enlistar_usuario(request, usr):
 			"memo": u"Ud. adquirirá el servicio: " + unicode(serv),
 			"receiverList": {
 				"receiver": [{
-					"amount": unicode(precio_serv),
+					"amount": unicode(round(precio_serv,2)),
 					"email": ACCESO_API_PAYPAL["CORREO_API"],
 					"primary": True
 				},{
-					"amount": unicode(precio_serv-comisiones),
-					"email": unicode(url.vendedor.usuario.email),
+					"amount": unicode(round(precio_serv-comisiones,2)),
+					"email": "cc10-comprador@hotmail.com", # unicode(url.vendedor.usuario.email),
 					"primary": False
 				}]
 			},
