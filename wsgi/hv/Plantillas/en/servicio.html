@@ -11,7 +11,10 @@
 		var btn = "btn-inputs-"+modal;
 		var f = document.getElementById(btn);
 		if (n.value!=0) {n = ++n.value;}
-		else {n = 2;}
+		else {
+			if (clau=="Nclausulas-editar"){n=1;}
+			else {n = 2;}
+		}
 		if (s.innerText)
 			{s.innerText = n+".-"}
 		else
@@ -164,7 +167,7 @@
 							<input type="text" name="clausula-0" class="clausulas form-controlado col-md-11">
 							<a href="#" id="btn-inputs-negociar" onclick="agregarInput('formu-serv','negociar')" class="btn btn-default">+</a>
 						</p>
-						<input type="hidden" id="Nclausulas-negociar" name="Nclausulas" value="1">
+						<input type="hidden" id="Nclausulas-negociar" name="Nclausulas" value="0">
 						<input type="hidden" name="serv" value="{{ servicio.url }}">
 					</div>
 					<div class="modal-footer">

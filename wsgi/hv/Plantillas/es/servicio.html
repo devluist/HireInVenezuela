@@ -11,7 +11,10 @@
 		var btn = "btn-inputs-"+modal;
 		var f = document.getElementById(btn);
 		if (n.value!=0) {n = ++n.value;}
-		else {n = 2;}
+		else {
+			if (clau=="Nclausulas-editar"){n=1;}
+			else {n = 2;}
+		}
 		if (s.innerText)
 			{s.innerText = n+".-"}
 		else

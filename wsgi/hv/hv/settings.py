@@ -9,6 +9,7 @@ import os
 
 desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
 desarrollando_en_paypal = True
+fail_silently = True if desarrollando else False
 
 DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
