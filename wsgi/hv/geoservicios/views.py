@@ -797,7 +797,13 @@ def mostrar_oportunidad(request, tipo):
 		"pag_activa": idioma + "/oportunidades.html",
 		"idiomas_disponibles": IDIOMAS_DISPONIBLES,
 	}
-	return render(request, 'base.html', datos)
+	if request.user.is_authenticated():
+		p = get_object_or_404(Perfil, usuario=request.user)
+		datos['perfil_logueado'] = p
+		datos['logueado'] = True
+		return render(request, 'base.html', datos)
+	else:
+		return render(request, 'base.html', datos)
 
 
 def recuperar_pw(request, clave="", correo=""):
@@ -858,7 +864,7 @@ def recuperar_pw(request, clave="", correo=""):
 					}[idioma]
 					from hv.settings import EMAIL_HOST_USER
 					try:
-						send_mail(asunto, msj, EMAIL_HOST_USER, [receptor.email])
+						send_mail(asunto, msj, EMAIL_HOST_USER, [EMAIL_HOST_USER])
 					except BadHeaderError:
 						datos["mensaje"] = 'Error: Cabecera del correo invalida.'
 					else:

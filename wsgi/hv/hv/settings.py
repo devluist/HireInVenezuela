@@ -8,7 +8,7 @@ Django settings for hv project.
 import os
 
 desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
-desarrollando_en_paypal = True
+desarrollando_en_paypal = False
 fail_silently = True if desarrollando else False
 
 DJ_PROJECT_DIR = os.path.dirname(__file__)
@@ -75,7 +75,7 @@ COMISION_HV = 30
 
 
 SECRET_KEY = SECRETS['secret_key']
-DEBUG = True  # False
+DEBUG = False  # True
 
 
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -188,7 +188,7 @@ if desarrollando:
 
 ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
 
-if desarrollando:
+if not desarrollando:
 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
