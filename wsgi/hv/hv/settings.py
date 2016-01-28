@@ -10,6 +10,7 @@ import os
 desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
 desarrollando_en_paypal = False
 fail_silently = True if desarrollando else False
+URL_SITIO = "http://buy-2venezuela.rhcloud.com/perfil/" if not desarrollando else "localhost:8000/"
 DEBUG = False  # True
 
 DJ_PROJECT_DIR = os.path.dirname(__file__)
@@ -47,6 +48,7 @@ if desarrollando_en_paypal:
 			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
 		},
 		"CORREO_API": "v11-presidente@hotmail.com",
+		"CORREO_USR_API": "cc10-comprador@hotmail.com",
 		"URL_REFUND": "https://svcs.sandbox.paypal.com/AdaptivePayments/Refund",
 		"URL_EXECUTE": "https://svcs.sandbox.paypal.com/AdaptivePayments/ExecutePayment",
 		"URL_PAY": "https://svcs.sandbox.paypal.com/AdaptivePayments/Pay",
@@ -63,6 +65,7 @@ else:
 			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
 		},
 		"CORREO_API": "luistena.developer@hotmail.com",
+		"CORREO_USR_API": "",
 		"URL_REFUND": "https://svcs.paypal.com/AdaptivePayments/Refund",
 		"URL_EXECUTE": "https://svcs.paypal.com/AdaptivePayments/ExecutePayment",
 		"URL_PAY": "https://svcs.paypal.com/AdaptivePayments/Pay",

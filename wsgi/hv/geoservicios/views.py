@@ -21,7 +21,7 @@ from os import mkdir, access, F_OK
 from datetime import datetime  # , date
 from hashlib import sha1
 import re, urllib2, json
-from hv.settings import ACCESO_API_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL  # ,PRECIO_POR_DOLAR, ANIO_INICIO_CH
+from hv.settings import ACCESO_API_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL, URL_SITIO  # ,PRECIO_POR_DOLAR, ANIO_INICIO_CH
 
 #----------------------------------------------------------
 #---------------------  Inicializando  --------------------
@@ -1627,12 +1627,12 @@ def enlistar_usuario(request, usr):
 					"primary": True
 				},{
 					"amount": unicode(round(precio_serv-comisiones,2)),
-					"email": "cc10-comprador@hotmail.com", # unicode(url.vendedor.usuario.email),
+					"email": unicode(url.vendedor.usuario.email) if not ACCESO_API_PAYPAL["CORREO_USR_API"] else ACCESO_API_PAYPAL["CORREO_USR_API"],
 					"primary": False
 				}]
 			},
-			"returnUrl": "http://buy-2venezuela.rhcloud.com/perfil/" + unicode(p) + "/?mensaje=bien&c=" + unicode(encola.id),
-			"cancelUrl": "http://buy-2venezuela.rhcloud.com/perfil/" + unicode(p) + "/?mensaje=cancelado&c=" + unicode(encola.id),
+			"returnUrl": URL_SITIO + unicode(p) + "/?mensaje=bien&c=" + unicode(encola.id),
+			"cancelUrl": URL_SITIO + unicode(p) + "/?mensaje=cancelado&c=" + unicode(encola.id),
 			"requestEnvelope": {
 				"errorLanguage": "en_US",
 				"detailLevel": "ReturnAll"
@@ -1842,27 +1842,3 @@ def contactar_empresa(request):
 		return render(request, 'base.html', datos)
 	else:
 		return render(request, 'base.html', datos)
-
-
-#def comprar(request):
-	# """Este modulo realiza:
-	#   * Aceptar_compra (confirmar el cobro)
-	#   * Confirmar_entrega (Facturada)
-	#   * Cancelacion de la compra
-	# estos son seciones enlazados a paypal, mercadopago, bitpay o RIPPLE"""
-	# if request.user.is_authenticated():
-	#   factura = request.POST["orden"]
-	#   # xHACER:  implementar algo q no permita q se pueda ver la facturas de otras personas
-	#   # falta valorar la compra en caso de confirmar
-	#   try:
-	#       factura = Factura.objects.get(id=factura)
-	#   except:
-	#       # esto significa q es para crear una nva factura
-	#       Factura.objects.create()
-
-	#   usr_sesionado = request.user
-	#   usr_sesionado = Perfil.objects.get(usuario=usr)
-	#   if usr_sesionado != factura.comprador or usr_sesionado != factura.vendedor:
-	#       return "no me jodas"
-	# else:
-	#   return HttpResponseRedirect(reverse('geoservicios.views.sesionar_usr'))
