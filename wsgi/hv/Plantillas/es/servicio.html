@@ -115,7 +115,7 @@
 							{% if servicio.url.vendedor == perfil_logueado %}
 								<button type="button" id="traduce_luego_envia" data-toggle="modal" data-target=".modal-traducirserv" class="btn-contratar">Traducir</button>
 							{% elif not perfil_logueado %}
-								<a href="/" class="btn btn-contratar" style="margin-left: -2px;font-size: 13px;" title="Crear cuenta en HI">Registrate para<br>comprar!</a>
+								<a href="/" class="btn btn-contratar" style="margin-left: -2px;font-size: 13px;" title="Crear cuenta en HI">Registrate para<br>comprar</a>
 							{% elif perfil_logueado.es_venezolano %}
 							{% else %}
 								<button type="submit" class="btn-contratar">Contratar</button>
