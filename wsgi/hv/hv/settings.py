@@ -10,6 +10,7 @@ import os
 desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
 desarrollando_en_paypal = False
 fail_silently = True if desarrollando else False
+DEBUG = False  # True
 
 DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -75,7 +76,6 @@ COMISION_HV = 30
 
 
 SECRET_KEY = SECRETS['secret_key']
-DEBUG = True  # False
 
 
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -188,15 +188,15 @@ if desarrollando:
 
 ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
 
-# if not desarrollando:
-# 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# else:
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp-mail.outlook.com'
-EMAIL_HOST_USER = 'des.luistena@outlook.com'
-EMAIL_HOST_PASSWORD = 'm@m@rr@d3cl@v32'
-EMAIL_PORT = 587
+if desarrollando:
+	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+	EMAIL_USE_TLS = True
+	EMAIL_HOST = 'smtp-mail.outlook.com'
+	EMAIL_HOST_USER = 'des.luistena@outlook.com'
+	EMAIL_HOST_PASSWORD = 'm@m@rr@d3cl@v32'
+	EMAIL_PORT = 587
 
 
 #####################

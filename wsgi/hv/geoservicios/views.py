@@ -864,7 +864,7 @@ def recuperar_pw(request, clave="", correo=""):
 					}[idioma]
 					from hv.settings import EMAIL_HOST_USER
 					try:
-						send_mail(asunto, msj, EMAIL_HOST_USER, [EMAIL_HOST_USER])
+						send_mail(asunto, msj, EMAIL_HOST_USER, [receptor.email])
 					except BadHeaderError:
 						datos["mensaje"] = 'Error: Cabecera del correo invalida.'
 					else:
