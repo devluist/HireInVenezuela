@@ -48,6 +48,7 @@ urlpatterns = patterns('geoservicios.views',
 	url('^admin/', include(admin.site.urls)),
 	url(r'^googlea6116be28450736e.html/$', TemplateView.as_view(template_name="googlea6116be28450736e.html")),
 	url('^robots.txt/$', TemplateView.as_view(template_name="robots.txt")),
+	url('^sitemap.xml/$', TemplateView.as_view(template_name="sitemap.xml")),
 	#url('googlea6116be28450736e.html', )
 
 	# xHACER:  url('^borrar/(?P<id_tlmsj>\\d+)/$', 'borrar'),
