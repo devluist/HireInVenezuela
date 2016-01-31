@@ -1,3 +1,17 @@
 User-agent: *
-Disallow: /discusion/
-Disallow: /mensajeria/
+Disallow:/discusion/
+Disallow:/mensajeria/
+Disallow:/sesionarme/
+Disallow:/cierre-sesion/
+Disallow:/registrarme/
+Disallow:/borrar-cta/
+Disallow:/lengua/
+Disallow:/enlistar-usuario/
+Disallow:/lista-solicitudes-servicio/
+Disallow:/crear-servicio/
+Disallow:/traducir-servicio/
+Disallow:/comprando/
+Disallow:/facturas/
+Disallow:/sugerencia/
+Disallow:/admin/
+Disallow:/googlea6116be28450736e.html/
