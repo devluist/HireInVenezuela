@@ -46,7 +46,8 @@ urlpatterns = patterns('geoservicios.views',
 	(r'^mensajeria/', include('postman.urls', namespace='postman', app_name='postman')),
 
 	url('^admin/', include(admin.site.urls)),
-	url(r'^googlea6116be28450736e\.html/', TemplateView.as_view(template_name="googlea6116be28450736e.html")),
+	url(r'^googlea6116be28450736e.html/$', TemplateView.as_view(template_name="googlea6116be28450736e.html")),
+	url('^robots.txt/$', TemplateView.as_view(template_name="robots.txt")),
 	#url('googlea6116be28450736e.html', )
 
 	# xHACER:  url('^borrar/(?P<id_tlmsj>\\d+)/$', 'borrar'),
