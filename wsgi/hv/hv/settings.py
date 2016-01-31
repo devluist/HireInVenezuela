@@ -3,13 +3,14 @@
 """
 Django settings for hv project.
 """
-
+## django los esconde las variables que contienen: API, KEY, PASS, SECRET, SIGNATURE, TOKEN
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
+
 import os
 
 desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
 desarrollando_en_paypal = False
-URL_SITIO = "http://buy-2venezuela.rhcloud.com/perfil/" if not desarrollando else "localhost:8000/"
 DEBUG = False  # True
 
 DJ_PROJECT_DIR = os.path.dirname(__file__)
@@ -33,54 +34,11 @@ IDIOMAS_DISPONIBLES = ["es", "en"]
 	# "zh-CN":
 	# "fr-FR":
 	# "da-DE":  # or "de-DE":
-
-## django los esconde las variables que contienen: API, KEY, PASS, SECRET, SIGNATURE, TOKEN
-
-if desarrollando_en_paypal:
-	ACCESO_API_PAYPAL = {
-		"HEADERS_API": {
-			"X-PAYPAL-SECURITY-USERID": "v11-presidente_api1.hotmail.com",
-			"X-PAYPAL-SECURITY-PASSWORD": "YDJ4JY78B4PJ49NM",
-			"X-PAYPAL-SECURITY-SIGNATURE": "AFcWxV21C7fd0v3bYYYRCpSSRl31A19Xg5YCxz26FXh2mHNU6iUanMTY",
-			"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
-			"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
-			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-		},
-		"CORREO_API": "v11-presidente@hotmail.com",
-		"CORREO_USR_API": "cc10-comprador@hotmail.com",
-		"URL_REFUND": "https://svcs.sandbox.paypal.com/AdaptivePayments/Refund",
-		"URL_EXECUTE": "https://svcs.sandbox.paypal.com/AdaptivePayments/ExecutePayment",
-		"URL_PAY": "https://svcs.sandbox.paypal.com/AdaptivePayments/Pay",
-		"URL_GOPAY": "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
-	}
-else:
-	ACCESO_API_PAYPAL = {
-		"HEADERS_API": {
-			"X-PAYPAL-SECURITY-USERID": "luistena.developer_api1.hotmail.com",
-			"X-PAYPAL-SECURITY-PASSWORD": "2KYBFK4XZRP6CAUB",
-			"X-PAYPAL-SECURITY-SIGNATURE": "A3gtadA.qm-wBsRRzcYXSiDI4VENAX3WSHA1VSmNyC10FMVOPDPc28wb",
-			"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
-			"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
-			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-		},
-		"CORREO_API": "luistena.developer@hotmail.com",
-		"CORREO_USR_API": "",
-		"URL_REFUND": "https://svcs.paypal.com/AdaptivePayments/Refund",
-		"URL_EXECUTE": "https://svcs.paypal.com/AdaptivePayments/ExecutePayment",
-		"URL_PAY": "https://svcs.paypal.com/AdaptivePayments/Pay",
-		"URL_GOPAY": "https://www.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
-	}
-
 from decimal import Decimal
 COMISION_PAYPAL = {"ganancia": Decimal("5.4"), "neto": Decimal("0.3")}
 COMISION_HV = 30
 #PRECIO_POR_DOLAR = 1000
-
-
 SECRET_KEY = SECRETS['secret_key']
-
-
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 LOCALE_PATHS = (
 	'postman/locale',
@@ -138,29 +96,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hv.wsgi.application'
 
-if desarrollando:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',  # 'django.db.backends.sqlite3',
-			'NAME': 'buy',  # os.path.join(DATA_DIR, 'buy'),
-			'USER': 'postgres',
-			'PASSWORD': 'qwerty2',
-			'HOST': 'localhost',
-			'PORT': '5432'
-		}
-	}
-else:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': 'buy',
-			'USER': 'adminci3pyaj',
-			'PASSWORD': 'ftijnkv9DCWE',
-			'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST', ""),
-			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT', "") # '5432'
-		}
-	}
-
 LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
@@ -171,29 +106,54 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 STATIC_URL = '/static/'
+
+ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
+
+#####################
+# solo para jugar con ipython
+# DJANGO_SETTINGS_MODULE = 'hv.settings'
+
+# super usr=jefe , pw= jefe@a.a
+POSTMAN_AUTO_MODERATE_AS = True
+
+
+
 if desarrollando:
 	STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 	STATICFILES_DIRS = (
 		os.path.join(WSGI_DIR, 'static/'),
 	)
-else:
-	STATIC_ROOT = os.path.join(WSGI_DIR, 'multimedia/')
-
-
-if desarrollando:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',  # 'django.db.backends.sqlite3',
+			'NAME': 'buy',  # os.path.join(DATA_DIR, 'buy'),
+			'USER': 'postgres',
+			'PASSWORD': 'qwerty2',
+			'HOST': 'localhost',
+			'PORT': '5432'
+		}
+	}
+	URL_SITIO = "localhost:8000/"
 	MEDIA_URL = '/media/'
 	MEDIA_ROOT = os.path.join(DATA_DIR, 'subidos/')  # '~/hv/Multimedia/images/'
 	# xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
-
-
-ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
-
-if desarrollando:
 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 	MUESTRA_ERRORES_SMTP = True
+
 else:
+	STATIC_ROOT = os.path.join(WSGI_DIR, 'multimedia/')
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'buy',
+			'USER': 'adminci3pyaj',
+			'PASSWORD': 'ftijnkv9DCWE',
+			'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST', ""),
+			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT', "") # '5432'
+		}
+	}
+	URL_SITIO = "http://buy-2venezuela.rhcloud.com/perfil/"
 	MUESTRA_ERRORES_SMTP = False
 	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 	EMAIL_USE_TLS = True
@@ -203,9 +163,38 @@ else:
 	EMAIL_PORT = 587
 
 
-#####################
-# solo para jugar con ipython
-# DJANGO_SETTINGS_MODULE = 'hv.settings'
 
-# super usr=jefe , pw= jefe@a.a
-POSTMAN_AUTO_MODERATE_AS = True
+if desarrollando_en_paypal:
+	ACCESO_API_PAYPAL = {
+		"HEADERS_API": {
+			"X-PAYPAL-SECURITY-USERID": "v11-presidente_api1.hotmail.com",
+			"X-PAYPAL-SECURITY-PASSWORD": "YDJ4JY78B4PJ49NM",
+			"X-PAYPAL-SECURITY-SIGNATURE": "AFcWxV21C7fd0v3bYYYRCpSSRl31A19Xg5YCxz26FXh2mHNU6iUanMTY",
+			"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
+			"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
+			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+		},
+		"CORREO_API": "v11-presidente@hotmail.com",
+		"CORREO_USR_API": "cc10-comprador@hotmail.com",
+		"URL_REFUND": "https://svcs.sandbox.paypal.com/AdaptivePayments/Refund",
+		"URL_EXECUTE": "https://svcs.sandbox.paypal.com/AdaptivePayments/ExecutePayment",
+		"URL_PAY": "https://svcs.sandbox.paypal.com/AdaptivePayments/Pay",
+		"URL_GOPAY": "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
+	}
+else:
+	ACCESO_API_PAYPAL = {
+		"HEADERS_API": {
+			"X-PAYPAL-SECURITY-USERID": "luistena.developer_api1.hotmail.com",
+			"X-PAYPAL-SECURITY-PASSWORD": "2KYBFK4XZRP6CAUB",
+			"X-PAYPAL-SECURITY-SIGNATURE": "A3gtadA.qm-wBsRRzcYXSiDI4VENAX3WSHA1VSmNyC10FMVOPDPc28wb",
+			"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
+			"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
+			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+		},
+		"CORREO_API": "luistena.developer@hotmail.com",
+		"CORREO_USR_API": "",
+		"URL_REFUND": "https://svcs.paypal.com/AdaptivePayments/Refund",
+		"URL_EXECUTE": "https://svcs.paypal.com/AdaptivePayments/ExecutePayment",
+		"URL_PAY": "https://svcs.paypal.com/AdaptivePayments/Pay",
+		"URL_GOPAY": "https://www.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
+	}

@@ -20,12 +20,14 @@ urlpatterns = patterns('geoservicios.views',
 	url('^configuracion/$', 'configurar_cta'),
 	url('^borrar-cta/$', 'borrar_cta'),
 	url('^lengua/$', 'cambiar_idioma'),
-	url('^recuperar-cuenta/clave=(?P<clave>[a-zA-Z0-9-_\+]+)&correo=(?P<correo>[a-zA-Z0-9-_]+@[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+)$', 'recuperar_pw'),
+	url('^recuperar-cuenta/clave=(?P<clave>[a-zA-Z0-9-_\+]+)&correo=(?P<correo>[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+)$', 'recuperar_pw'),
 	url('^recuperar-cuenta/$', 'recuperar_pw'),
 
-	url('^categoria/(?P<cat>[a-zA-Z-]+)/$', 'ver_categoria'),
-	url('^categoria/(?P<cat>[a-zA-Z-]+)/(?P<subcat>[a-zA-Z-\+\.]+)/$', 'ver_subcategoria'),
-	url('^categoria/(?P<cat>[a-zA-Z-]+)/[a-zA-Z-\+\.]+/(?P<serv>[0-9a-zA-Z-]+)/$', 'ver_servicio'),  # xPENSAR: es seguro incluir el ' ya q los gringos lo usan mucho...?
+	url('^categoria/(?P<cat>[a-zA-Z0-9-]+)/$', 'ver_categoria'),
+	url('^categoria/(?P<cat>[a-zA-Z0-9-]+)/(?P<subcat>[a-zA-Z0-9-+]+)/$', 'ver_subcategoria'),
+	url('^categoria/(?P<cat>[a-zA-Z0-9-]+)/[a-zA-Z0-9-+]+/(?P<serv>[a-zA-Z0-9-+]+)/$', 'ver_servicio'),
+	# xPENSAR: ¿es seguro incluir el ' ya q los gringos lo usan mucho...?
+	# NOTA: servicio es el nombre "uerelizado" osea en forma de url, osea sin vainas raras solo simbolos basicos de una url
 	#url('^cuadroHonor/$', 'ver_cuadro_honor'),
 
 	url('^enlistar-usuario/(?P<usr>[a-zA-Z0-9_]+)/$', 'enlistar_usuario'),

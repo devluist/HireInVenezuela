@@ -1019,6 +1019,18 @@ small#beta {
 	padding: 4px 9px 1px 17px;
 }
 
+#btn-traducir {
+	padding: 3px 10px 2px 30px;
+}
+
+
+.glyphicon-globe {
+	vertical-align: text-top;
+    margin-left: -15px;
+    left: 25px;
+    top: 3px;
+}
+
 @media (min-width: 768px ){
 	.navbar-nav-mio>li>a{
 		padding-top: 12px;
@@ -1058,6 +1070,10 @@ small#beta {
 	}
 	i.glyphicon.glyphicon-chevron-right.mas {
 		top: 0px;
+	}
+	#btn-buscar{
+	    margin-left: -5px; 
+		margin-top: -5px; 
 	}
 }
 
@@ -1104,6 +1120,15 @@ small#beta {
 	}
 	.btn-mio {
 		padding: 5px 11px 3px 11px;
+	}
+	#btn-traducir {
+		padding: 3px 10px 2px 30px;
+	}
+	.glyphicon-globe {
+		vertical-align: text-top;
+	    margin-left: -15px;
+	    left: 30px;
+	    top: 3px;
 	}
 }
 
