@@ -6,9 +6,6 @@ from django.conf.urls import patterns, url, include
 from django.contrib import admin
 
 urlpatterns = patterns('geoservicios.views',
-	## Examples:
-	## url(r'^$', 'hv.views.home', name='home'),
-	## url(r'^blog/', include('blog.urls')),
 	url('^$', 'inicio'),
 
 	url('^buscar/$', 'buscar'),
