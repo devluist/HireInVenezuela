@@ -9,7 +9,6 @@ import os
 
 desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
 desarrollando_en_paypal = False
-fail_silently = True if desarrollando else False
 URL_SITIO = "http://buy-2venezuela.rhcloud.com/perfil/" if not desarrollando else "localhost:8000/"
 DEBUG = False  # True
 
@@ -193,7 +192,9 @@ ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
 
 if desarrollando:
 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+	MUESTRA_ERRORES_SMTP = True
 else:
+	MUESTRA_ERRORES_SMTP = False
 	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 	EMAIL_USE_TLS = True
 	EMAIL_HOST = 'smtp-mail.outlook.com'

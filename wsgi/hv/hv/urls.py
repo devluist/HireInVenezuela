@@ -4,6 +4,7 @@ from settings import desarrollando
 from postman.views import ConversationView
 from django.conf.urls import patterns, url, include
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 urlpatterns = patterns('geoservicios.views',
 	url('^$', 'inicio'),
@@ -24,7 +25,7 @@ urlpatterns = patterns('geoservicios.views',
 
 	url('^categoria/(?P<cat>[a-zA-Z-]+)/$', 'ver_categoria'),
 	url('^categoria/(?P<cat>[a-zA-Z-]+)/(?P<subcat>[a-zA-Z-\+\.]+)/$', 'ver_subcategoria'),
-	url('^categoria/(?P<cat>[a-zA-Z-]+)/[a-zA-Z-+]+/(?P<serv>[0-9a-zA-Z-]+)/$', 'ver_servicio'),  # xPENSAR: es seguro incluir el ' ya q los gringos lo usan mucho...?
+	url('^categoria/(?P<cat>[a-zA-Z-]+)/[a-zA-Z-\+\.]+/(?P<serv>[0-9a-zA-Z-]+)/$', 'ver_servicio'),  # xPENSAR: es seguro incluir el ' ya q los gringos lo usan mucho...?
 	#url('^cuadroHonor/$', 'ver_cuadro_honor'),
 
 	url('^enlistar-usuario/(?P<usr>[a-zA-Z0-9_]+)/$', 'enlistar_usuario'),
@@ -43,6 +44,8 @@ urlpatterns = patterns('geoservicios.views',
 	(r'^mensajeria/', include('postman.urls', namespace='postman', app_name='postman')),
 
 	url('^admin/', include(admin.site.urls)),
+	url(r'^googlea6116be28450736e\.html/', TemplateView.as_view(template_name="googlea6116be28450736e.html")),
+	#url('googlea6116be28450736e.html', )
 
 	# xHACER:  url('^borrar/(?P<id_tlmsj>\\d+)/$', 'borrar'),
 )

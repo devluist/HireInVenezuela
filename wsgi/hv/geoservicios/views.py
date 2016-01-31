@@ -21,7 +21,7 @@ from os import mkdir, access, F_OK
 from datetime import datetime  # , date
 from hashlib import sha1
 import re, urllib2, json
-from hv.settings import ACCESO_API_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL, URL_SITIO  # ,PRECIO_POR_DOLAR, ANIO_INICIO_CH
+from hv.settings import ACCESO_API_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL, URL_SITIO, MUESTRA_ERRORES_SMTP  # ,PRECIO_POR_DOLAR, ANIO_INICIO_CH
 
 #----------------------------------------------------------
 #---------------------  Inicializando  --------------------
@@ -866,7 +866,7 @@ def recuperar_pw(request, clave="", correo=""):
 					}[idioma]
 					from hv.settings import EMAIL_HOST_USER
 					try:
-						send_mail(asunto, msj, EMAIL_HOST_USER, [receptor.email])
+						send_mail(asunto, msj, EMAIL_HOST_USER, [receptor.email], fail_silently=MUESTRA_ERRORES_SMTP)
 					except BadHeaderError:
 						datos["mensaje"] = 'Error: Cabecera del correo invalida.'
 					else:

@@ -384,9 +384,9 @@ label, .enlace-sesion {
 }
 
 .imag {
-	/*padding: 0;*/
-	border: 4px solid #FFF;
-	height: 80px;
+	padding: 0;
+    margin-right: 10px;
+    height: 80px;
 }
 
 .imag-perfil {
@@ -1012,6 +1012,13 @@ small#beta {
 #5D2B60
 */
 
+
+.btn-mio{
+	font-size: 15px;
+	border-radius: 0;
+	padding: 4px 9px 1px 17px;
+}
+
 @media (min-width: 768px ){
 	.navbar-nav-mio>li>a{
 		padding-top: 12px;
@@ -1024,7 +1031,7 @@ small#beta {
 	.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus,
 	.navbar-brand-mio:hover, .navbar-brand-mio:focus {
 		box-shadow: inset 0 6px #CCC;
-		padding: 15px 15px 11px;
+		padding: 15px 15px 12px;
 	}
 	.menu-servicio a{
 		color: #FFF !important;
@@ -1042,11 +1049,7 @@ small#beta {
 	.frase {
 		margin-top: 30px;
 	}
-	.btn-mio {
-		margin-top: -6px;
-		margin-left: -5px;
-		padding: 6px 15px 5px;
-	}
+	
 	.glyphicon{
 		top: 3px;
 	}
@@ -1099,17 +1102,8 @@ small#beta {
 	.glyphicon.glyphicon-search:empty {
 		width: inherit;
 	}
+	.btn-mio {
+		padding: 5px 11px 3px 11px;
+	}
 }
 
-.btn-mio{
-	font-size: 15px;
-	border-radius: 0;
-	/* xHACER:
-		# quitarlo como boton y ponerlo dentro del cuadro de busqueda dejando su padding
-	*/
-}
-
-.btn-mio-idioma {
-	margin: 0px auto auto -28px;
-	padding: 4px 10px 1px 30px;
-}

@@ -46,7 +46,7 @@
 				</div>
 				<div class="form-group en-linea pull-right" style="margin-right: 5px;">
 					{% csrf_token %}
-					<select class="form-control form-controlado" name="language" style="height: 28px;">
+					<select class="form-control form-controlado" name="language" style="height: 28px;margin-right: 3px;padding-right: 0px;">
 						{% get_language_info_list for idiomas_disponibles as idiomas_disponibles %}
 						{% get_current_language as LANGUAGE_CODE %}
 						{% for idioma in idiomas_disponibles %}
