@@ -34,13 +34,6 @@ from hv.settings import ACCESO_API_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COM
 
 getcontext().prec = 5
 
-# xDEPURAR: y si mas bien lo pongo en la funcion xq esto se hace cada vez q hay una peticion y no para todas las vistas son necesarios estos datos
-LISTA_SUBCATEGORIAS = []
-CATEGORIAS = Categoria.objects.filter(url__padre=None)
-for i, cat in enumerate(CATEGORIAS):
-	LISTA_SUBCATEGORIAS.append([i, Categoria.objects.filter(url__padre=cat.url)])
-
-
 ##############################
 ##############  FUNCIONES
 ##############################
@@ -634,7 +627,7 @@ def inicializar_niveles():
 def datos_perfil_venezolano(perfil, idioma):
 	# es distinto pedir cantidad de servicios por las urls que por los servicios...
 	urls = UrlServicio.objects.filter(vendedor=perfil)
-	servis = ServicioVirtual.objects.filter(url__in=urls, eliminado=False)
+	servis = ServicioVirtual.objects.filter(url__in=urls, eliminado=False, )
 	cant_servicios = servis.count()
 	facturas = Factura.objects.filter(url_servicio__vendedor=perfil)
 	n_facturas = facturas.count()
@@ -661,6 +654,10 @@ def datos_perfil_venezolano(perfil, idioma):
 		prom, te, exp, atencion, calidad = 0, 0, 0, 0, 0
 	nivel_usr = NivelUsuario.objects.get(usuario=perfil)
 	# u_extras = get_object_or_404(DatosExtraPerfil, usuario__iexact=usuario)
+	LISTA_SUBCATEGORIAS = []
+	CATEGORIAS = Categoria.objects.filter(url__padre=None, idioma=idioma)
+	for i, cat in enumerate(CATEGORIAS):
+		LISTA_SUBCATEGORIAS.append([i, Categoria.objects.filter(url__padre=cat.url, idioma=idioma)])
 	datos = {
 		'vacacionando': "Si" if perfil.vacacionando else "No, Trabajando",
 		'prom': prom,
@@ -1424,6 +1421,7 @@ def ver_perfil(request, usr):
 			for f in facturas:
 				invertido += f.comprador_pago
 			# valoraciones = Valoracion.objects.get(evaluador=perfil).count()  # xHACER: debo depurar q hacer luego de q se termina la operacion de compra
+		CATEGORIAS = Categoria.objects.filter(url__padre=None, idioma=idioma)
 		datos['perfil'] = perfil
 		datos['invertido'] = invertido
 		datos['n_compras'] = n_facturas
@@ -1517,6 +1515,10 @@ def crear_servicio(request):
 				cont = cont[: len(cont) - 4]  # le quito el ultimo <br>
 			id_subc = int(request.POST['subc'])
 			id_cat = int(request.POST['subcategoria'])
+			LISTA_SUBCATEGORIAS = []
+			CATEGORIAS = Categoria.objects.filter(url__padre=None, idioma=idioma)
+			for i, cat in enumerate(CATEGORIAS):
+				LISTA_SUBCATEGORIAS.append([i, Categoria.objects.filter(url__padre=cat.url, idioma=idioma)])
 			subc = LISTA_SUBCATEGORIAS[id_cat][1][id_subc]
 			try:
 				precio = Decimal(request.POST['precio'])

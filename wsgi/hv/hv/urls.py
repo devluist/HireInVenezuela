@@ -41,12 +41,12 @@ urlpatterns = patterns('geoservicios.views',
 	url('^oportunidades-(?P<tipo>inversion|empleo)/$', 'mostrar_oportunidad'),
 	url('^contacto/$', 'contactar_empresa'),
 
-	url(r'^discusion/(?P<thread_id>[\d]+)/(?P<obj_cola>[\d]+)/$', ConversationView.as_view(template_name='postman/discusion.html'), name='view_conversation'),
-	url(r'^discusion/(?P<thread_id>[\d]+)/(?P<obj_cola>[\d]+)/(?P<msj>[\d]+)/$', ConversationView.as_view(template_name='postman/discusion.html'), name='view_conversation'),
-	(r'^mensajeria/', include('postman.urls', namespace='postman', app_name='postman')),
+	url('^discusion/(?P<thread_id>[\d]+)/(?P<obj_cola>[\d]+)/$', ConversationView.as_view(template_name='postman/discusion.html'), name='view_conversation'),
+	url('^discusion/(?P<thread_id>[\d]+)/(?P<obj_cola>[\d]+)/(?P<msj>[\d]+)/$', ConversationView.as_view(template_name='postman/discusion.html'), name='view_conversation'),
+	url('^mensajeria/', include('postman.urls', namespace='postman', app_name='postman')),
 
 	url('^admin/', include(admin.site.urls)),
-	url(r'^googlea6116be28450736e.html/$', TemplateView.as_view(template_name="googlea6116be28450736e.html")),
+	url('^googlea6116be28450736e.html/$', TemplateView.as_view(template_name="googlea6116be28450736e.html")),
 	url('^robots.txt/$', TemplateView.as_view(template_name="robots.txt")),
 	url('^sitemap.xml/$', TemplateView.as_view(template_name="sitemap.xml")),
 
