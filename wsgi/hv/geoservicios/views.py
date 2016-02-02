@@ -1515,6 +1515,7 @@ def crear_servicio(request):
 				cont = cont[: len(cont) - 4]  # le quito el ultimo <br>
 			id_subc = int(request.POST['subc'])
 			id_cat = int(request.POST['subcategoria'])
+			idioma = request.LANGUAGE_CODE
 			LISTA_SUBCATEGORIAS = []
 			CATEGORIAS = Categoria.objects.filter(url__padre=None, idioma=idioma)
 			for i, cat in enumerate(CATEGORIAS):

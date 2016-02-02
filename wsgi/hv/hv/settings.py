@@ -11,7 +11,8 @@ import os
 
 desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
 desarrollando_en_paypal = False
-DEBUG = False  # True
+
+
 
 DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -120,6 +121,7 @@ POSTMAN_AUTO_MODERATE_AS = True
 
 
 if desarrollando:
+	DEBUG = True
 	STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 	STATICFILES_DIRS = (
 		os.path.join(WSGI_DIR, 'static/'),
@@ -142,6 +144,7 @@ if desarrollando:
 	MUESTRA_ERRORES_SMTP = True
 
 else:
+	DEBUG = False
 	STATIC_ROOT = os.path.join(WSGI_DIR, 'multimedia/')
 	DATABASES = {
 		'default': {
@@ -161,7 +164,6 @@ else:
 	EMAIL_HOST_USER = 'des.luistena@hotmail.com'
 	EMAIL_HOST_PASSWORD = 'm@m@rr@d3cl@v32'
 	EMAIL_PORT = 587
-
 
 
 if desarrollando_en_paypal:
