@@ -109,7 +109,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ADMIN_MEDIA_PREFIX = '/multimedia/admin/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 #####################
 # solo para jugar con ipython
