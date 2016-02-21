@@ -13,5 +13,5 @@ Disallow:/traducir-servicio/
 Disallow:/comprando/
 Disallow:/facturas/
 Disallow:/sugerencia/
-Disallow:/admin/
+Disallow:/quien-eres/
 Disallow:/googlea6116be28450736e.html/
