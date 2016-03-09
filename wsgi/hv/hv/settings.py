@@ -159,7 +159,7 @@ else:
 			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT', "") # '5432'
 		}
 	}
-	MULTIMEDIA_EN = {"css":"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0", "js":"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js"}
+	MULTIMEDIA_EN = {"css":"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/", "jsjq":"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/", "jsboot":"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/"}
 	URL_SITIO = "http://hireInVenezuela.com/"
 	MUESTRA_ERRORES_SMTP = False
 	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
