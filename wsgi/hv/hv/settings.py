@@ -138,7 +138,7 @@ if desarrollando:
 			'PORT': '5432'
 		}
 	}
-	MULTIMEDIA_EN = {"css":"/static/css", "js":"/static/js"}
+	MULTIMEDIA_EN = {"css":"/static/css/", "jsjq":"/static/js/", "jsboot":"/static/js/"}
 	URL_SITIO = "http://localhost:8000/"
 	MEDIA_URL = '/media/'
 	MEDIA_ROOT = os.path.join(DATA_DIR, 'subidos/')  # '~/hv/Multimedia/images/'
