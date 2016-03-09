@@ -33,7 +33,7 @@ body{
 .intro{
 	font-family: GeosansLight, Lucida Sans, Segoe UI, Roboto, Arial, Helvetica, sans-serif;
 	/* xHACER: # verificar q tengo el copyright pa usar esas fuentes 	*/
-	font-size: 55px;
+	font-size: 60px;
 	line-height:inherit;
 	line-height: initial;
 	line-height: 45px;
@@ -176,7 +176,7 @@ body{
 }
 /* xHACER:  	# optimizar caja-serv y perfil en uno solo */
 .caja-perfil {
-	height: 270px !important;
+	height: 300px !important;
 	float: left;
 	margin: 0 15px 35px 0;
 	border: 1px solid #DDD;

@@ -58,7 +58,7 @@
 						{% endif %}
 					</a>
 				</p>
-				<img src="{% static 'images/falta.png' %}" width="100%" height="200px" alt="Right now the server cant upload images">
+				<img src="{% static 'images/falta.png' %}" width="100%" height="200px" alt="The server cant upload images right now">
 			 	{% comment %}<!-- <img {{servicio.imagen.url}} data-src="holder.js/300x200" alt="..."> -->{% endcomment %}
 			</div>
 			<div class="col-md-8 col-md-offset-1 descrip-serv">
@@ -115,7 +115,7 @@
 							{% if servicio.url.vendedor == perfil_logueado %}
 								<button type="button" id="traduce_luego_envia" data-toggle="modal" data-target=".modal-traducirserv" class="btn-contratar">Traducir</button>
 							{% elif not perfil_logueado %}
-								<a href="/" class="btn btn-contratar" style="margin-left: -2px;font-size: 13px;" title="Crear cuenta en HI">Sign up to<br>hire</a>
+								<a href="/" class="btn btn-contratar" style="margin-left: -2px;font-size: 13px;" title="Create an HI account">Sign up to<br>hire</a>
 							{% elif perfil_logueado.es_venezolano %}
 							{% else %}
 								<button type="submit" class="btn-contratar">Hire</button>
@@ -237,7 +237,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Mode Edition</h4>
+						<h4 class="modal-title">Edition Mode</h4>
 					</div>
 					<form action="/categoria/{{ categoria }}/{{ categoria.urlsubcategoria }}/{{ servicio.url }}/" method="post" accept-charset="utf-8">
 						{% csrf_token %}
@@ -279,7 +279,7 @@
 						{% csrf_token %}
 						<div class="modal-body row">
 							{% get_language_info for servicio.idioma as idiom %}
-							<p>¿Are you sure to remove this service in its version for the <b>{{ idiom.name_local|capfirst }}</b> language?</p>
+							<p>¿Are you sure you want to remove this service in its version for the <b>{{ idiom.name_local|capfirst }}</b> language?</p>
 							<input type="hidden" name="eliminar" value="1">
 							<input type="hidden" name="idioma_serv" value="{{ servicio.idioma }}">
 						</div>

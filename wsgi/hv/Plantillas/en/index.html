@@ -1,5 +1,5 @@
 {% load i18n %}
-{% block extrahead %}<title>Buy-2venezuela</title>{% endblock %}
+{% block extrahead %}<title>Hire In Venezuela</title>{% endblock %}
 {% include "en/menu-superior.html" %}
 {% load static from staticfiles %}
 {% if mensaje %}
@@ -9,7 +9,7 @@
 {% endif %}
 <div class="row presentacion">
 	<div class="col-md-6">
-		<span class="intro">Buy-2venezuela<small id="beta"> beta</small></span><br>
+		<span class="intro">Hire<small id="beta">In</small>Venezuela<small id="beta"> (beta)</small></span><br>
 		<hr class="separa-intro">
 		<div class="eslogan">The only place to buy and sell services from Venezuela. If you are from a foreign country you will get quality services at a good price while you help Venezuelan cause. Register now! its free, easy and safe</div>
 		{% comment %}<a class="btn btn-intro pull-right" type="button" href="#">Tell me more!</a>{% endcomment %}
@@ -26,7 +26,7 @@
 			<div id="comnt" class="tab-pane active media">
 				<img src="{% static 'images/logo.jpg'  %}" width="100px" height="80px" class="imag img-responsive media-object pull-left">
 				<div class=" media-body">
-					<span class="comilla">"</span> From the beginning of this project it have created MILLIONS of jobs in Venezuela. Thanks for helping us!<span class="comilla">"</span>
+					<span class="comilla">"</span> From the beginning of this project it has created MILLIONS of jobs in Venezuela. Thanks for helping us!<span class="comilla">"</span>
 					<span class="nombre">Luis Tena</span>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 								<input class="caja-txt-form" type="password" name="pw" placeholder="Password">
 							</div>
 							{% comment %}<label class=""><input class="checkb" type="checkbox" name="mantenido"> Stay Logged</label>{% endcomment %}
-							<a href="/recuperar-cuenta/" class="enlace-sesion">I forgot my data!</a>
+							<a href="/recuperar-cuenta/" class="enlace-sesion">I forgot my information!</a>
 						</div>
 						<input type="submit" value="Start!" class="col-sm-12 col-md-4 envia-form">
 					</form>
@@ -102,7 +102,7 @@
 						</a>
 					</div>
 				 	<div class="cara-principal">
-						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="Right now the server cant upload images">
+						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="The server cant upload images right now">
 				 		{% comment %}<!-- <img {{ gs.imagen.url }} data-src="holder.js/300x200" alt="..."> -->{% endcomment %}
 					 	<div class="dir-serv">
 							<div class="row">
@@ -147,7 +147,7 @@
 						</a>
 					</div>
 				 	<div class="cara-principal">
-						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="Right now the server cant upload images">
+						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="The server cant upload images right now">
 				 		{% comment %}<!-- <img{{ sv.imagen.url }} data-src="holder.js/300x200" alt="..."> -->{ % endcomment %}
 					 	<div class="dir-serv">
 							<div class="row">
@@ -343,6 +343,3 @@
 		</div>
 	</div>
 </div>
-{% if logueado %}
-	{% include "en/modal-sugerencia.html" %}
-{% endif %}

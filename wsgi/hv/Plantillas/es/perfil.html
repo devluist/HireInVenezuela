@@ -68,9 +68,9 @@
 							<li>Experiencia: <span class="pull-right">{{ exp }}</span></li>
 							<br>
 							{% if perfil_propio %}
-								<li><a href="/lista-solicitudes-servicio/">Solicitudes de Servicio</a></li>
-								<li><a href="/facturas/">Servicios Terminados</a></li>
-							 	<li><a href="#" data-toggle="modal" data-target=".modal-crearservicio">Crear Servicio</a></li>
+								<li><a class="btn btn-default" href="/lista-solicitudes-servicio/">Solicitudes de Servicio</a></li>
+							 	<li><a class="btn btn-default" href="#" data-toggle="modal" data-target=".modal-crearservicio">Crear Servicio</a></li>
+								<li><a class="btn btn-default" href="/facturas/">Servicios Terminados</a></li>
 							{% endif %}
 							{% if logueado and not perfil_logueado.es_venezolano and perfil_logueado != perfil and not perfil_propio %}
 								<li><a href="{% url 'postman:write' perfil %}" title="¿Tienes preguntas sobre el servicio?" >Chatear con usuario</a></li>
@@ -83,7 +83,7 @@
 							<li class="titulo-categoria">Estad&iacute;sticas</li>
 							<li><b>Promedio de Puntuaci&oacute;n:</b></li>
 							<li>Promedio General: <span class="pull-right">{{ prom }}</span></li>
-							<li>Atencion al Cliente: <span class="pull-right">{{ atencion }}</span></li>
+							<li>Atenci&oacute;n al Cliente: <span class="pull-right">{{ atencion }}</span></li>
 							<li>Calidad del resultado: <span class="pull-right">{{ calidad }}</span></li>
 							<li>Tiempo de entrega: <span class="pull-right">{{ tiempo_entrega }}</span></li>
 							<br>

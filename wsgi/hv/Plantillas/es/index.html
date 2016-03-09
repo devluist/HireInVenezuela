@@ -1,5 +1,5 @@
 {% load i18n %}
-{% block extrahead %}<title>Buy-2venezuela</title>{% endblock %}
+{% block extrahead %}<title>Hire In Venezuela</title>{% endblock %}
 {% include "es/menu-superior.html" %}
 {% load static from staticfiles %}
 {% if mensaje %}
@@ -9,7 +9,7 @@
 {% endif %}
 <div class="row presentacion">
 	<div class="col-md-6">
-		<span class="intro">Buy-2venezuela<small id="beta"> beta</small></span><br>
+		<span class="intro">Hire<small id="beta">In</small>Venezuela<small id="beta"> (beta)</small></span><br>
 		<hr class="separa-intro">
 		<div class="eslogan">El &uacute;nico lugar donde podr&aacute;s vender servicios directamente a extranjeros, recuperando tu poder adquisitivo mientras ayudas a Venezuela. Si eres extranjero podr&aacute;s acceder a servicios de calidad a buen precio. Ingresa ya! es gratis, f&aacute;cil y seguro</div>
 		{% comment %}<a class="btn btn-intro pull-right" type="button" href="#">Dime m&aacute;s!</a>{% endcomment %}
@@ -343,6 +343,3 @@
 		</div>
 	</div>
 </div>
-{% if logueado %}
-	{% include "en/modal-sugerencia.html" %}
-{% endif %}

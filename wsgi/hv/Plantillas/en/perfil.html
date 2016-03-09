@@ -67,14 +67,14 @@
 							<li>Experience: <span class="pull-right">{{ exp }}</span></li>
 							<br>
 							{% if perfil_propio %}
-								<li><a href="/lista-solicitudes-servicio/">Waiting List</a></li>
-								<li><a href="/facturas/">Completed Services</a></li>
-							 	<li><a href="#" data-toggle="modal" data-target=".modal-crearservicio">Create a Service</a></li>
+								<li><a class="btn btn-default" href="/lista-solicitudes-servicio/">Waiting List</a></li>
+							 	<li><a class="btn btn-default" href="#" data-toggle="modal" data-target=".modal-crearservicio">Create a Service</a></li>
+								<li><a class="btn btn-default" href="/facturas/">Completed Services</a></li>
 							{% endif %}
 							{% if logueado and not perfil_logueado.es_venezolano and perfil_logueado != perfil and not perfil_propio %}
 								<li><a href="{% url 'postman:write' perfil %}" title="¿Tienes preguntas sobre el servicio?" >Chat with..</a></li>
 							{% endif %}
-							{% comment %}<li><button>To denounce</button></li>{% endcomment %}
+							{% comment %}<li><button>Report User</button></li>{% endcomment %}
 						</ul>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 caja-perfil caja-titulo" style="width: auto; max-width: 729px; margin-right: 0;  min-width: 235px;">
@@ -84,7 +84,7 @@
 							<li>General Average: <span class="pull-right">{{ prom }}</span></li>
 							<li>Client Support: <span class="pull-right">{{ atencion }}</span></li>
 							<li>Quality of results: <span class="pull-right">{{ calidad }}</span></li>
-							<li>Time of delivery: <span class="pull-right">{{ tiempo_entrega }}</span></li>
+							<li>Delivery Time: <span class="pull-right">{{ tiempo_entrega }}</span></li>
 							<br>
 							<li>Profit: <span class="pull-right">{{ ganancias }}</span></li>
 							{% comment %}<li>N&deg; Visits to GeoServicios: <span class="pull-right">{{ visitas }}</span></li>{% endcomment %}
@@ -102,7 +102,7 @@
 							<thead>
 								<th class="col-md-6">Name of Service</th>
 								<th class="col-md-2">N&deg; Users on hold</th>
-								<th class="col-md-2">N&deg; Sells</th>
+								<th class="col-md-2">N&deg; Sales</th>
 								<th class="col-md-2">N&deg; Cancels</th>
 							</thead>
 							<tbody>
@@ -166,7 +166,7 @@
 									</div>
 								{% endfor %}
 							{% else %}
-								<p class="text-center" ><br>You have not chosen or it has not been accepted (by sellers) new services yet.</p> <!-- xHACER: que sea mejores cuando se añada la valoracion	-->
+								<p class="text-center" ><br>New services have not been accepted or you have not requested one.</p> <!-- xHACER: que sea mejores cuando se añada la valoracion	-->
 							{% endif %}
 						{% endif %}
 					</div>
@@ -205,7 +205,7 @@
 							{% endfor %}
 						{% else %}
 							<div class="titulo-categoria"  style="background: #BE2A2D;margin-bottom:0">Waiting List</div>
-							<p class="text-center" ><br>No request so far... You can check our categories and <a href="/nuevos-servicios/">find</a> something you want  ;)</p>
+							<p class="text-center" ><br>No requests so far... You can check our categories and <a href="/nuevos-servicios/">find</a> something you want  ;)</p>
 						{% endif %}
 					</div>
 				</div>

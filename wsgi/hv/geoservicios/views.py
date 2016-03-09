@@ -21,7 +21,7 @@ from os import mkdir, access, F_OK
 from datetime import datetime  # , date
 from hashlib import sha1
 import re, urllib2, json
-from hv.settings import ACCESO_API_PAYPAL, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL, URL_SITIO, MUESTRA_ERRORES_SMTP  # ,PRECIO_POR_DOLAR, ANIO_INICIO_CH
+from hv.settings import ACCESO_API_PAYPAL, MULTIMEDIA_EN, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL, URL_SITIO, MUESTRA_ERRORES_SMTP  # ,PRECIO_POR_DOLAR, ANIO_INICIO_CH
 
 #----------------------------------------------------------
 #---------------------  Inicializando  --------------------
@@ -681,6 +681,7 @@ def datos_perfil_venezolano(perfil, idioma):
 		# 'n_servicios_cancelados': cancelada,
 		"pag_activa": idioma + "/perfil.html",
 		"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+		"MULTIMEDIA_EN": MULTIMEDIA_EN
 	}
 	return datos
 
@@ -795,6 +796,7 @@ def mostrar_oportunidad(request, tipo):
 		"tipo_oport": tipo,
 		"pag_activa": idioma + "/oportunidades.html",
 		"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+		"MULTIMEDIA_EN": MULTIMEDIA_EN
 	}
 	if request.user.is_authenticated():
 		p = get_object_or_404(Perfil, usuario=request.user)
@@ -819,6 +821,7 @@ def recuperar_pw(request, clave="", correo=""):
 				"cambiar_contra": True,
 				"correo_usr": correo,
 				"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+				"MULTIMEDIA_EN": MULTIMEDIA_EN
 			}
 			try:
 				clave = enigma.unsign(correo+":"+clave.replace("+",":"), max_age = 86400)  # 86400 segundos = un dia
@@ -832,6 +835,7 @@ def recuperar_pw(request, clave="", correo=""):
 				"pag_activa": idioma + "/recuperar-pw.html",
 				"cambiar_contra": False,
 				"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+				"MULTIMEDIA_EN": MULTIMEDIA_EN				
 			}
 		if request.method == "POST":
 			correo = request.POST.get("correo", "")
@@ -840,6 +844,7 @@ def recuperar_pw(request, clave="", correo=""):
 			datos = {
 				"pag_activa": idioma + "/index.html",
 				"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+				"MULTIMEDIA_EN": MULTIMEDIA_EN
 			}
 			if correo:
 				try:
@@ -918,6 +923,7 @@ def buscar(request):
 				'consulta': consulta,
 				'pag_activa': idioma + "/busqueda.html",
 				'idiomas_disponibles': IDIOMAS_DISPONIBLES,
+				"MULTIMEDIA_EN": MULTIMEDIA_EN
 			}
 		if request.user.is_authenticated():
 			p = get_object_or_404(Perfil, usuario=request.user)
@@ -929,6 +935,7 @@ def buscar(request):
 		"formbuscar": FormBuscar(),
 		"pag_activa": idioma + "/busqueda.html",
 		"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+		"MULTIMEDIA_EN": MULTIMEDIA_EN
 	}
 	return HttpResponseRedirect(reverse('/', datos))
 
@@ -966,6 +973,7 @@ def destacados(request, vista):
 			'vista': vista,
 			'pag_activa': idioma + "/destacados.html",
 			'idiomas_disponibles': IDIOMAS_DISPONIBLES,
+			"MULTIMEDIA_EN": MULTIMEDIA_EN
 		}
 		if request.user.is_authenticated():
 			p = get_object_or_404(Perfil, usuario=request.user)
@@ -976,6 +984,7 @@ def destacados(request, vista):
 	datos = {
 		"pag_activa": idioma + "/destacados.html",
 		"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+		"MULTIMEDIA_EN": MULTIMEDIA_EN
 	}
 	return HttpResponseRedirect(reverse('/', datos))
 
@@ -999,6 +1008,7 @@ def inicio(request):
 		# 'servicios_valorados': Valoracion.objects.all()[:8],
 		# 'LANGUAGES': settings.LANGUAGES,
 		'idiomas_disponibles': IDIOMAS_DISPONIBLES,
+		"MULTIMEDIA_EN": MULTIMEDIA_EN,
 		# 'val': val,
 	}
 	if request.user.is_authenticated():
@@ -1020,6 +1030,7 @@ def sesionar_usr(request):
 		datos = {
 			"pag_activa": idioma + "/index.html",
 			"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+			"MULTIMEDIA_EN": MULTIMEDIA_EN
 		}
 		try:
 			# xHACER: estos Post estan filtrados!
@@ -1082,7 +1093,8 @@ def proceso_compra(request):
 					datos = {
 						"msj": "Hubo un error en el procesamiento del pago. Por favor vuelva a intetarlo, si persiste el error contacte a nuestro personal.",
 						'pag_activa': idioma + "/index.html",
-						'idiomas_disponibles': IDIOMAS_DISPONIBLES
+						'idiomas_disponibles': IDIOMAS_DISPONIBLES,
+						"MULTIMEDIA_EN": MULTIMEDIA_EN
 					}
 					if request.user.is_authenticated():
 						p = get_object_or_404(Perfil, usuario__username = request.user)
@@ -1113,6 +1125,7 @@ def proceso_compra(request):
 						'perfil_logueado': p,
 						"pag_activa": idioma + "/index.html",
 						"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+						"MULTIMEDIA_EN": MULTIMEDIA_EN
 					}
 					if bien:
 						Cola.objects.filter(id=serv_cola.id).update(estatus="C")
@@ -1136,6 +1149,7 @@ def registrar_usr(request):
 		datos = {
 			"pag_activa": idioma + "/index.html",
 			"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+			"MULTIMEDIA_EN": MULTIMEDIA_EN
 		}
 		if not re.match('^[a-zA-Z0-9_]+$', request.POST['usuario']):
 			datos["mensaje"] = 'El nombre de usuario solo puede contener letras, numeros y _'
@@ -1211,6 +1225,8 @@ def ver_categoria(request, cat):
 		'subcategorias': subcategorias,
 		"pag_activa": idioma + "/categoria.html",
 		"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+		"MULTIMEDIA_EN": MULTIMEDIA_EN,
+		"URL_SITIO": URL_SITIO
 	}
 	if request.user.is_authenticated():
 		p = get_object_or_404(Perfil, usuario=request.user)
@@ -1259,6 +1275,8 @@ def ver_subcategoria(request, cat, subcat):
 		'subcategorias': subcategorias,
 		"pag_activa": idioma + "/categoria.html",
 		"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+		"MULTIMEDIA_EN": MULTIMEDIA_EN,
+		"URL_SITIO": URL_SITIO
 	}
 	if request.user.is_authenticated():
 		p = get_object_or_404(Perfil, usuario=request.user)
@@ -1350,6 +1368,7 @@ def ver_servicio(request, cat, serv):
 		'servicio': serv,
 		'contrato': contrato,
 		'categoria': cat,
+		"MULTIMEDIA_EN": MULTIMEDIA_EN,
 		#'servs_satelite': extras,
 	}
 	msj = request.GET.get("mensaje", None)  # xHACER: request.POST.get("mensaje", None)
@@ -1378,6 +1397,7 @@ def ver_perfil(request, usr):
 		data["mensaje"] = "Este usuario ha borrado su cuenta o no existe"
 		data["pag_activa"] = idioma + "/index.html"
 		data["idiomas_disponibles"] = IDIOMAS_DISPONIBLES
+		data["MULTIMEDIA_EN"] = MULTIMEDIA_EN
 		return render(request, 'base.html', data)
 	if perfil.es_venezolano:
 		datos = datos_perfil_venezolano(perfil, idioma)
@@ -1424,6 +1444,7 @@ def ver_perfil(request, usr):
 		CATEGORIAS = Categoria.objects.filter(url__padre=None, idioma=idioma)
 		datos['perfil'] = perfil
 		datos['invertido'] = invertido
+		datos['MULTIMEDIA_EN'] = MULTIMEDIA_EN
 		datos['n_compras'] = n_facturas
 		datos['lista'] = lista
 		datos['lista_aprobados'] = aprobados
@@ -1601,7 +1622,8 @@ def enlistar_usuario(request, usr):
 				# 'lista': lista,
 				"pag_activa": idioma + "/lista-solicitudes-servicio.html",
 				"idiomas_disponibles": IDIOMAS_DISPONIBLES,
-				"mensaje": "No puedes comprar tus propios servicios"
+				"mensaje": "No puedes comprar tus propios servicios",
+				"MULTIMEDIA_EN": MULTIMEDIA_EN
 			}
 			return render(request, 'base.html', datos)
 		n_clausulas = request.POST.get("Nclausulas", None)
@@ -1636,8 +1658,8 @@ def enlistar_usuario(request, usr):
 					"primary": False
 				}]
 			},
-			"returnUrl": URL_SITIO + unicode(p) + "/?mensaje=bien&c=" + unicode(encola.id),
-			"cancelUrl": URL_SITIO + unicode(p) + "/?mensaje=cancelado&c=" + unicode(encola.id),
+			"returnUrl": URL_SITIO + "perfil/" + unicode(p) + "/?mensaje=bien&c=" + unicode(encola.id),
+			"cancelUrl": URL_SITIO + "perfil/" + unicode(p) + "/?mensaje=cancelado&c=" + unicode(encola.id),
 			"requestEnvelope": {
 				"errorLanguage": "en_US",
 				"detailLevel": "ReturnAll"
@@ -1733,6 +1755,7 @@ def lista_solicitudes_servicio(request):
 				'mensaje': msj_reembolso,
 				"pag_activa": idioma + "/encolados.html",
 				"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+				"MULTIMEDIA_EN": MULTIMEDIA_EN
 			}
 			return render(request, 'base.html', datos)
 	return HttpResponseRedirect(reverse('geoservicios.views.inicio'))
@@ -1752,6 +1775,7 @@ def facturados(request):
 			'facts': facts,
 			'logueado': True,
 			'perfil_logueado': p,
+			"MULTIMEDIA_EN": MULTIMEDIA_EN
 		}
 		return render(request, 'base.html', datos)
 	else:
@@ -1770,6 +1794,7 @@ def configurar_cta(request):
 			'perfil': p,
 			'logueado': True,
 			'perfil_logueado': p,
+			"MULTIMEDIA_EN": MULTIMEDIA_EN
 		}
 		try:
 			if request.method == "POST":
@@ -1812,7 +1837,8 @@ def borrar_cta(request):
 		idioma = request.LANGUAGE_CODE
 		datos = {
 			"pag_activa": idioma + "/index.html",
-			"idiomas_disponibles": IDIOMAS_DISPONIBLES
+			"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+			"MULTIMEDIA_EN": MULTIMEDIA_EN
 		}
 		try:
 			p.eliminado = True
@@ -1839,6 +1865,7 @@ def contactar_empresa(request):
 	datos = {
 		"pag_activa": idioma + "/contacto.html",
 		"idiomas_disponibles": IDIOMAS_DISPONIBLES,
+		"MULTIMEDIA_EN": MULTIMEDIA_EN
 	}
 	if request.user.is_authenticated():
 		p = get_object_or_404(Perfil, usuario=request.user)

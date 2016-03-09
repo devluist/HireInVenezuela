@@ -43,7 +43,7 @@ csrf_protect_m = method_decorator(csrf_protect)
 ##########
 # HV app
 ##########
-from geoservicios.views import IDIOMAS_DISPONIBLES
+from geoservicios.views import IDIOMAS_DISPONIBLES, MULTIMEDIA_EN
 from geoservicios.models import Perfil, Cola
 
 ##########
@@ -97,6 +97,7 @@ class FolderMixin(NamespaceMixin, object):
             'by_conversation_url': reverse(viewname, current_app=current_instance),
             'by_message_url': reverse(viewname, args=[OPTION_MESSAGES], current_app=current_instance),
             'current_url': self.request.get_full_path(),
+            'MULTIMEDIA_EN': MULTIMEDIA_EN,
             'idiomas_disponibles': IDIOMAS_DISPONIBLES,
             'idioma': self.request.LANGUAGE_CODE,
             'pag_menu': self.request.LANGUAGE_CODE+"/menu-superior.html",
@@ -223,6 +224,7 @@ class ComposeMixin(NamespaceMixin, object):
             'autocompleter_app': autocompleter_app,
             'next_url': self.request.GET.get('next') or _get_referer(self.request),
             'idiomas_disponibles': IDIOMAS_DISPONIBLES,
+            'MULTIMEDIA_EN': MULTIMEDIA_EN,
             'idioma': self.request.LANGUAGE_CODE,
             'pag_menu': self.request.LANGUAGE_CODE+"/menu-superior.html",
             'current_url': self.request.get_full_path(),
@@ -395,6 +397,7 @@ class DisplayMixin(NamespaceMixin, object):
             'archived': archived,
             'current_url': self.request.get_full_path(),
             'idiomas_disponibles': IDIOMAS_DISPONIBLES,
+            'MULTIMEDIA_EN': MULTIMEDIA_EN,
             'idioma': self.request.LANGUAGE_CODE,
             'pag_menu': self.request.LANGUAGE_CODE+"/menu-superior.html",
             'serv_cola': serv_cola,

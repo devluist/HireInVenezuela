@@ -4,7 +4,7 @@
 {% load static from staticfiles %}
 <script type="text/javascript" charset="utf-8">
 	function ir(pag) {
-		window.location = "http://buy-2venezuela.rhcloud.com"+pag.options[pag.selectedIndex].value;
+		window.location = "{{ URL_SITIO }}"+pag.options[pag.selectedIndex].value;
 	}
 </script>
 <div class="cuerpo">
@@ -23,7 +23,7 @@
 					{% endif %}
 				</option>
 				{% for sub in subcategorias %}
-				 	<option value="/categoria/{{ sub.url.padre }}/{{ sub.url }}/">{{ sub }}</option>
+				 	<option value="categoria/{{ sub.url.padre }}/{{ sub.url }}/">{{ sub }}</option>
 				{% endfor %}
 			</select>
 		</div>

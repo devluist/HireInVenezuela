@@ -138,7 +138,8 @@ if desarrollando:
 			'PORT': '5432'
 		}
 	}
-	URL_SITIO = "localhost:8000/"
+	MULTIMEDIA_EN = {"css":"/static/css", "js":"/static/js"}
+	URL_SITIO = "http://localhost:8000/"
 	MEDIA_URL = '/media/'
 	MEDIA_ROOT = os.path.join(DATA_DIR, 'subidos/')  # '~/hv/Multimedia/images/'
 	# xPENSAR: deberia dejar esto es DATA_DIR ya q es donde se guardan lo del usr
@@ -158,7 +159,8 @@ else:
 			'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT', "") # '5432'
 		}
 	}
-	URL_SITIO = "http://buy-2venezuela.rhcloud.com/perfil/"
+	MULTIMEDIA_EN = {"css":"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0", "js":"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js"}
+	URL_SITIO = "http://hireInVenezuela.com/"
 	MUESTRA_ERRORES_SMTP = False
 	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 	EMAIL_USE_TLS = True

@@ -4,7 +4,7 @@
 {% load static from staticfiles %}
 <script type="text/javascript" charset="utf-8">
 	function ir(pag) {
-		window.location = "http://buy-2venezuela.rhcloud.com"+pag.options[pag.selectedIndex].value;
+		window.location = "{{ URL_SITIO }}"+pag.options[pag.selectedIndex].value;
 	}
 </script>
 <div class="cuerpo">
@@ -23,7 +23,7 @@
 					{% endif %}
 				</option>
 				{% for sub in subcategorias %}
-				 	<option value="/categoria/{{ sub.url.padre }}/{{ sub.url }}/">{{ sub }}</option>
+				 	<option value="categoria/{{ sub.url.padre }}/{{ sub.url }}/">{{ sub }}</option>
 				{% endfor %}
 			</select>
 		</div>
@@ -48,7 +48,7 @@
 						</a>
 					</div>
 				 	<div class="cara-principal">
-						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="Right now the server cant upload images">
+						<img src="{% static 'images/falta.png' %}" width="215" height="130" alt="The server can't upload images right now">
 						{% comment %}<!-- xHACER: src={{ gs.imagen.url }}
 							# modificar los "alt" de las imagenes
 							# ver si hay en otras plantillas

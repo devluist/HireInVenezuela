@@ -26,7 +26,7 @@
 						<div class="col-md-5">
 							<li><b>Username:</b>  @{{ perfil }}</li>
 							<li class="row">
-								<b class="col-xs-12 col-md-5" style="padding: 0;">Name and Lastname:</b>
+								<b class="col-xs-12 col-md-5" style="padding: 0;">Name and Last Name:</b>
 								<span class="col-xs-12 col-md-7" style="padding: 0;">
 									<input class="form-control input-sm caja-txt-form caja-txt-cfg" name="nombre_completo" type="text" placeholder="Your Name" value="{{ perfil.nombre_completo }}">
 								</span>
@@ -34,10 +34,10 @@
 							<li>
 								<span class="col-xs-12 col-md-3" style="padding:0">
 									<b>Age:</b>
-									<input name="edad" class="form-control input-sm caja-txt-form caja-txt-cfg" type="text" placeholder="0" value=" {% if perfil.edad != 0 %}{{ perfil.edad }}{% endif %}" style="width: 35px !important;display: inline-block;margin-left: 10px;text-align: center;">
+									<input name="edad" class="form-control input-sm caja-txt-form caja-txt-cfg" type="text" placeholder="0" value="{% if perfil.edad != 0 %}{{ perfil.edad }}{% endif %}" style="width: 35px !important;display: inline-block;margin-left: 10px;text-align: center;">
 								</span>
 								<span class="col-xs-12 col-md-9">
-									<b>¿You're on vacation?</b>
+									<b>¿Are you on vacation?</b>
 									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="vacacionando" value="0" {% if perfil.vacacionando == 0 %}checked{% endif %}>No</label>
 									<label class="radio checkbox-inline" style="margin:0"><input type="radio" name="vacacionando" value="1" {% if perfil.vacacionando == 1 %}checked{% endif %}>Si</label>
 								</span>
@@ -74,7 +74,7 @@
 							<li>{% endcomment %}
 						</div>
 						<div class="col-md-3">
-							<li><b>Languages you speak:</b><br>(Hold <b>Ctrl</b> Key to select more)<br><br>
+							<li><b>Spoken languages:</b><br>(Hold <b>Ctrl</b> Key to select multiple languages)<br><br>
 								<input type="hidden" id="lenguas" name="lenguas" value="">
 								<select id="lista_lenguas" multiple="multiple">
 									{% get_language_info_list for idiomas_disponibles as idiomas %}
