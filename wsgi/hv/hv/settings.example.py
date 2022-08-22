@@ -9,7 +9,7 @@ Django settings for hv project.
 
 import os
 
-desarrollando = True # False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
+desarrollando = False if os.environ.get('OPENSHIFT_DATA_DIR', None) else True
 desarrollando_en_paypal = True # TODO: AFTER PAYPAL REFACTOR, CHANGE THIS TO FALSE
 
 
@@ -120,6 +120,7 @@ DJANGO_SETTINGS_MODULE = 'hv.settings'
 
 POSTMAN_AUTO_MODERATE_AS = True
 
+
 if desarrollando:
 	DEBUG = True
 	STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
@@ -141,6 +142,8 @@ if desarrollando:
 	}
 	MULTIMEDIA_EN = {"css":"/static/css/", "jsjq":"/static/js/", "jsboot":"/static/js/"}
 	URL_SITIO = "http://localhost:8000/"
+	MEDIA_URL = '/media/'
+	MEDIA_ROOT = 'media/'
 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 	MUESTRA_ERRORES_SMTP = True
 
@@ -174,19 +177,19 @@ else:
 if desarrollando_en_paypal:
 	ACCESO_API_PAYPAL = {
 		"HEADERS_API": {
-			"X-PAYPAL-SECURITY-USERID": "sb-nner429977863_api1.business.example.com",
-			"X-PAYPAL-SECURITY-PASSWORD": "WWQ9U8EMFVHX4N2N",
-			"X-PAYPAL-SECURITY-SIGNATURE": "ABNsmCTtewqi92BESYariCSJQh2ZAQAfv.K6AtEJ-SNIurximaqqPCuY",
-			"X-PAYPAL-APPLICATION-ID": "APP-80W284485P519543T",
+			"X-PAYPAL-SECURITY-USERID": "correo_fake_api1.dominio.com",
+			"X-PAYPAL-SECURITY-PASSWORD": "123456",
+			"X-PAYPAL-SECURITY-SIGNATURE": "1234567890",
+			"X-PAYPAL-APPLICATION-ID": "APP-123456789",
 			"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
 			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
 		},
-		"CORREO_API": "sb-me74878653553@business.example.com",
-		"CORREO_USR_API": "sb-ugyfq20392977@personal.example.com",
-		# "URL_REFUND": "https://svcs.sandbox.paypal.com/AdaptivePayments/Refund",
-		# "URL_EXECUTE": "https://svcs.sandbox.paypal.com/AdaptivePayments/ExecutePayment",
-		# "URL_PAY": "https://svcs.sandbox.paypal.com/AdaptivePayments/Pay",
-		# "URL_GOPAY": "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
+		"CORREO_API": "developer@fake.com",
+		"CORREO_USR_API": "",
+		# "URL_REFUND": "https://svcs.paypal.com/AdaptivePayments/Refund",
+		# "URL_EXECUTE": "https://svcs.paypal.com/AdaptivePayments/ExecutePayment",
+		# "URL_PAY": "https://svcs.paypal.com/AdaptivePayments/Pay",
+		# "URL_GOPAY": "https://www.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
 
 		"URL_REFUND": "http://localhost:3000/refund",
 		"URL_EXECUTE": "http://localhost:3000/executePayment",
@@ -196,10 +199,10 @@ if desarrollando_en_paypal:
 else:
 	ACCESO_API_PAYPAL = {
 		"HEADERS_API": {
-			"X-PAYPAL-SECURITY-USERID": "correo_fake_api1.hotmail.com",
-			"X-PAYPAL-SECURITY-PASSWORD": "34FE45RRP6CAUB",
-			"X-PAYPAL-SECURITY-SIGNATURE": "A3gtsdfd.qm-wBsRRzcYX323SGSR3WSHA1VSmNyC10FMVOPDPc28wb",
-			"X-PAYPAL-APPLICATION-ID": "APP-80W282225PJ5O43T",
+			"X-PAYPAL-SECURITY-USERID": "correo_fake_api1.dominio.com",
+			"X-PAYPAL-SECURITY-PASSWORD": "123456",
+			"X-PAYPAL-SECURITY-SIGNATURE": "1234567890",
+			"X-PAYPAL-APPLICATION-ID": "APP-123456789",
 			"X-PAYPAL-REQUEST-DATA-FORMAT": "JSON",
 			"X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
 		},

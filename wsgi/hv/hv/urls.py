@@ -55,8 +55,8 @@ urlpatterns = patterns('geoservicios.views',
 
 if desarrollando:
 	from django.conf.urls.static import static
-	from settings import STATIC_ROOT, STATIC_URL, MEDIA_URL, MEDIA_ROOT
-	urlpatterns += static(STATIC_URL, document_root=STATIC_ROOT) + static(MEDIA_URL, document_root=MEDIA_ROOT)
+	from settings import STATIC_ROOT, STATIC_URL#, MEDIA_URL, MEDIA_ROOT
+	urlpatterns += static(STATIC_URL, document_root=STATIC_ROOT) #+ static(MEDIA_URL, document_root=MEDIA_ROOT)
 
 # xHACER: se pueden eliminar lo q no es una vista y pasar a funciones/form que simplementen procesen, x ejm:
 	# enlistar-usuario

@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     # GETTING-STARTED: set your app name:
-    name='buy',
+    name='hireinve',
     # GETTING-STARTED: set your app version:
     version='0.5',
     # GETTING-STARTED: set your app description:

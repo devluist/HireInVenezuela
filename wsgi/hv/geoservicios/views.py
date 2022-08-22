@@ -21,7 +21,7 @@ from os import mkdir, access, F_OK
 from datetime import datetime  # , date
 from hashlib import sha1
 import re, urllib2, json
-from hv.settings import ACCESO_API_PAYPAL, MULTIMEDIA_EN, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL, URL_SITIO, MUESTRA_ERRORES_SMTP  # ,PRECIO_POR_DOLAR, ANIO_INICIO_CH
+from hv.settings import ACCESO_API_PAYPAL, MULTIMEDIA_EN, IDIOMAS_DISPONIBLES, COMISION_HV, COMISION_PAYPAL, URL_SITIO, MUESTRA_ERRORES_SMTP, STATICFILES_DIRS  # ,PRECIO_POR_DOLAR, ANIO_INICIO_CH
 
 #----------------------------------------------------------
 #---------------------  Inicializando  --------------------
@@ -859,11 +859,11 @@ def recuperar_pw(request, clave="", correo=""):
 					enigma = TimestampSigner("c4mb13-d3-v1d4-3l" + str(datetime(2014, 12, 31)), salt="j0d3t3-h@ck3r")
 					contra = enigma.sign(correo).split(":")
 					asunto = {
-						"es": "Restablecer acceso a cuenta buy-2venezuela.com. Tienes menos de 1 dia",
+						"es": "Restablecer acceso a cuenta hireInVenezuela.com. Tienes menos de 1 dia",
 						"en": ""
 					}[idioma]
 					msj = {
-						"es": u"Ud. ha notificado imposibilidad para acceder a <b>buy-2venezuela.com<b><br><br>Ingrese a la siguiente URL para <a href='buy-2venezuela.com/recuperar-cuenta/clave=" + contra[1] + "+" + contra[2] + "&correo=" + correo + "' />recuperar su cuenta</a>",
+						"es": u"Ud. ha notificado imposibilidad para acceder a <b>hireInVenezuela.com<b><br><br>Ingrese a la siguiente URL para <a href='hireInVenezuela.com/recuperar-cuenta/clave=" + contra[1] + "+" + contra[2] + "&correo=" + correo + "' />recuperar su cuenta</a>",
 						"en": ""
 					}[idioma]
 					from hv.settings import EMAIL_HOST_USER
@@ -872,7 +872,7 @@ def recuperar_pw(request, clave="", correo=""):
 					except BadHeaderError:
 						datos["mensaje"] = 'Error: Cabecera del correo invalida.'
 					else:
-						datos["mensaje"] = u"Ha sido enviado un correo con las instrucciones para recuperar el acceso a su cuenta buy-2venezuela.com. La URL estará activa durante un dia solamente"
+						datos["mensaje"] = u"Ha sido enviado un correo con las instrucciones para recuperar el acceso a su cuenta hireInVenezuela.com. La URL estará activa durante un dia solamente"
 			elif pw:
 				try:
 					u = User.objects.get(email=correo_usr)
@@ -1356,6 +1356,8 @@ def ver_servicio(request, cat, serv):
 	if serv.contrato != "":
 		contrato = serv.contrato.split("<br>")
 
+	if serv.imagen:
+		serv.imagen = str(serv.imagen).split("/")[-1]
 	#extras = ServicioSatelite.objects.filter(servicio=serv)
 	datos = {
 		"pag_activa": idioma + "/servicio.html",
@@ -1492,7 +1494,7 @@ def traducir_servicio(request):
 						if request.POST[n] != "":
 							cont += request.POST[n] + "<br>"
 					cont = cont[: len(cont) - 4]  # le quito el ultimo <br>
-				s = ServicioVirtual.objects.create(url=url, idioma=idioma, nombre=nomb, descripcion=descrip, contrato=cont)  # , imagen=url.obj_servicio.get().imagen)
+				s = ServicioVirtual.objects.create(url=url, idioma=idioma, nombre=nomb, descripcion=descrip, contrato=cont, imagen=url.obj_servicio.get().imagen)
 				Contador.objects.create(servicio=s, experiencia=0, atencion=0, calidad=0, promedio=0, tiempo_entrega=0)
 			# xHACER: q tenga un else q mande un mensaje de error si es el mismo lenguaje al q quiere traducir
 			return HttpResponseRedirect('/categoria/' + url.subcategoria.padre.url + "/" + url.subcategoria.url + "/" + url.url + "/")
@@ -1515,16 +1517,20 @@ def crear_servicio(request):
 			nomb = request.POST['nomb']
 			url = uerelizar(nomb)
 			# xHACER:
-				# si tu eres un chino como coño traduces tu servicio a url??
+				# si tu eres un chino como te traduzco tu servicio a url??
 				# el precio debe variar segun el nivel del usr
 			descrip = request.POST['descrip']
-			# if request.FILES:
-			# 	usr_str = str(p)
-			# 	if not access('Multimedia/images/' + usr_str, F_OK):
-			# 		mkdir('Multimedia/images/' + usr_str)
-			# 	with open('Multimedia/images/' + usr_str + '/name.png', 'wb+') as destination:
-			# 		for chunk in request.FILES['img_serv'].chunks():
-			# 			destination.write(chunk)
+			if request.FILES:
+				usr_str = str(p)
+				if not access(STATICFILES_DIRS[0] + "/subidas/" + usr_str, F_OK):
+					mkdir(STATICFILES_DIRS[0]  + "/subidas/" + usr_str)
+
+				file_path = STATICFILES_DIRS[0]  + "/subidas/" + usr_str + '/' + url + "." + str(request.FILES['img_serv']).split(".")[-1]
+
+				with open(file_path, 'wb+') as destination:
+					for chunk in request.FILES['img_serv'].chunks():
+						destination.write(chunk)
+
 			cont = ""
 			n_clausulas = request.POST.get("Nclausulas", None)  # n_clausulas = int(request.POST.get('Nclausulas', 0))  # modificado! 1
 			if n_clausulas is not None:
@@ -1551,15 +1557,16 @@ def crear_servicio(request):
 					u = UrlServicio.objects.get(url=url)
 				else:
 					u = UrlServicio.objects.create(url=url, subcategoria=subc.url, vendedor=p, precio=precio)
-				# if request.FILES:
-					# # xHACER:
-					# 	# darle un nombre a la img yo
-					# 	# meterlo en una carpeta del usr
-					# 	# validar en la img: formato, peso, dimensiones??
-					# img = request.FILES["img_serv"]
-					# s = ServicioVirtual.objects.create(url=u, nombre=nomb, descripcion=descrip, contrato=cont, imagen=img)  # idioma no va xq el q crea los servicios es un venezolano
-				# else:
-				s = ServicioVirtual.objects.create(url=u, nombre=nomb, descripcion=descrip, contrato=cont)  # idioma no va xq el q crea los servicios es un venezolano
+				if request.FILES:
+					# xHACER:
+						# validar en la img: formato, peso, dimensiones??
+					img = file_path #request.FILES["img_serv"]
+					print("BIEEEEEEN")
+					print(img)
+					s = ServicioVirtual.objects.create(url=u, nombre=nomb, descripcion=descrip, contrato=cont, imagen=img)  # idioma no va xq el q crea los servicios es un venezolano
+					print("MEJORRRRRR")
+				else:
+					s = ServicioVirtual.objects.create(url=u, nombre=nomb, descripcion=descrip, contrato=cont)  # idioma no va xq el q crea los servicios es un venezolano
 				Contador.objects.create(servicio=s, experiencia=0, atencion=0, calidad=0, promedio=0, tiempo_entrega=0)
 			except BaseException, e:
 				# xHACER:
@@ -1571,7 +1578,8 @@ def crear_servicio(request):
 				elif precio < 5:
 					datos["mensaje"] = u"No se puede sobrepasar el precio piso (de 5 $) para ofrecer Servicios"
 				else:
-					datos["mensaje"] = "Codigo de error: NXQPSA. Por Favor intentelo nuevamente y si persiste haganoslo saber y le atenderemos. Gracias!"  # No Xe Que PaSo Aqui  jajajaj
+					print(e)
+					datos["mensaje"] = e #"Codigo de error: NXQPSA. Por Favor intentelo nuevamente y si persiste haganoslo saber y le atenderemos. Gracias!"  # No Xe Que PaSo Aqui  jajajaj
 				if request.user.is_authenticated():
 					perfil2 = get_object_or_404(Perfil, usuario__username = usr)
 					datos['logueado'] = True

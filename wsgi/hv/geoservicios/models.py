@@ -2,6 +2,7 @@
 
 from django.contrib.auth.models import User
 from django.db import models
+from hv.settings import STATICFILES_DIRS
 
 # xPENSAR:
 	# xq idioma es idiomas del usr, xq no hay una relacion entre servicios e idiomas xejm??
@@ -181,12 +182,14 @@ class UrlServicio(models.Model):
 	def __unicode__(self):
 		return "%s" % self.url
 
+file_path = STATICFILES_DIRS[0]  + "/subidas"
 
 class ServicioVirtual(models.Model):
 	"""Eliminado existe para no borrar estos datos para las facturas. El maximo valor del precio (PSI field) que toma para Django v1.7 es 32767
 	El precio no esta aqui para poder evitar las preferencias por parte de los usr, asi soy yo el que impongo que valor se paga por cada dolar/peso/libra, etc
 	Cada una de estas instancias representa una traduccion del mismo servicio, es decir siempre se crea una en español y luego se puede traducir
 	La fecha la tienen los servicios para saber cuando se tradujo y sobre todo para poder traer los nuevos servicios (buqueda por fecha)"""
+
 	url = models.ForeignKey(UrlServicio, related_name="obj_servicio")
 	idioma = models.CharField(max_length=5, default="es")
 	nombre = models.CharField(max_length=100)
@@ -194,7 +197,7 @@ class ServicioVirtual(models.Model):
 	activo = models.BooleanField(default=True)
 	contrato = models.TextField()
 	eliminado = models.BooleanField(default=False)
-	imagen = models.ImageField(upload_to="alla", blank=True, null=True)  # imagen/video
+	imagen = models.ImageField(upload_to=file_path, blank=True, null=True)  # imagen/video
 	fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
 	class Meta:

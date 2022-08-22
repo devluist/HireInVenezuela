@@ -118,7 +118,7 @@ class Migration(migrations.Migration):
                 ('activo', models.BooleanField(default=True)),
                 ('contrato', models.TextField()),
                 ('eliminado', models.BooleanField(default=False)),
-                ('imagen', models.ImageField(null=True, upload_to=b'alla', blank=True)),
+                ('imagen', models.ImageField(null=True, upload_to=b'/home/buy/wsgi/static//subidas', blank=True)),
                 ('fecha_publicacion', models.DateTimeField(auto_now_add=True)),
             ],
             options={

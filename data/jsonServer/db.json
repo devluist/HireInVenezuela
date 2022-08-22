@@ -1,0 +1,26 @@
+{
+  "paymentExecute": {
+    "paymentExecStatus": "COMPLETED",
+    "responseEnvelope": {
+      "ack": "Success"
+    }
+  },
+  "pay": {
+    "payKey": "1233134dfsdf",
+    "responseEnvelope": {
+      "ack": "Success"
+    }
+  },
+  "refund": {
+    "responseEnvelope": {
+      "ack": "Success"
+    },
+    "refundInfoList": {
+      "refundInfo": [
+        {
+          "refundStatus": "REFUNDED"
+        }
+      ]
+    }
+  }
+}
