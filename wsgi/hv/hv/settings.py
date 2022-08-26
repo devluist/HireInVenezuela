@@ -188,10 +188,10 @@ if desarrollando_en_paypal:
 		# "URL_PAY": "https://svcs.sandbox.paypal.com/AdaptivePayments/Pay",
 		# "URL_GOPAY": "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
 
-		"URL_REFUND": "http://localhost:3000/refund",
-		"URL_EXECUTE": "http://localhost:3000/executePayment",
-		"URL_PAY": "http://localhost:3000/pay",
-		"URL_GOPAY": "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="
+		"URL_REFUND": "host.docker.internal:3000/refund",
+		"URL_EXECUTE": "host.docker.internal:3000/executePayment",
+		"URL_PAY": "host.docker.internal:3000/pay",
+		"URL_GOPAY": "host.docker.internal:3000"
 	}
 else:
 	ACCESO_API_PAYPAL = {

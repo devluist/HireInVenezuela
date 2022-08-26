@@ -1,3 +1,14 @@
+
+from geoservicios.views import inicializar_idiomas, inicializar_categorias, inicializar_niveles
+inicializar_idiomas()
+inicializar_niveles()
+inicializar_categorias()
+
+
+from django.contrib.auth.models import User
+from geoservicios.models import Perfil
+User.objects.all().delete()
+
 Django on OpenShift
 ===================
 

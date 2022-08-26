@@ -8,8 +8,8 @@
 *~
 .project
 .pydevproject
-wsgi/hv/archivos_clasificados/
+wsgi/hv/archivos_clasificados
 wsgi/hv/hv/settings.py
 wsgi/static/subidas
 
-data/jsonServer/node_modules
+data/jsonServer/

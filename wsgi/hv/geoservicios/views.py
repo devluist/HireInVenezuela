@@ -697,21 +697,21 @@ def reembolsar(obj_encola):
 		}
 	}
 	datos_paypal = json.dumps(datos_paypal)
-	try:
-		peticion = urllib2.Request(url=ACCESO_API_PAYPAL["URL_REFUND"], data=datos_paypal, headers=ACCESO_API_PAYPAL["HEADERS_API"])
-		com_paypal = urllib2.urlopen(peticion, timeout=30)
-	except urllib2.URLError, motivo:
-		# xHACER: reenviar a una pagina luego de un error en el reembolso (inicio, perfil ?)
-		return 0
-		# xHACER: terminar q pasa si no conecta con el servidor
-	resp_paypal = com_paypal.read()
-	com_paypal.close()
-	resp_paypal = json.JSONDecoder().decode(resp_paypal)
-	if resp_paypal["responseEnvelope"]["ack"] == "Success" and resp_paypal['refundInfoList']['refundInfo'][0]["refundStatus"] == "REFUNDED":
-		inter.delete()
-		obj_encola.delete()
-		return 1
-	return 0
+	#try:
+	#	peticion = urllib2.Request(url=ACCESO_API_PAYPAL["URL_REFUND"], data=datos_paypal, headers=ACCESO_API_PAYPAL["HEADERS_API"])
+	#	com_paypal = urllib2.urlopen(peticion, timeout=30)
+	#except urllib2.URLError, motivo:
+	#	xHACER: reenviar a una pagina luego de un error en el reembolso (inicio, perfil ?)
+	#	return 0
+	# xHACER: terminar q pasa si no conecta con el servidor
+	#resp_paypal = com_paypal.read()
+	#com_paypal.close()
+	#resp_paypal = json.JSONDecoder().decode(resp_paypal)
+	#if resp_paypal["responseEnvelope"]["ack"] == "Success" and resp_paypal['refundInfoList']['refundInfo'][0]["refundStatus"] == "REFUNDED":
+	inter.delete()
+	obj_encola.delete()
+	return 1
+	#return 0
 
 
 def pagar_vendedores(obj_encola):
@@ -724,20 +724,20 @@ def pagar_vendedores(obj_encola):
 		}
 	}
 	datos_paypal = json.dumps(datos_paypal)
-	try:
-		peticion = urllib2.Request(url=ACCESO_API_PAYPAL["URL_EXECUTE"], data=datos_paypal, headers=ACCESO_API_PAYPAL["HEADERS_API"])
-		com_paypal = urllib2.urlopen(peticion, timeout=30)
-	except urllib2.URLError, motivo:
-		# xHACER: reenviar a una pagina luego de un error (inicio, perfil ?)
-		return 0
-		# xHACER: terminar q pasa si no conecta con el servidor
-	resp_paypal = com_paypal.read()
-	com_paypal.close()
-	resp_paypal = json.JSONDecoder().decode(resp_paypal)
-	if resp_paypal["responseEnvelope"]["ack"] == "Success" and resp_paypal["paymentExecStatus"] == "COMPLETED":
-		inter.delete()
-		obj_encola.delete()
-		return 1
+	# try:
+	# 	peticion = urllib2.Request(url=ACCESO_API_PAYPAL["URL_EXECUTE"], data=datos_paypal, headers=ACCESO_API_PAYPAL["HEADERS_API"])
+	# 	com_paypal = urllib2.urlopen(peticion, timeout=30)
+	# except urllib2.URLError, motivo:
+	# 	# xHACER: reenviar a una pagina luego de un error (inicio, perfil ?)
+	# 	return 0
+	# 	# xHACER: terminar q pasa si no conecta con el servidor
+	# resp_paypal = com_paypal.read()
+	# com_paypal.close()
+	#resp_paypal = json.JSONDecoder().decode(resp_paypal)
+	#if resp_paypal["responseEnvelope"]["ack"] == "Success" and resp_paypal["paymentExecStatus"] == "COMPLETED":
+	inter.delete()
+	obj_encola.delete()
+	return 1
 	return 0
 
 
@@ -1675,14 +1675,14 @@ def enlistar_usuario(request, usr):
 		}
 		datos_paypal = json.dumps(datos_paypal)
 		try:
-			peticion = urllib2.Request(url=ACCESO_API_PAYPAL["URL_PAY"], data=datos_paypal, headers=ACCESO_API_PAYPAL["HEADERS_API"])
-			com_paypal = urllib2.urlopen(peticion, timeout=360)
-			resp_paypal = com_paypal.read()
-			com_paypal.close()
-			resp_paypal = json.JSONDecoder().decode(resp_paypal)
-			if resp_paypal["responseEnvelope"]["ack"] == "Success":
-				Intermediario.objects.create(clave_paypal=resp_paypal['payKey'], obj_cola=encola, comprador=encola.comprador, vendedor=encola.vendedor)
-				return HttpResponseRedirect(ACCESO_API_PAYPAL["URL_GOPAY"] + resp_paypal['payKey'])
+			#peticion = urllib2.Request(url=ACCESO_API_PAYPAL["URL_PAY"], data=datos_paypal, headers=ACCESO_API_PAYPAL["HEADERS_API"])
+			#com_paypal = urllib2.urlopen(peticion, timeout=360)
+			#resp_paypal = com_paypal.read()
+			#com_paypal.close()
+			#resp_paypal = json.JSONDecoder().decode(resp_paypal)
+			#if resp_paypal["responseEnvelope"]["ack"] == "Success":
+			Intermediario.objects.create(clave_paypal=str(datetime.now()), obj_cola=encola, comprador=encola.comprador, vendedor=encola.vendedor)
+			return HttpResponseRedirect("/") # ACCESO_API_PAYPAL["URL_GOPAY"] + resp_paypal['payKey'])
 		except urllib2.URLError, motivo:
 			pass
 			# xHACER: terminar q pasa si no conecta con el servidor o si datos de paypal no vino como es
